@@ -1,31 +1,46 @@
 public class Score {
-    private int score;
-    private int bonus;
+    private int currentPoints;
+    private final int pointsForBonus; // Pontos necessários para ativar o bônus
+    private boolean bonusActive;
 
-    public Score() {
-        score = 0;
-        bonus = 0;
+    public Score(int pointsForBonus) {
+        this.currentPoints = 0;
+        this.pointsForBonus = pointsForBonus;
+        this.bonusActive = false;
     }
 
-    public void addScore(int score){
-        this.score += score;
+    public int getPoints() {
+        return currentPoints;
     }
 
-    public int getScore(){
-        return score;
+    public void addPoints(int points) {
+        this.currentPoints += points;
+        checkBonusActivation();
     }
 
-    public void useBonus(){
-        if (bonus > 0){
-            bonus--;
+    // Verifica se o bônus deve ser ativado
+    private void checkBonusActivation() {
+        if (currentPoints >= pointsForBonus && !bonusActive) {
+            bonusActive = true;
+            System.out.println("You hava one remaining bonus");
         }
     }
 
-    public int getBonus() {
-        return bonus;
+    public void useBonus(Board board) {
+        if (bonusActive) {
+            System.out.println("Bonus used");
+            bonusActive = false; // Desativa o bônus após ser usado
+        } else {
+            System.out.println("Você não tem um bônus disponível!");
+        }
     }
 
-    public void addBonus(){
-        this.bonus += bonus;
+    public boolean isBonusActive() {
+        return bonusActive;
+    }
+
+    public void reset() {
+        currentPoints = 0;
+        bonusActive = false;
     }
 }
