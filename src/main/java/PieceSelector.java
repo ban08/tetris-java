@@ -17,6 +17,12 @@ public class PieceSelector {
     }
 
     /**
+     * Getter for predefined pieces for tests use.
+     */
+    public List<Piece> getPredefinedPieces(){
+        return predefinedPieces;
+    }
+    /**
      * Initializes the list of predefined pieces.
      * 
      * @return the list of predefined pieces.
