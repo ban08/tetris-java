@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PieceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-24T17:49:53" hostname="DESKTOP-3JMO58F" time="0.006">
+  <properties/>
+  <testcase name="testGettersAndSetters()" classname="PieceTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
