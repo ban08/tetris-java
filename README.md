@@ -44,3 +44,11 @@ Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Caroli
 ## DIAGRAMA UML
 
 ![img.png](img.png)
+
+## MOCKUPS
+
+![TetrisMain](https://github.com/user-attachments/assets/f03f2534-f452-497d-b62b-96ed49e754d2)
+
+![TetrisMockup](https://github.com/user-attachments/assets/7b8f1ce1-1e0d-4085-80ca-73b879b3fc85)
+
+![TetrisGameOver](https://github.com/user-attachments/assets/26e3dae0-6c15-4c20-87a7-bbfcb739ce82)
