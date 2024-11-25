@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RotateLeftStrategyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-11-25T11:08:54" hostname="DESKTOP-3JMO58F" time="0.009">
-  <properties/>
-  <testcase name="testRotateRectangularMatrix()" classname="RotateLeftStrategyTest" time="0.002"/>
-  <testcase name="testRotate_EmptyArray()" classname="RotateLeftStrategyTest" time="0.004"/>
-  <testcase name="testRotateSymmetry()" classname="RotateLeftStrategyTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
