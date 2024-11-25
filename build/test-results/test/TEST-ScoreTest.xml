@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ScoreTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-11-25T11:08:54" hostname="DESKTOP-3JMO58F" time="0.011">
+  <properties/>
+  <testcase name="testOnGameOver()" classname="ScoreTest" time="0.01"/>
+  <testcase name="testInitialScore()" classname="ScoreTest" time="0.0"/>
+  <testcase name="testOnlineCleared()" classname="ScoreTest" time="0.0"/>
+  <system-out><![CDATA[Game Over! Final Score: 0
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
