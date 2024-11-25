@@ -3,3 +3,12 @@
  out/
  build/
  *.iml
+
+ # Ignore Gradle files
+ *.class
+ *.lock
+
+ # Ignore test reports and results
+ build/reports/
+ build/test-results/
+ build/tmp/
