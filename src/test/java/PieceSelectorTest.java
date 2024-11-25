@@ -13,7 +13,7 @@ public class PieceSelectorTest {
         List<Piece> predefinedpieces= pieceselector.getPredefinedPieces();
         assertEquals(5,predefinedpieces.size());
         // O
-        Piece OPiece = predefinedpieces.getFirst();
+        Piece OPiece = predefinedpieces.get(0);
         assertArrayEquals(new char[][]{{'O', 'O'}, {'O', 'O'}}, OPiece.getShape());
         assertEquals(TextColor.ANSI.YELLOW, OPiece.getColor());
 
