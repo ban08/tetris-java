@@ -7,7 +7,7 @@ O nosso jogo é uma recriação do clássico Tetris com algumas novidades estrat
 
 Os jogadores podem acumular pontos para desbloquear bônus que permitem eliminar linhas ou áreas específicas, prolongando o jogo e aumentando as possibilidades estratégicas.
 
-Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),.....]** para a unidade curricular LDTS 2024/2025 na FEUP.
+Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Carolina Roque(up202305062@fe.up.pt),Raul Oliveira(up202303446@fe.up.pt)]** para a unidade curricular LDTS 2024/2025 na FEUP.
 
 ---
 
