@@ -63,7 +63,7 @@ public class PositionedPiece {
      * Move the piece one position down.
      */
     public void moveDown() {
-        y++;
+        ++y;
     }
 
     /**
