@@ -1,0 +1,70 @@
+package model;
+
+import com.googlecode.lanterna.TextColor;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class RotateRightStrategyTest {
+    @Test
+    void testRotate_AzazArray() {
+        // Arrange
+        RotateRightStrategy rotateRightStrategy = new RotateRightStrategy();
+        char[][] input = {"AZAZ".toCharArray()}; // 1 row, 4 columns
+
+        // Act
+        char[][] actualRotateResult = rotateRightStrategy.rotate(input);
+
+        // Assert
+        assertEquals(4, actualRotateResult.length); // Expect 4 rows
+        assertArrayEquals(new char[]{'A'}, actualRotateResult[0]); // First column
+        assertArrayEquals(new char[]{'Z'}, actualRotateResult[1]); // Second column
+        assertArrayEquals(new char[]{'A'}, actualRotateResult[2]); // Third column
+        assertArrayEquals(new char[]{'Z'}, actualRotateResult[3]); // Fourth column
+    }
+
+    @Test
+    void testRotate_EmptyArray() {
+        // Arrange
+        RotateRightStrategy rotateRightStrategy = new RotateRightStrategy();
+        char[][] input = {};
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> rotateRightStrategy.rotate(input));
+    }
+    @Test
+    void testRotate_atBoardEdge() {
+        // Arrange
+        Board board = new Board(4, 4);
+        char[][] shape = {{'X', 'X'}, {'X', 'X'}};
+        PositionedPiece piece = new PositionedPiece(new Piece(shape, TextColor.ANSI.BLUE), 2, 2);
+
+        // Act
+        piece.rotate(board, new RotateRightStrategy());
+
+        // Assert
+        assertEquals(2, piece.getX()); // X-coordinate should not change
+        assertEquals(2, piece.getY()); // Y-coordinate should not change
+        assertArrayEquals(shape, piece.getPiece().getShape()); // Shape remains the same
+    }
+    @Test
+    void testRotate_withOverlap() {
+        // Arrange
+        Board board = new Board(4, 4);
+        char[][] shape = {{'X', 'X'}, {'X', 'X'}};
+        PositionedPiece piece = new PositionedPiece(new Piece(shape, TextColor.ANSI.BLUE), 0, 0);
+
+        char[][] blocker = {{'B', 'B'}, {'B', 'B'}};
+        board.addPositionedPiece(new PositionedPiece(new Piece(blocker, TextColor.ANSI.RED), 1, 1));
+
+        // Act
+        piece.rotate(board, new RotateRightStrategy());
+
+        // Assert
+        assertArrayEquals(shape, piece.getPiece().getShape()); // Should not rotate due to overlap
+        assertEquals(0, piece.getX()); // Position remains unchanged
+        assertEquals(0, piece.getY()); // Position remains unchanged
+    }
+
+
+}
