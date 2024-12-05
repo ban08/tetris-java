@@ -1,28 +1,32 @@
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import controller.Game;
+import view.GameView;
 
-/**
- * The main class for the game. This class sets up the screen and runs the game.
- */
 public class Main {
-    /**
-     * The main method which starts the game.
-     * @param args The command line arguments.
-     */
     public static void main(String[] args) {
         try {
             // Set up the screen
-            TerminalSize terminalSize = new TerminalSize(10, 22); // Board size plus space for the score
+            TerminalSize terminalSize = new TerminalSize(10, 22);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
             Screen screen = terminalFactory.createScreen();
             screen.startScreen();
 
-            // Run the game
-            Game game = new Game(screen);
-            game.run();
+            // Initialize MVC components
+            Game game = new Game();
+            GameView view = new GameView(screen, game, game);
 
-            // Close the screen
+            // controller.Game loop
+            while (game.isRunning()) {
+                view.render();
+                view.processInput();
+                game.update();
+                Thread.sleep(500); // Control the game speed
+            }
+
+            // Render controller.Game Over screen
+            view.renderGameOver();
             screen.close();
         } catch (Exception e) {
             e.printStackTrace();
