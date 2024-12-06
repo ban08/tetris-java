@@ -1,26 +1,22 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-
 import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PieceTest {
+
     @Test
     void testGettersAndSetters() {
-        // Arrange
-        TextColor.Indexed color = TextColor.Indexed.fromRGB(1, 1, 1);
-        char[][] shape = {"AZAZ".toCharArray()};
 
-        // Act
+        TextColor color = TextColor.ANSI.CYAN;
+        char[][] shape = { {'A','Z'} };
         Piece piece = new Piece(shape, color);
-        piece.setShape(shape);
-
-        // Assert
+        assertArrayEquals(shape, piece.getShape());
         assertEquals(color, piece.getColor());
-        assertSame(shape, piece.getShape());
-        assertArrayEquals(shape[0], piece.getShape()[0]);
+
+        char[][] newShape = { {'X','X'} };
+        piece.setShape(newShape);
+        assertArrayEquals(newShape, piece.getShape());
     }
 }

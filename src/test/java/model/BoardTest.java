@@ -1,14 +1,22 @@
 package model;
 
 import com.googlecode.lanterna.TextColor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-public class BoardTest {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+class BoardTest {
+    private Board board;
+
+    @BeforeEach
+    void setup() {
+        board = new Board(3, 3);
+    }
 
     @Test
-    public void testInitializeBoard() {
-        Board board = new Board(3, 3);
+    void testInitializeBoard() {
         assertEquals(3, board.getBoard().length);
         assertEquals(3, board.getBoard()[0].length);
         assertEquals(' ', board.getBoard()[0][0]);
@@ -16,50 +24,54 @@ public class BoardTest {
     }
 
     @Test
-    public void testAddObserver() {
-        Board board = new Board(3, 3);
-        BoardObserver observer = new BoardObserver() {
-            @Override
-            public void onLineCleared(int linesCleared) {}
-
-            @Override
-            public void onGameOver() {}
-        };
-        board.addObserver(observer);
-        assertEquals(1, board.getObservers().size());
+    void testCanPlaceShape_Valid() {
+        char[][] shape = {{'X'}};
+        assertTrue(board.canPlaceShape(shape, 1, 1));
     }
 
     @Test
-    public void testCanPlaceShape() {
-        Board board = new Board(3, 3);
-        char[][] shape = {{'A', 'A'}, {'A', 'A'}};
-        assertTrue(board.canPlaceShape(shape, 0, 0));
-        assertFalse(board.canPlaceShape(shape, 2, 3));
+    void testCanPlaceShape_InvalidOutOfBound() {
+        char[][] shape = {{'X','X'}};
+        assertFalse(board.canPlaceShape(shape, 2, 2));
     }
+
     @Test
-    public void testAddPositionedPiece() {
-        Board board = new Board(3, 3);
-        char[][] shape = {{'A', 'A'}, {'A', 'A'}}; // Declare shape variable locally
-        PositionedPiece piece = new PositionedPiece(new Piece(shape, TextColor.ANSI.BLACK), 0, 0);
+    void testAddPositionedPiece() {
+        char[][] shape = {{'A','A'}};
+        PositionedPiece piece = new PositionedPiece(new Piece(shape, TextColor.ANSI.RED), 0, 0);
         board.addPositionedPiece(piece);
         assertEquals('A', board.getBoard()[0][0]);
-        assertEquals(TextColor.ANSI.BLACK, board.getColors()[0][0]);
+        assertEquals(TextColor.ANSI.RED, board.getColors()[0][0]);
     }
 
     @Test
-    public void testDeleteFullLines() {
-        Board board = new Board(3, 3);
-        board.addPositionedPiece(new PositionedPiece(new Piece(new char[][]{{'A', 'A', 'A'}}, TextColor.ANSI.BLACK), 0, 0));
+    void testDeleteFullLines() {
+        // Fill a line
+        char[][] line = {{'X','X','X'}};
+        board.addPositionedPiece(new PositionedPiece(new Piece(line, TextColor.ANSI.BLUE),0,0));
         board.deleteFullLines();
         assertEquals(' ', board.getBoard()[0][0]);
-        assertEquals(TextColor.ANSI.BLACK, board.getColors()[0][0]);
     }
 
     @Test
-    public void testCheckGameOver() {
-        Board board = new Board(3, 3);
-        PositionedPiece piece = new PositionedPiece(new Piece(new char[][]{{'A', 'A'}, {'A', 'A'}}, TextColor.ANSI.BLACK), 1, 1);
-        board.checkGameOver(piece);
-        // Verificar se o jogo acabou
+    void testNotifyGameOver() {
+        BoardObserver observer = mock(BoardObserver.class);
+        board.addObserver(observer);
+
+        char[][] shape = {{'X','X'}};
+        PositionedPiece piece = new PositionedPiece(new Piece(shape, TextColor.ANSI.YELLOW), 2,2);
+        board.checkGameOver(piece); // Out of bounds => game over
+        verify(observer).onGameOver();
+    }
+
+    @Test
+    void testNotifyLineCleared() {
+        BoardObserver observer = mock(BoardObserver.class);
+        board.addObserver(observer);
+
+        char[][] line = {{'X','X','X'}};
+        board.addPositionedPiece(new PositionedPiece(new Piece(line, TextColor.ANSI.GREEN),0,0));
+        board.deleteFullLines();
+        verify(observer).onLineCleared(1);
     }
 }

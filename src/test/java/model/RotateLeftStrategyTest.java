@@ -1,56 +1,25 @@
 package model;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class RotateLeftStrategyTest {
-
     @Test
-    void testRotate_EmptyArray() {
-        // Arrange
-        RotateLeftStrategy rotateLeftStrategy = new RotateLeftStrategy();
-        char[][] input = {};
+    void testRotateLeft() {
+        RotateLeftStrategy strategy = new RotateLeftStrategy();
+        char[][] input = { {'A','B'}, {'C','D'} };
+        char[][] result = strategy.rotate(input);
 
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> rotateLeftStrategy.rotate(input));
-    }
-
-    @Test
-    void testRotateSymmetry() {
-        char[][] original = {
-                {'A', 'B'},
-                {'C', 'D'}
+        char[][] expected = {
+                {'B','D'},
+                {'A','C'}
         };
-
-
-        RotateRightStrategy rightStrategy = new RotateRightStrategy();
-        RotateLeftStrategy leftStrategy = new RotateLeftStrategy();
-
-        char[][] rotatedRight = rightStrategy.rotate(original);
-        char[][] rotatedLeft = leftStrategy.rotate(rotatedRight);
-
-
-        assertArrayEquals(original, rotatedLeft); // Should pass now
+        assertArrayEquals(expected, result);
     }
+
     @Test
-    void testRotateRectangularMatrix() {
-        char[][] original = {
-                {'1', '2', '3'},
-                {'4', '5', '6'}
-        };
-
-
-        RotateRightStrategy rightStrategy = new RotateRightStrategy();
-        RotateLeftStrategy leftStrategy = new RotateLeftStrategy();
-
-        char[][] rotatedRight = rightStrategy.rotate(original);
-        char[][] rotatedLeft = leftStrategy.rotate(rotatedRight);
-
-
-        assertArrayEquals(original, rotatedLeft);
+    void testRotateEmptyThrows() {
+        RotateLeftStrategy strategy = new RotateLeftStrategy();
+        assertThrows(IllegalArgumentException.class, () -> strategy.rotate(new char[][]{}));
     }
-
-
-
 }

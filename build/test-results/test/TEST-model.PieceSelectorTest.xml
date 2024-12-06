@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.PieceSelectorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-05T18:40:54" hostname="DESKTOP-3JMO58F" time="0.006">
-  <properties/>
-  <testcase name="testRandomPiece()" classname="model.PieceSelectorTest" time="0.003"/>
-  <testcase name="testInitializePieces()" classname="model.PieceSelectorTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
