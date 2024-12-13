@@ -3,6 +3,7 @@ package model;
 import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class BoardTest {
 
@@ -18,15 +19,11 @@ public class BoardTest {
     @Test
     public void testAddObserver() {
         Board board = new Board(3, 3);
-        BoardObserver observer = new BoardObserver() {
-            @Override
-            public void onLineCleared(int linesCleared) {}
-
-            @Override
-            public void onGameOver() {}
-        };
+        BoardObserver observer = mock(BoardObserver.class);
         board.addObserver(observer);
+
         assertEquals(1, board.getObservers().size());
+        assertEquals(observer, board.getObservers().get(0));  // Verifica se o observador correto foi adicionado
     }
 
     @Test
@@ -61,5 +58,19 @@ public class BoardTest {
         PositionedPiece piece = new PositionedPiece(new Piece(new char[][]{{'A', 'A'}, {'A', 'A'}}, TextColor.ANSI.BLACK), 1, 1);
         board.checkGameOver(piece);
         // Verificar se o jogo acabou
+    }
+
+    @Test
+    void testNotifyLineCleared() {
+        Board board = new Board(3, 3);
+        BoardObserver mockObserver = mock(BoardObserver.class);
+
+        board.addObserver(mockObserver);
+
+        // Add and clear a full line
+        board.addPositionedPiece(new PositionedPiece(new Piece(new char[][]{{'A', 'A', 'A'}}, TextColor.ANSI.GREEN), 0, 0));
+        board.deleteFullLines();
+
+        verify(mockObserver, times(1)).onLineCleared(1);
     }
 }
