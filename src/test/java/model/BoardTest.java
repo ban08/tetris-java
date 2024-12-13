@@ -35,12 +35,19 @@ public class BoardTest {
     }
     @Test
     public void testAddPositionedPiece() {
-        Board board = new Board(3, 3);
-        char[][] shape = {{'A', 'A'}, {'A', 'A'}}; // Declare shape variable locally
-        PositionedPiece piece = new PositionedPiece(new Piece(shape, TextColor.ANSI.BLACK), 0, 0);
-        board.addPositionedPiece(piece);
-        assertEquals('A', board.getBoard()[0][0]);
-        assertEquals(TextColor.ANSI.BLACK, board.getColors()[0][0]);
+        Board board = new Board(3, 3);  // Instanciando o Board real
+        Piece piece = new Piece(new char[][]{{'A', 'A'}, {'A', 'A'}}, TextColor.ANSI.BLACK);  // Criando a peça real
+        PositionedPiece positionedPiece = new PositionedPiece(piece, 0, 0);  // Criando a peça posicionada
+
+        // Verificando que a posição começa vazia (espaco)
+        assertEquals(' ', board.getBoard()[0][0]);
+
+        // Adicionando a peça posicionada ao Board
+        board.addPositionedPiece(positionedPiece);
+
+        // Verificando se a peça foi colocada corretamente no tabuleiro
+        assertEquals('A', board.getBoard()[0][0]);  // Verifica se a posição foi alterada
+        assertEquals(TextColor.ANSI.BLACK, board.getColors()[0][0]);  // Verifica a cor associada
     }
 
     @Test
