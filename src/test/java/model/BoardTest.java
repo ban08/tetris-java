@@ -52,11 +52,26 @@ public class BoardTest {
 
     @Test
     public void testDeleteFullLines() {
+        // Mock do observer
+        BoardObserver observer = mock(BoardObserver.class);
+
+        // Criando um Board 3x3 e configurando uma linha cheia
         Board board = new Board(3, 3);
-        board.addPositionedPiece(new PositionedPiece(new Piece(new char[][]{{'A', 'A', 'A'}}, TextColor.ANSI.BLACK), 0, 0));
+        board.getBoard()[0] = new char[]{'A', 'A', 'A'};
+        board.getColors()[0] = new TextColor[]{TextColor.ANSI.RED, TextColor.ANSI.RED, TextColor.ANSI.RED};
+
+        // Adicionando o observer
+        board.addObserver(observer);
+
+        // Deletando linhas completas
         board.deleteFullLines();
-        assertEquals(' ', board.getBoard()[0][0]);
-        assertEquals(TextColor.ANSI.BLACK, board.getColors()[0][0]);
+
+        // Verificando se o observer foi notificado
+        verify(observer).onLineCleared(1);
+
+        // Verificando que a linha foi limpa
+        assertArrayEquals(new char[]{' ', ' ', ' '}, board.getBoard()[0]);
+        assertArrayEquals(new TextColor[]{TextColor.ANSI.BLACK, TextColor.ANSI.BLACK, TextColor.ANSI.BLACK}, board.getColors()[0]);
     }
 
     @Test
