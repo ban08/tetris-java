@@ -7,7 +7,7 @@ import com.googlecode.lanterna.TextColor;
     /**
      * A tetris board.
      */
-    public class Board {
+    public class Board implements IBoard{
         private final char[][] board;
         private final TextColor[][] colors;
         private final int width;
@@ -46,6 +46,7 @@ import com.googlecode.lanterna.TextColor;
          *
          * @return the current state of the board
          */
+        @Override
         public char[][] getBoard() {
             return board;
         }
@@ -55,6 +56,7 @@ import com.googlecode.lanterna.TextColor;
          *
          * @return the current state of the board's colors
          */
+        @Override
         public TextColor[][] getColors() {
             return colors;
         }
@@ -64,6 +66,7 @@ import com.googlecode.lanterna.TextColor;
          *
          * @param observer the observer to add
          */
+        @Override
         public void addObserver(BoardObserver observer) {
             observers.add(observer);
         }
@@ -73,6 +76,7 @@ import com.googlecode.lanterna.TextColor;
          *
          * @return a list of all observers
          */
+        @Override
         public List<BoardObserver> getObservers() {
             return observers;
         }
@@ -105,6 +109,7 @@ import com.googlecode.lanterna.TextColor;
          * @param y the y-coordinate of the position
          * @return true if the shape can be placed, false otherwise
          */
+        @Override
         public boolean canPlaceShape(char[][] shape, int x, int y) {
             // Check if the shape is within the bounds of the board
             if (x < 0 || y < 0 || x + shape[0].length > width || y + shape.length > height) {
@@ -128,6 +133,7 @@ import com.googlecode.lanterna.TextColor;
          *
          * @param positionedPiece the positioned piece to add
          */
+        @Override
         public void addPositionedPiece(PositionedPiece positionedPiece) {
             char[][] shape = positionedPiece.getPiece().getShape();
             TextColor color = positionedPiece.getPiece().getColor();
@@ -147,6 +153,7 @@ import com.googlecode.lanterna.TextColor;
         /**
          * Delete all full lines in the board.
          */
+        @Override
         public void deleteFullLines() {
             int linesCleared = 0;
 
@@ -169,6 +176,7 @@ import com.googlecode.lanterna.TextColor;
          * @param row the row to check
          * @return true if the line is full, false otherwise
          */
+
         private boolean isFullLine(int row) {
             for (int col = 0; col < width; col++) {
                 if (board[row][col] == ' ') return false;
@@ -209,6 +217,7 @@ import com.googlecode.lanterna.TextColor;
          *
          * @param piece the piece to place
          */
+        @Override
         public void checkGameOver(PositionedPiece piece) {
             if (!canPlaceShape(piece.getPiece().getShape(), piece.getX(), piece.getY())) {
                 notifyGameOver();
