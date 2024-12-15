@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.PieceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-12-05T18:40:54" hostname="DESKTOP-3JMO58F" time="0.002">
+<testsuite name="model.PieceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-12-15T13:46:08" hostname="DESKTOP-3JMO58F" time="0.004">
   <properties/>
-  <testcase name="testGettersAndSetters()" classname="model.PieceTest" time="0.002"/>
+  <testcase name="testGettersAndSetters()" classname="model.PieceTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
