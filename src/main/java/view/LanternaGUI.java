@@ -37,7 +37,7 @@ public class LanternaGUI implements GUI {
                 case 'e' -> ACTION.E_KEY;
                 case 'r' -> ACTION.R_KEY;
                 case 'q' -> ACTION.Q_KEY;
-                case 'b' -> ACTION.B_KEY; // Handle 'b' key as B_KEY action
+                case 'b' -> ACTION.B_KEY;
                 default -> ACTION.NONE;
             };
         }
