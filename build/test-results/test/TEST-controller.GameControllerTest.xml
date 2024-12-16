@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="controller.GameControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-12-16T20:24:16" hostname="DESKTOP-3JMO58F" time="0.377">
+  <properties/>
+  <testcase name="testPause()" classname="controller.GameControllerTest" time="0.358"/>
+  <testcase name="testDrop()" classname="controller.GameControllerTest" time="0.001"/>
+  <testcase name="testUpdateGame()" classname="controller.GameControllerTest" time="0.002"/>
+  <testcase name="testRotateLeft()" classname="controller.GameControllerTest" time="0.001"/>
+  <testcase name="testMoveDown()" classname="controller.GameControllerTest" time="0.001"/>
+  <testcase name="testMoveLeft()" classname="controller.GameControllerTest" time="0.001"/>
+  <testcase name="testRotateRight()" classname="controller.GameControllerTest" time="0.001"/>
+  <testcase name="testMoveRight()" classname="controller.GameControllerTest" time="0.001"/>
+  <testcase name="testIsGameRunning()" classname="controller.GameControllerTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

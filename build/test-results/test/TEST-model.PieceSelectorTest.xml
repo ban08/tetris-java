@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.PieceSelectorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-16T19:38:07" hostname="DESKTOP-3JMO58F" time="0.003">
+<testsuite name="model.PieceSelectorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-16T20:24:17" hostname="DESKTOP-3JMO58F" time="0.003">
   <properties/>
-  <testcase name="testRandomPiece()" classname="model.PieceSelectorTest" time="0.001"/>
+  <testcase name="testRandomPiece()" classname="model.PieceSelectorTest" time="0.002"/>
   <testcase name="testInitializePieces()" classname="model.PieceSelectorTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
