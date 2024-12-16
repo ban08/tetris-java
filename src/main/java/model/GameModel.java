@@ -1,6 +1,8 @@
 package model;
 
 import com.googlecode.lanterna.TextColor;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {
@@ -17,16 +19,22 @@ public class GameModel {
     private int bonusCharge;
     private boolean bonusActive;
     private boolean paused;
-    private int lastScore; // Track increments since last piece lock
+    private int lastScore;
 
-    public GameModel() {
-        this.board = new Board(10, 20);
-        this.score = new Score();
-        this.pieceFactory = new RandomPieceFactory();
+    public GameModel(Board board, Score score, PieceFactory pieceFactory) {
+        this.board = board;
+        this.score = score;
+        this.pieceFactory = pieceFactory;
         initGameState();
         board.addObserver(score);
     }
 
+    /**
+     * Default constructor initializing with default dependencies.
+     */
+    public GameModel() {
+        this(new Board(10, 20), new Score(), new RandomPieceFactory());
+    }
     private void initGameState() {
         this.running = true;
         this.fallSpeed = 500;
@@ -40,25 +48,16 @@ public class GameModel {
 
     public void resetGame() {
         // Clear board
-        clearBoard();
+        board.resetBoard();
         // Reset score and re-add observer
-        this.score = new Score();
+        this.score.reset();
         this.board.getObservers().clear();
         board.addObserver(score);
         // Reset all game state fields
         initGameState();
     }
 
-    private void clearBoard() {
-        char[][] b = board.getBoard();
-        TextColor[][] c = board.getColors();
-        for (int i = 0; i < b.length; i++) {
-            for (int j = 0; j < b[i].length; j++) {
-                b[i][j] = ' ';
-                c[i][j] = TextColor.ANSI.BLACK;
-            }
-        }
-    }
+
 
     private void spawnNewPiece() {
         this.currentPiece = new PositionedPiece(nextPiece.getPiece(), INITIAL_PIECE_X, INITIAL_PIECE_Y);
@@ -107,16 +106,34 @@ public class GameModel {
 
     public void executeBonus(List<Integer> rowsToClear) {
         if (bonusActive) {
-            rowsToClear.sort(Integer::compareTo);
-            for (int clearedRow : rowsToClear) {
-                clearLine(clearedRow);
-                shiftLinesDown(clearedRow);
+            List<Integer> sortedRows = new ArrayList<>(rowsToClear);
+            sortedRows.sort((a, b) -> b - a); // Sort in descending order to handle shifting correctly
+
+            int linesCleared = 0;
+            for (int clearedRow : sortedRows) {
+                if (clearedRow >= 0 && clearedRow < board.getBoard().length) { // Boundary check
+                    clearLine(clearedRow);
+                    shiftLinesDown(clearedRow);
+                    linesCleared++;
+                } else {
+                    // Optionally, log a warning or handle the error
+                    System.err.println("Attempted to clear invalid row: " + clearedRow);
+                }
             }
+
+            if (linesCleared > 0) {
+                score.onLineCleared(linesCleared); // Notify Score of lines cleared
+            }
+
             bonusActive = false;
             bonusCharge = 0;
             lastScore = score.getPoints();
         }
     }
+
+
+
+
 
     private void clearLine(int row) {
         for (int col = 0; col < board.getBoard()[0].length; col++) {
@@ -136,7 +153,7 @@ public class GameModel {
         }
     }
 
-    private void lockCurrentPiece() {
+    public void lockCurrentPiece() {
         if (paused) return;
         board.addPositionedPiece(currentPiece);
         board.deleteFullLines();
@@ -170,9 +187,15 @@ public class GameModel {
     public int getFallSpeed() {
         return fallSpeed;
     }
+    public void setFallSpeed(int fallSpeed) {
+        this.fallSpeed = fallSpeed;
+    }
 
     public int getBonusCharge() {
         return bonusCharge;
+    }
+    public void setBonusCharge(int bonusCharge) {
+        this.bonusCharge = bonusCharge;
     }
 
     public boolean isBonusActive() {
@@ -194,11 +217,22 @@ public class GameModel {
     public PositionedPiece getNextPiece() {
         return nextPiece;
     }
+    public void setCurrentPiece(PositionedPiece currentPiece) {
+        this.currentPiece = currentPiece;
+    }
+    public void setNextPiece(PositionedPiece nextPiece) {
+        this.nextPiece = nextPiece;
+    }
 
     public int getScorePoints() {
         return score.getPoints();
     }
-
+    public int getLastScore() {
+        return lastScore;
+    }
+    public void setLastScore(int lastScore) {
+        this.lastScore = lastScore;
+    }
     public void update() {
         if (!paused) moveDown();
     }

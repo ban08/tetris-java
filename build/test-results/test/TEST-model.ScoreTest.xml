@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.ScoreTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-15T13:46:08" hostname="DESKTOP-3JMO58F" time="0.016">
+<testsuite name="model.ScoreTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-16T19:38:07" hostname="DESKTOP-3JMO58F" time="0.007">
   <properties/>
-  <testcase name="testOnGameOver()" classname="model.ScoreTest" time="0.015"/>
-  <testcase name="testInitialScore()" classname="model.ScoreTest" time="0.001"/>
+  <testcase name="testOnGameOver()" classname="model.ScoreTest" time="0.005"/>
+  <testcase name="testInitialScore()" classname="model.ScoreTest" time="0.0"/>
   <testcase name="testOnlineCleared()" classname="model.ScoreTest" time="0.0"/>
   <system-out><![CDATA[Game Over! Final Score: 0
 ]]></system-out>

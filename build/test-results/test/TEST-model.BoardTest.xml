@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.BoardTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-12-15T13:46:08" hostname="DESKTOP-3JMO58F" time="0.549">
+<testsuite name="model.BoardTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2024-12-16T19:38:06" hostname="DESKTOP-3JMO58F" time="0.538">
   <properties/>
-  <testcase name="testCheckGameOver()" classname="model.BoardTest" time="0.021"/>
-  <testcase name="testNotifyLineCleared()" classname="model.BoardTest" time="0.493"/>
-  <testcase name="testAddObserver()" classname="model.BoardTest" time="0.009"/>
-  <testcase name="testDeleteFullLines()" classname="model.BoardTest" time="0.004"/>
-  <testcase name="testInitializeBoard()" classname="model.BoardTest" time="0.002"/>
-  <testcase name="testCanPlaceShape()" classname="model.BoardTest" time="0.002"/>
-  <testcase name="testAddPositionedPiece()" classname="model.BoardTest" time="0.003"/>
+  <testcase name="testDeleteFullLines_SingleLine()" classname="model.BoardTest" time="0.5"/>
+  <testcase name="testClearBoard()" classname="model.BoardTest" time="0.003"/>
+  <testcase name="testAddObserver()" classname="model.BoardTest" time="0.002"/>
+  <testcase name="testCheckGameOver_GameOver()" classname="model.BoardTest" time="0.003"/>
+  <testcase name="testCanPlaceShape_Overlap()" classname="model.BoardTest" time="0.002"/>
+  <testcase name="testDeleteFullLines_NoFullLines()" classname="model.BoardTest" time="0.003"/>
+  <testcase name="testCheckGameOver_NotGameOver()" classname="model.BoardTest" time="0.002"/>
+  <testcase name="testInitializeBoard()" classname="model.BoardTest" time="0.001"/>
+  <testcase name="testCanPlaceShape_ValidPlacement()" classname="model.BoardTest" time="0.0"/>
+  <testcase name="testAddObserver_NullObserver()" classname="model.BoardTest" time="0.002"/>
+  <testcase name="testAddPositionedPiece()" classname="model.BoardTest" time="0.001"/>
+  <testcase name="testShiftLinesDown()" classname="model.BoardTest" time="0.001"/>
+  <testcase name="testCanPlaceShape_OutOfBounds()" classname="model.BoardTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

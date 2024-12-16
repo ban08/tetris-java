@@ -30,7 +30,12 @@ public class Board {
 
     public char[][] getBoard() { return board; }
     public TextColor[][] getColors() { return colors; }
-    public void addObserver(BoardObserver observer) { observers.add(observer); }
+    public void addObserver(BoardObserver observer) {
+        if (observer == null) {
+            throw new NullPointerException("Adding null observer should throw NullPointerException.");
+        }
+        observers.add(observer);
+    }
     public List<BoardObserver> getObservers() { return observers; }
 
     private void notifyLineCleared(int linesCleared) {
@@ -103,7 +108,17 @@ public class Board {
         }
     }
 
+
     public void checkGameOver(PositionedPiece piece) {
         if (!canPlaceShape(piece.getPiece().getShape(), piece.getX(), piece.getY())) notifyGameOver();
+    }
+
+    public void resetBoard() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = ' ';
+                colors[i][j] = TextColor.ANSI.BLACK;
+            }
+        }
     }
 }
