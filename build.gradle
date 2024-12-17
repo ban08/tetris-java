@@ -27,14 +27,15 @@ dependencies {
 
 pitest {
     targetClasses = ['model.*', 'controller.*', 'states.*', 'view.*', 'main.*', 'music.*'] // Specify the packages to mutate
-    targetTests = ['model.*', 'controller.*', 'states.*', 'view.*', 'main.*', 'music.*'] // Specify the test classes
+    targetTests = ['*Test'] // Specify the test classes
     threads = 4
     outputFormats = ['HTML', 'XML'] // Formats for the report
     mutators = ['ALL'] // Mutators to use; 'ALL' covers all mutation types
-    junit5PluginVersion = '0.15' // Ensure compatibility with JUnit 5
+    junit5PluginVersion = '0.14' // Ensure compatibility with JUnit 5
     pitestVersion = '1.9.11' // Specify PITest version
-    verbosity = 'DEBUG' // Set to 'INFO' or 'DEBUG' for more detailed logs
     timestampedReports = false // Generate reports in a consistent directory
+    verbose = true
+    jvmArgs = ['-Dfile.encoding=UTF-8'] // Force UTF-8 encoding
 }
 jacocoTestReport {
     reports {
@@ -43,6 +44,14 @@ jacocoTestReport {
     }
 }
 
+tasks.withType(JavaCompile) {
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+    compileTestJava {
+        options.encoding = "UTF-8"
+    }
+}
 
     test {
         useJUnitPlatform()

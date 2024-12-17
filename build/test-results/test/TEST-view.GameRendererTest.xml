@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="view.GameRendererTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-12-17T01:07:58" hostname="DESKTOP-3JMO58F" time="0.049">
+<testsuite name="view.GameRendererTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-12-17T22:06:34" hostname="DESKTOP-3JMO58F" time="0.106">
   <properties/>
-  <testcase name="testRender_NextPieceDisplayedCorrectly()" classname="view.GameRendererTest" time="0.01"/>
-  <testcase name="testRenderCalledWithCorrectParameters()" classname="view.GameRendererTest" time="0.013"/>
-  <testcase name="testRender_WithBonusActiveAndChoosingLines()" classname="view.GameRendererTest" time="0.014"/>
-  <testcase name="testRender_WhenGameIsPaused()" classname="view.GameRendererTest" time="0.009"/>
+  <testcase name="testRender_NextPieceDisplayedCorrectly()" classname="view.GameRendererTest" time="0.011"/>
+  <testcase name="testRenderCalledWithCorrectParameters()" classname="view.GameRendererTest" time="0.023"/>
+  <testcase name="testRender_WithBonusActiveAndChoosingLines()" classname="view.GameRendererTest" time="0.039"/>
+  <testcase name="testRender_WhenGameIsPaused()" classname="view.GameRendererTest" time="0.029"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

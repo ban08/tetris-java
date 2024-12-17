@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.RotateLeftStrategyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-17T01:07:57" hostname="DESKTOP-3JMO58F" time="0.004">
+<testsuite name="model.RotateLeftStrategyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-17T22:06:33" hostname="DESKTOP-3JMO58F" time="0.006">
   <properties/>
   <testcase name="testRotateRectangularMatrix()" classname="model.RotateLeftStrategyTest" time="0.001"/>
-  <testcase name="testRotate_EmptyArray()" classname="model.RotateLeftStrategyTest" time="0.001"/>
+  <testcase name="testRotate_EmptyArray()" classname="model.RotateLeftStrategyTest" time="0.003"/>
   <testcase name="testRotateSymmetry()" classname="model.RotateLeftStrategyTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

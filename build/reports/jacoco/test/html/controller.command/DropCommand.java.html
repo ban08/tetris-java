@@ -2,16 +2,24 @@
 
 import controller.ControllerInterface;
 
+/**
+ * A command to drop the current  piece to the bottom of the board.
+ */
 public class DropCommand implements Command {
     private final ControllerInterface controller;
 
-<span class="fc" id="L8">    public DropCommand(ControllerInterface controller) {</span>
-<span class="fc" id="L9">        this.controller = controller;</span>
-<span class="fc" id="L10">    }</span>
+    /**
+     * Creates a new DropCommand.
+     *
+     * @param controller the controller to use when dropping the piece
+     */
+<span class="fc" id="L16">    public DropCommand(ControllerInterface controller) {</span>
+<span class="fc" id="L17">        this.controller = controller;</span>
+<span class="fc" id="L18">    }</span>
 
     @Override
     public void execute() {
-<span class="fc" id="L14">        controller.drop();</span>
-<span class="fc" id="L15">    }</span>
+<span class="fc" id="L22">        controller.drop();</span>
+<span class="fc" id="L23">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

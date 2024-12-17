@@ -7,6 +7,10 @@ import model.menu.StartMenu;
 
 import java.io.IOException;
 
+/**
+ * The StartMenuViewer class is responsible for rendering the start menu screen
+ * using a GUI. It displays the game title and options to start or exit the game.
+ */
 public class StartMenuViewer {
     private final StartMenu menu;
 
@@ -14,6 +18,13 @@ public class StartMenuViewer {
         this.menu = menu;
     }
 
+    /**
+     * Draws the start menu on the screen using the provided GUI.
+     *
+     * @param gui the GUI instance used for rendering
+     * @throws IOException if an error occurs during screen rendering
+     * @throws IllegalStateException if the GUI is not an instance of LanternaGUI
+     */
     public void draw(GUI gui) throws IOException {
         if (!(gui instanceof LanternaGUI)) {
             throw new IllegalStateException("GUI must be a LanternaGUI instance");
@@ -35,7 +46,6 @@ public class StartMenuViewer {
                 "     ██    █████      ██    ██████  ██ ███████ ",
                 "     ██    ██         ██    ██   ██ ██      ██ ",
                 "     ██    ███████    ██    ██   ██ ██ ███████ "
-
         };
         int startRow = (rows / 2) - (title.length / 2) - 2;
         for (int i = 0; i < title.length; i++) {

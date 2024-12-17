@@ -6,7 +6,12 @@ import music.Music;
 import view.GUI;
 
 import java.io.IOException;
-
+/**
+ * The GameOverState class represents the game over state of the game.
+ * It is responsible for rendering the game over screen and handling user input to restart the game or quit.
+ *
+ *
+ */
 public class GameOverState extends State {
     private final GameOverMenu menu;
     private final Screen screen;
@@ -18,6 +23,17 @@ public class GameOverState extends State {
         this.menu = new GameOverMenu();
     }
 
+    /**
+     * Renders the game over screen and handles user input actions.
+     * Clears the screen, displays the "GAME OVER" message, and presents options to
+     * either return to the start menu or quit the game. Listens for the user's key
+     * input and transitions to the corresponding state based on the action.
+     *
+     * @param gui the GUI instance used to fetch the next action
+     * @param time the current time in milliseconds
+     * @return the new State based on user input or the current GameOverState if no relevant action is taken
+     * @throws IOException if an error occurs during screen rendering or input fetching
+     */
     @Override
     public State step(GUI gui, long time) throws IOException {
         screen.clear();
@@ -40,3 +56,4 @@ public class GameOverState extends State {
         }
     }
 }
+

@@ -7,29 +7,47 @@ import view.GUI;
 import view.StartMenuViewer;
 
 import java.io.IOException;
-
+/**
+ * The start menu state of the game.
+ * This state is responsible for rendering the start menu and handling user input.
+ *
+ */
 public class StartMenuState extends State {
     private final StartMenu menu;
     private final StartMenuViewer viewer;
     private final Screen screen;
     private final Music music;
 
-<span class="fc" id="L17">    public StartMenuState(Screen screen, Music music) {</span>
-<span class="fc" id="L18">        this.screen = screen;</span>
-<span class="fc" id="L19">        this.menu = new StartMenu();</span>
-<span class="fc" id="L20">        this.music = music;</span>
-<span class="fc" id="L21">        this.viewer = new StartMenuViewer(menu);</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L21">    public StartMenuState(Screen screen, Music music) {</span>
+<span class="fc" id="L22">        this.screen = screen;</span>
+<span class="fc" id="L23">        this.menu = new StartMenu();</span>
+<span class="fc" id="L24">        this.music = music;</span>
+<span class="fc" id="L25">        this.viewer = new StartMenuViewer(menu);</span>
+<span class="fc" id="L26">    }</span>
 
+    /**
+     * Advances the state of the start menu based on user input.
+     *
+     * This method draws the current state of the start menu using the provided GUI,
+     * retrieves the next user action, and transitions to the appropriate state.
+     * If the 'S' key is pressed, the game transitions to the GameState.
+     * If the 'E' key is pressed, the game exits. For any other key, the state remains
+     * in the StartMenuState.
+     *
+     * @param gui the GUI used to interact with the user
+     * @param time the current time in milliseconds
+     * @return the next state of the game, or null if the game is exiting
+     * @throws IOException if an I/O error occurs during the state transition
+     */
     @Override
     public State step(GUI gui, long time) throws IOException {
-<span class="fc" id="L26">        viewer.draw(gui);</span>
-<span class="fc" id="L27">        GUI.ACTION action = gui.getNextAction();</span>
-<span class="fc bfc" id="L28" title="All 3 branches covered.">        switch(action) {</span>
-<span class="fc" id="L29">            case S_KEY -&gt; {return new GameState(screen,music);}</span>
-<span class="fc" id="L30">            case E_KEY -&gt; {return null;}</span>
-<span class="fc" id="L31">            default -&gt; {return this;}</span>
+<span class="fc" id="L44">        viewer.draw(gui);</span>
+<span class="fc" id="L45">        GUI.ACTION action = gui.getNextAction();</span>
+<span class="fc bfc" id="L46" title="All 3 branches covered.">        switch(action) {</span>
+<span class="fc" id="L47">            case S_KEY -&gt; {return new GameState(screen,music);}</span>
+<span class="fc" id="L48">            case E_KEY -&gt; {return null;}</span>
+<span class="fc" id="L49">            default -&gt; {return this;}</span>
         }
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

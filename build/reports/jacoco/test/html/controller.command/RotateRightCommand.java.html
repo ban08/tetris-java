@@ -2,9 +2,31 @@
 
 import controller.ControllerInterface;
 
-public class RotateRightCommand implements Command {
+/**
+ * A command that rotates the current piece right.
+ */
+public final class RotateRightCommand implements Command {
+
+    /**
+     * The controller to use for rotating the current piece right.
+     */
     private final ControllerInterface controller;
-<span class="fc" id="L7">    public RotateRightCommand(ControllerInterface controller) { this.controller = controller; }</span>
-<span class="fc" id="L8">    @Override public void execute() { controller.rotateRight(); }</span>
+
+    /**
+     * Creates a new RotateRightCommand with the given controller.
+     *
+     * @param controller the controller to use for rotating the current piece right
+     */
+<span class="fc" id="L20">    public RotateRightCommand(ControllerInterface controller) {</span>
+<span class="fc" id="L21">        this.controller = controller;</span>
+<span class="fc" id="L22">    }</span>
+
+    /**
+     * Rotates the current piece right.
+     */
+    @Override
+    public void execute() {
+<span class="fc" id="L29">        controller.rotateRight();</span>
+<span class="fc" id="L30">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
