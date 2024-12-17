@@ -173,6 +173,7 @@ public class GameModel {
         spawnNewPiece();
         if (!board.canPlaceShape(currentPiece.getPiece().getShape(), currentPiece.getX(), currentPiece.getY())) {
             running = false;
+
         }
     }
 
@@ -233,6 +234,7 @@ public class GameModel {
     public void setLastScore(int lastScore) {
         this.lastScore = lastScore;
     }
+
     public void update() {
         if (!paused) moveDown();
     }

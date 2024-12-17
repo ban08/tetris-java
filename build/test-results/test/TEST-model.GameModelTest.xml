@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.GameModelTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-12-16T20:24:17" hostname="DESKTOP-3JMO58F" time="0.107">
+<testsuite name="model.GameModelTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:13:31" hostname="DESKTOP-3JMO58F" time="0.129">
   <properties/>
-  <testcase name="testLockCurrentPieceDoesNotDecreaseFallSpeedWhenThresholdNotMet()" classname="model.GameModelTest" time="0.043"/>
+  <testcase name="testLockCurrentPieceDoesNotDecreaseFallSpeedWhenThresholdNotMet()" classname="model.GameModelTest" time="0.062"/>
   <testcase name="testResetGameResetsGameState()" classname="model.GameModelTest" time="0.004"/>
-  <testcase name="testLockCurrentPieceAddsPieceToBoardAndClearsLines()" classname="model.GameModelTest" time="0.003"/>
+  <testcase name="testLockCurrentPieceAddsPieceToBoardAndClearsLines()" classname="model.GameModelTest" time="0.004"/>
   <testcase name="testBonusChargeCappedAtMaximum()" classname="model.GameModelTest" time="0.002"/>
-  <testcase name="testLockCurrentPieceSpawnsNewPiece()" classname="model.GameModelTest" time="0.005"/>
+  <testcase name="testLockCurrentPieceSpawnsNewPiece()" classname="model.GameModelTest" time="0.003"/>
   <testcase name="testFallSpeedDecreasesAfterScoreThreshold()" classname="model.GameModelTest" time="0.002"/>
   <testcase name="testActivateBonusWithSufficientCharge()" classname="model.GameModelTest" time="0.002"/>
   <testcase name="testActivateBonusWithInsufficientCharge()" classname="model.GameModelTest" time="0.003"/>
-  <testcase name="testLockCurrentPieceHandlesNegativeScoreIncrement()" classname="model.GameModelTest" time="0.003"/>
-  <testcase name="testFallSpeedDoesNotDecreaseBelowMinimum()" classname="model.GameModelTest" time="0.002"/>
-  <testcase name="testExecuteBonusClearsSelectedLines()" classname="model.GameModelTest" time="0.025"/>
-  <testcase name="testLockCurrentPieceDoesNotStopGameWhenSpaceIsAvailable()" classname="model.GameModelTest" time="0.001"/>
-  <testcase name="testLockCurrentPieceStopsGameWhenNoSpaceForNewPiece()" classname="model.GameModelTest" time="0.002"/>
-  <testcase name="testBonusChargeUpdatesCorrectlyBasedOnScoreIncrements()" classname="model.GameModelTest" time="0.002"/>
+  <testcase name="testLockCurrentPieceHandlesNegativeScoreIncrement()" classname="model.GameModelTest" time="0.002"/>
+  <testcase name="testFallSpeedDoesNotDecreaseBelowMinimum()" classname="model.GameModelTest" time="0.003"/>
+  <testcase name="testExecuteBonusClearsSelectedLines()" classname="model.GameModelTest" time="0.026"/>
+  <testcase name="testLockCurrentPieceDoesNotStopGameWhenSpaceIsAvailable()" classname="model.GameModelTest" time="0.002"/>
+  <testcase name="testLockCurrentPieceStopsGameWhenNoSpaceForNewPiece()" classname="model.GameModelTest" time="0.003"/>
+  <testcase name="testBonusChargeUpdatesCorrectlyBasedOnScoreIncrements()" classname="model.GameModelTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

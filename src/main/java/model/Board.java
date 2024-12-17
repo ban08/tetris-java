@@ -74,15 +74,21 @@ public class Board {
 
     public void deleteFullLines() {
         int linesCleared = 0;
-        for (int row = 0; row < height; row++) {
+
+        for (int row = height - 1; row >= 0; ) {
             if (isFullLine(row)) {
                 clearLine(row);
                 shiftLinesDown(row);
                 linesCleared++;
+            } else {
+                row--;
             }
         }
+
         if (linesCleared > 0) notifyLineCleared(linesCleared);
     }
+
+
 
     private boolean isFullLine(int row) {
         for (int col = 0; col < width; col++)
