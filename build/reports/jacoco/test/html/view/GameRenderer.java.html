@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameRenderer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">view</a> &gt; <span class="el_source">GameRenderer.java</span></div><h1>GameRenderer.java</h1><pre class="source lang-java linenums">package view;
+
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
+import model.Board;
+import model.PositionedPiece;
+import model.Piece;
+
+import java.io.IOException;
+import java.util.List;
+
+public class GameRenderer {
+    private final Screen screen;
+
+<span class="fc" id="L16">    public GameRenderer(Screen screen) {</span>
+<span class="fc" id="L17">        this.screen = screen;</span>
+<span class="fc" id="L18">    }</span>
+
+    public void render(Board board,
+                       PositionedPiece currentPiece,
+                       int score,
+                       int bonusCharge,
+                       boolean bonusActive,
+                       boolean choosingLines,
+                       int selectedLine,
+                       List&lt;Integer&gt; chosenLines,
+                       boolean paused,
+                       Piece nextPiece,
+                       String timer) {
+<span class="fc" id="L31">        screen.clear();</span>
+<span class="fc" id="L32">        TextGraphics g = screen.newTextGraphics();</span>
+<span class="fc" id="L33">        g.setBackgroundColor(TextColor.ANSI.BLACK);</span>
+<span class="fc" id="L34">        g.setForegroundColor(TextColor.ANSI.WHITE);</span>
+
+<span class="fc" id="L36">        int cols = screen.getTerminalSize().getColumns();</span>
+<span class="fc" id="L37">        int rows = screen.getTerminalSize().getRows();</span>
+
+<span class="fc" id="L39">        int boardWidth = board.getBoard()[0].length;</span>
+<span class="fc" id="L40">        int boardHeight = board.getBoard().length;</span>
+
+<span class="fc" id="L42">        int boardX = (cols - boardWidth) / 2;</span>
+<span class="fc" id="L43">        int boardY = (rows - boardHeight) / 2;</span>
+
+<span class="fc" id="L45">        drawBox(g, boardX - 1, boardY - 1, boardWidth + 2, boardHeight + 2, TextColor.ANSI.WHITE);</span>
+<span class="fc" id="L46">        renderBoard(g, board, boardX, boardY);</span>
+<span class="fc" id="L47">        renderActivePiece(g, currentPiece, boardX, boardY);</span>
+
+<span class="fc" id="L49">        g.setBackgroundColor(TextColor.ANSI.BLACK);</span>
+<span class="fc" id="L50">        g.setForegroundColor(TextColor.ANSI.WHITE);</span>
+
+<span class="fc" id="L52">        g.putString(2, rows / 2, &quot;Score: &quot; + score);</span>
+
+<span class="fc" id="L54">        int filled = bonusCharge / 50;</span>
+<span class="fc" id="L55">        String bonusBar = &quot;Bonus: [&quot; + &quot;=&quot;.repeat(filled) + &quot; &quot;.repeat(10 - filled) + &quot;]&quot;;</span>
+<span class="fc" id="L56">        g.putString(2, (rows / 2) + 2, bonusBar);</span>
+
+        // Draw timer at top-right corner
+<span class="fc" id="L59">        g.putString(cols - 15, 2, timer);</span>
+
+<span class="fc" id="L61">        renderNextPiece(g, nextPiece, cols - 15, 4);</span>
+
+<span class="pc bpc" id="L63" title="1 of 4 branches missed.">        if (bonusActive &amp;&amp; choosingLines) {</span>
+<span class="fc" id="L64">            g.putString(2, (rows / 2) + 4, &quot;Select 3 lines with ENTER:&quot;);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            for (int y = 0; y &lt; boardHeight; y++) {</span>
+<span class="fc" id="L66">                String marker = &quot; &quot;;</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">                if (y == selectedLine) marker = &quot;&gt;&quot;;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">                if (chosenLines.contains(y)) marker = &quot;*&quot;;</span>
+<span class="fc" id="L69">                g.setBackgroundColor(TextColor.ANSI.BLACK);</span>
+<span class="fc" id="L70">                g.setForegroundColor(TextColor.ANSI.WHITE);</span>
+<span class="fc" id="L71">                g.putString(boardX - 3, boardY + y, marker);</span>
+            }
+        }
+
+<span class="fc" id="L75">        String instructions = &quot;[Arrows: Move | Space: Drop | A/D: Rotate | B: Bonus | P: Pause | E: Exit ]&quot;;</span>
+<span class="fc" id="L76">        g.putString((cols - instructions.length()) / 2, rows - 1, instructions);</span>
+
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (paused) {</span>
+<span class="fc" id="L79">            String pausedText = &quot;PAUSED&quot;;</span>
+<span class="fc" id="L80">            g.putString((cols - pausedText.length()) / 2, rows / 2 - 2, pausedText);</span>
+        }
+
+<span class="fc" id="L83">        refreshScreen();</span>
+<span class="fc" id="L84">    }</span>
+
+    private void drawBox(TextGraphics g, int x, int y, int width, int height, TextColor color) {
+<span class="fc" id="L87">        g.setForegroundColor(color);</span>
+<span class="fc" id="L88">        g.setBackgroundColor(TextColor.ANSI.BLACK);</span>
+<span class="fc" id="L89">        char topLeft = 'â”Œ', topRight = 'â”�', bottomLeft = 'â””', bottomRight = 'â”˜', horizontal = 'â”€', vertical = 'â”‚';</span>
+
+<span class="fc" id="L91">        g.putString(x, y, String.valueOf(topLeft));</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (int i = 1; i &lt; width - 1; i++) g.putString(x + i, y, String.valueOf(horizontal));</span>
+<span class="fc" id="L93">        g.putString(x + width - 1, y, String.valueOf(topRight));</span>
+
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        for (int row = 1; row &lt; height - 1; row++) {</span>
+<span class="fc" id="L96">            g.putString(x, y + row, String.valueOf(vertical));</span>
+<span class="fc" id="L97">            g.putString(x + width - 1, y + row, String.valueOf(vertical));</span>
+        }
+
+<span class="fc" id="L100">        g.putString(x, y + height - 1, String.valueOf(bottomLeft));</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        for (int i = 1; i &lt; width -1; i++) g.putString(x + i, y + height - 1, String.valueOf(horizontal));</span>
+<span class="fc" id="L102">        g.putString(x + width - 1, y + height - 1, String.valueOf(bottomRight));</span>
+<span class="fc" id="L103">    }</span>
+
+    private void renderBoard(TextGraphics g, Board board, int offsetX, int offsetY) {
+<span class="fc" id="L106">        char[][] gameBoard = board.getBoard();</span>
+<span class="fc" id="L107">        TextColor[][] colors = board.getColors();</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (int row = 0; row &lt; gameBoard.length; row++) {</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">            for (int col = 0; col &lt; gameBoard[row].length; col++) {</span>
+<span class="fc" id="L110">                g.setBackgroundColor(colors[row][col]);</span>
+<span class="fc" id="L111">                g.setForegroundColor(TextColor.ANSI.WHITE);</span>
+<span class="fc" id="L112">                g.putString(offsetX + col, offsetY + row, String.valueOf(gameBoard[row][col]));</span>
+            }
+        }
+<span class="fc" id="L115">    }</span>
+
+    private void renderActivePiece(TextGraphics g, PositionedPiece currentPiece, int offsetX, int offsetY) {
+<span class="fc" id="L118">        char[][] shape = currentPiece.getPiece().getShape();</span>
+<span class="fc" id="L119">        int x = currentPiece.getX();</span>
+<span class="fc" id="L120">        int y = currentPiece.getY();</span>
+<span class="fc" id="L121">        TextColor color = currentPiece.getPiece().getColor();</span>
+
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        for (int row = 0; row &lt; shape.length; row++) {</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            for (int col = 0; col &lt; shape[row].length; col++) {</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">                if (shape[row][col] != ' ') {</span>
+<span class="fc" id="L126">                    g.setBackgroundColor(color);</span>
+<span class="fc" id="L127">                    g.setForegroundColor(TextColor.ANSI.WHITE);</span>
+<span class="fc" id="L128">                    g.putString(offsetX + x + col, offsetY + y + row, &quot;â–ˆ&quot;);</span>
+                }
+            }
+        }
+<span class="fc" id="L132">    }</span>
+
+    private void renderNextPiece(TextGraphics g, Piece nextPiece, int startX, int startY) {
+<span class="fc" id="L135">        int boxWidth = 8;</span>
+<span class="fc" id="L136">        int boxHeight = 6;</span>
+<span class="fc" id="L137">        drawBox(g, startX, startY, boxWidth, boxHeight, TextColor.ANSI.WHITE);</span>
+
+<span class="fc" id="L139">        char[][] shape = nextPiece.getShape();</span>
+<span class="fc" id="L140">        TextColor color = nextPiece.getColor();</span>
+<span class="fc" id="L141">        int shapeHeight = shape.length;</span>
+<span class="fc" id="L142">        int shapeWidth = shape[0].length;</span>
+
+<span class="fc" id="L144">        int offsetX = startX + (boxWidth - shapeWidth) / 2;</span>
+<span class="fc" id="L145">        int offsetY = startY + (boxHeight - shapeHeight) / 2;</span>
+
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        for (int r = 0; r &lt; shapeHeight; r++) {</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            for (int c = 0; c &lt; shape[r].length; c++) {</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">                if (shape[r][c] != ' ') {</span>
+<span class="fc" id="L150">                    g.setBackgroundColor(color);</span>
+<span class="fc" id="L151">                    g.setForegroundColor(TextColor.ANSI.WHITE);</span>
+<span class="fc" id="L152">                    g.putString(offsetX + c, offsetY + r, &quot;â–ˆ&quot;);</span>
+                }
+            }
+        }
+
+<span class="fc" id="L157">        g.setBackgroundColor(TextColor.ANSI.BLACK);</span>
+<span class="fc" id="L158">        g.setForegroundColor(TextColor.ANSI.WHITE);</span>
+<span class="fc" id="L159">        g.putString(startX + 1, startY + boxHeight - 1, &quot;Next&quot;);</span>
+<span class="fc" id="L160">    }</span>
+
+    private void refreshScreen() {
+        try {
+<span class="fc" id="L164">            screen.refresh();</span>
+<span class="nc" id="L165">        } catch (IOException e) {</span>
+<span class="nc" id="L166">            e.printStackTrace();</span>
+<span class="fc" id="L167">        }</span>
+<span class="fc" id="L168">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

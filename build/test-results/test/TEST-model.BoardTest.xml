@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.BoardTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:13:30" hostname="DESKTOP-3JMO58F" time="0.035">
+<testsuite name="model.BoardTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:32:26" hostname="DESKTOP-3JMO58F" time="0.056">
   <properties/>
-  <testcase name="testDeleteFullLines_SingleLine()" classname="model.BoardTest" time="0.013"/>
-  <testcase name="testClearBoard()" classname="model.BoardTest" time="0.001"/>
+  <testcase name="testDeleteFullLines_SingleLine()" classname="model.BoardTest" time="0.027"/>
+  <testcase name="testClearBoard()" classname="model.BoardTest" time="0.003"/>
   <testcase name="testAddObserver()" classname="model.BoardTest" time="0.001"/>
-  <testcase name="testCheckGameOver_GameOver()" classname="model.BoardTest" time="0.001"/>
-  <testcase name="testCanPlaceShape_Overlap()" classname="model.BoardTest" time="0.001"/>
-  <testcase name="testDeleteFullLines_NoFullLines()" classname="model.BoardTest" time="0.002"/>
-  <testcase name="testCheckGameOver_NotGameOver()" classname="model.BoardTest" time="0.001"/>
+  <testcase name="testCheckGameOver_GameOver()" classname="model.BoardTest" time="0.002"/>
+  <testcase name="testCanPlaceShape_Overlap()" classname="model.BoardTest" time="0.003"/>
+  <testcase name="testDeleteFullLines_NoFullLines()" classname="model.BoardTest" time="0.005"/>
+  <testcase name="testCheckGameOver_NotGameOver()" classname="model.BoardTest" time="0.002"/>
   <testcase name="testInitializeBoard()" classname="model.BoardTest" time="0.0"/>
   <testcase name="testCanPlaceShape_ValidPlacement()" classname="model.BoardTest" time="0.0"/>
   <testcase name="testAddObserver_NullObserver()" classname="model.BoardTest" time="0.003"/>

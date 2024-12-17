@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="states.GameStateTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:13:31" hostname="DESKTOP-3JMO58F" time="0.121">
+<testsuite name="states.GameStateTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:32:26" hostname="DESKTOP-3JMO58F" time="0.208">
   <properties/>
-  <testcase name="testGameOverTransition()" classname="states.GameStateTest" time="0.089"/>
-  <testcase name="testGameContinuesWhenRunning()" classname="states.GameStateTest" time="0.031"/>
+  <testcase name="testGameOverTransition()" classname="states.GameStateTest" time="0.146"/>
+  <testcase name="testGameContinuesWhenRunning()" classname="states.GameStateTest" time="0.062"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

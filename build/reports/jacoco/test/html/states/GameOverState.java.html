@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameOverState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">states</a> &gt; <span class="el_source">GameOverState.java</span></div><h1>GameOverState.java</h1><pre class="source lang-java linenums">package states;
+
+import com.googlecode.lanterna.screen.Screen;
+import model.menu.GameOverMenu;
+import music.Music;
+import view.GUI;
+
+import java.io.IOException;
+
+public class GameOverState extends State {
+    private final GameOverMenu menu;
+    private final Screen screen;
+    private final Music music;
+
+<span class="fc" id="L15">    public GameOverState(Screen screen, Music music) {</span>
+<span class="fc" id="L16">        this.screen = screen;</span>
+<span class="fc" id="L17">        this.music = music;</span>
+<span class="fc" id="L18">        this.menu = new GameOverMenu();</span>
+<span class="fc" id="L19">    }</span>
+
+    @Override
+    public State step(GUI gui, long time) throws IOException {
+<span class="fc" id="L23">        screen.clear();</span>
+<span class="fc" id="L24">        var tg = screen.newTextGraphics();</span>
+<span class="fc" id="L25">        tg.setBackgroundColor(com.googlecode.lanterna.TextColor.ANSI.BLACK);</span>
+<span class="fc" id="L26">        tg.setForegroundColor(com.googlecode.lanterna.TextColor.ANSI.WHITE);</span>
+<span class="fc" id="L27">        int cols = screen.getTerminalSize().getColumns();</span>
+<span class="fc" id="L28">        int rows = screen.getTerminalSize().getRows();</span>
+<span class="fc" id="L29">        String gameOver = &quot;GAME OVER&quot;;</span>
+<span class="fc" id="L30">        tg.putString((cols - gameOver.length())/2, rows/2, gameOver);</span>
+<span class="fc" id="L31">        String retryText = &quot;Press R to Return to Menu or Q to Quit&quot;;</span>
+<span class="fc" id="L32">        tg.putString((cols - retryText.length())/2, (rows/2)+2, retryText);</span>
+<span class="fc" id="L33">        screen.refresh();</span>
+
+<span class="fc" id="L35">        GUI.ACTION action = gui.getNextAction();</span>
+<span class="fc bfc" id="L36" title="All 3 branches covered.">        switch(action) {</span>
+<span class="fc" id="L37">            case R_KEY -&gt; {return new StartMenuState(screen, music);}</span>
+<span class="fc" id="L38">            case Q_KEY -&gt; {return null;}</span>
+<span class="fc" id="L39">            default -&gt; {return this;}</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
