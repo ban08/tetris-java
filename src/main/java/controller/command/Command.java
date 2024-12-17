@@ -1,5 +1,5 @@
-package controller.command;
+    package controller.command;
 
-public interface Command {
-    void execute();
-}
+    public interface Command {
+        void execute();
+    }

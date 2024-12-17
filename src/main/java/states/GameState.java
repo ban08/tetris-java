@@ -40,6 +40,26 @@ public class GameState extends State {
         this.elapsedTime = 0;
         this.lastUpdateTime = System.currentTimeMillis();
     }
+    /**
+     * Overloaded constructor for testing purposes.
+     * Allows injection of mocked GameModel and GameController.
+     *
+     * @param screen     the Lanterna Screen
+     * @param music      the Music instance
+     * @param model      the GameModel instance (can be mocked)
+     * @param controller the GameController instance (can be mocked)
+     */
+    public GameState(Screen screen, Music music, GameModel model, GameController controller) {
+        this.screen = screen;
+        this.music = music;
+        this.model = model;
+        this.controller = controller;
+        this.renderer = new GameRenderer(screen);
+
+        // Initialize timer
+        this.elapsedTime = 0;
+        this.lastUpdateTime = System.currentTimeMillis();
+    }
 
     @Override
     public State step(GUI gui, long time) throws IOException {
@@ -161,7 +181,6 @@ public class GameState extends State {
                 }
             }
             case R_KEY -> {
-                // If paused, restart the game and reset the timer
                 if (model.isPaused()) {
                     model.resetGame();
                     elapsedTime = 0;

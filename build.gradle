@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.15.0'
+    id 'jacoco'
 }
 
 application {
@@ -23,6 +25,25 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.7.7'
 }
 
-test {
-    useJUnitPlatform()
+pitest {
+    targetClasses = ['model.*', 'controller.*', 'states.*', 'view.*', 'main.*', 'music.*'] // Specify the packages to mutate
+    targetTests = ['model.*', 'controller.*', 'states.*', 'view.*', 'main.*', 'music.*'] // Specify the test classes
+    threads = 4
+    outputFormats = ['HTML', 'XML'] // Formats for the report
+    mutators = ['ALL'] // Mutators to use; 'ALL' covers all mutation types
+    junit5PluginVersion = '0.15' // Ensure compatibility with JUnit 5
+    pitestVersion = '1.9.11' // Specify PITest version
+    verbosity = 'DEBUG' // Set to 'INFO' or 'DEBUG' for more detailed logs
+    timestampedReports = false // Generate reports in a consistent directory
 }
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+
+    test {
+        useJUnitPlatform()
+    }

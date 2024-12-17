@@ -10,6 +10,9 @@ public class Score implements BoardObserver {
     public void onLineCleared(int linesCleared) {
         points += linesCleared * 100;
     }
+    public void reset() {
+        this.points = 0;
+    }
 
     @Override
     public void onGameOver() {

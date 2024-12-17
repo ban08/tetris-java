@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">package model;
+
+import com.googlecode.lanterna.TextColor;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Board {
+    private final char[][] board;
+    private final TextColor[][] colors;
+    private final int width;
+    private final int height;
+    private final List&lt;BoardObserver&gt; observers;
+
+<span class="fc" id="L14">    public Board(int width, int height) {</span>
+<span class="fc" id="L15">        this.width = width;</span>
+<span class="fc" id="L16">        this.height = height;</span>
+<span class="fc" id="L17">        this.board = new char[height][width];</span>
+<span class="fc" id="L18">        this.colors = new TextColor[height][width];</span>
+<span class="fc" id="L19">        this.observers = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L20">        initializeBoard();</span>
+<span class="fc" id="L21">    }</span>
+
+    private void initializeBoard() {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (int i = 0; i &lt; height; i++)</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">            for (int j = 0; j &lt; width; j++) {</span>
+<span class="fc" id="L26">                board[i][j] = ' ';</span>
+<span class="fc" id="L27">                colors[i][j] = TextColor.ANSI.BLACK;</span>
+            }
+<span class="fc" id="L29">    }</span>
+
+<span class="fc" id="L31">    public char[][] getBoard() { return board; }</span>
+<span class="fc" id="L32">    public TextColor[][] getColors() { return colors; }</span>
+    public void addObserver(BoardObserver observer) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (observer == null) {</span>
+<span class="fc" id="L35">            throw new NullPointerException(&quot;Adding null observer should throw NullPointerException.&quot;);</span>
+        }
+<span class="fc" id="L37">        observers.add(observer);</span>
+<span class="fc" id="L38">    }</span>
+<span class="fc" id="L39">    public List&lt;BoardObserver&gt; getObservers() { return observers; }</span>
+
+    private void notifyLineCleared(int linesCleared) {
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        for (BoardObserver obs : observers) obs.onLineCleared(linesCleared);</span>
+<span class="fc" id="L43">    }</span>
+
+    private void notifyGameOver() {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (BoardObserver obs : observers) obs.onGameOver();</span>
+<span class="fc" id="L47">    }</span>
+
+    public boolean canPlaceShape(char[][] shape, int x, int y) {
+<span class="pc bpc" id="L50" title="1 of 8 branches missed.">        if (x &lt; 0 || y &lt; 0 || x+shape[0].length &gt; width || y+shape.length &gt; height) return false;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (int row = 0; row &lt; shape.length; row++) {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            for (int col = 0; col &lt; shape[row].length; col++) {</span>
+<span class="fc bfc" id="L53" title="All 4 branches covered.">                if (shape[row][col] != ' ' &amp;&amp; board[y+row][x+col] != ' ') return false;</span>
+            }
+        }
+<span class="fc" id="L56">        return true;</span>
+    }
+
+    public void addPositionedPiece(PositionedPiece positionedPiece) {
+<span class="fc" id="L60">        char[][] shape = positionedPiece.getPiece().getShape();</span>
+<span class="fc" id="L61">        TextColor color = positionedPiece.getPiece().getColor();</span>
+<span class="fc" id="L62">        int x = positionedPiece.getX();</span>
+<span class="fc" id="L63">        int y = positionedPiece.getY();</span>
+
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (int row = 0; row &lt; shape.length; row++) {</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            for (int col = 0; col &lt; shape[row].length; col++) {</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">                if (shape[row][col] != ' ') {</span>
+<span class="fc" id="L68">                    board[y+row][x+col] = shape[row][col];</span>
+<span class="fc" id="L69">                    colors[y+row][x+col] = color;</span>
+                }
+            }
+        }
+<span class="fc" id="L73">    }</span>
+
+    public void deleteFullLines() {
+<span class="fc" id="L76">        int linesCleared = 0;</span>
+
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (int row = height - 1; row &gt;= 0; ) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            if (isFullLine(row)) {</span>
+<span class="fc" id="L80">                clearLine(row);</span>
+<span class="fc" id="L81">                shiftLinesDown(row);</span>
+<span class="fc" id="L82">                linesCleared++;</span>
+            } else {
+<span class="fc" id="L84">                row--;</span>
+            }
+        }
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (linesCleared &gt; 0) notifyLineCleared(linesCleared);</span>
+<span class="fc" id="L89">    }</span>
+
+
+
+    private boolean isFullLine(int row) {
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++)</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">            if (board[row][col] == ' ') return false;</span>
+<span class="fc" id="L96">        return true;</span>
+    }
+
+    private void clearLine(int row) {
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++) {</span>
+<span class="fc" id="L101">            board[row][col] = ' ';</span>
+<span class="fc" id="L102">            colors[row][col] = TextColor.ANSI.BLACK;</span>
+        }
+<span class="fc" id="L104">    }</span>
+
+    private void shiftLinesDown(int startRow) {
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (int r = startRow; r &gt; 0; r--) {</span>
+<span class="fc" id="L108">            System.arraycopy(board[r-1], 0, board[r], 0, width);</span>
+<span class="fc" id="L109">            System.arraycopy(colors[r-1], 0, colors[r], 0, width);</span>
+        }
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++) {</span>
+<span class="fc" id="L112">            board[0][col] = ' ';</span>
+<span class="fc" id="L113">            colors[0][col] = TextColor.ANSI.BLACK;</span>
+        }
+<span class="fc" id="L115">    }</span>
+
+
+    public void checkGameOver(PositionedPiece piece) {
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if (!canPlaceShape(piece.getPiece().getShape(), piece.getX(), piece.getY())) notifyGameOver();</span>
+<span class="fc" id="L120">    }</span>
+
+    public void resetBoard() {
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            for (int j = 0; j &lt; board[i].length; j++) {</span>
+<span class="fc" id="L125">                board[i][j] = ' ';</span>
+<span class="fc" id="L126">                colors[i][j] = TextColor.ANSI.BLACK;</span>
+            }
+        }
+<span class="fc" id="L129">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

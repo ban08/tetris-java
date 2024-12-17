@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StartMenuViewer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">view</a> &gt; <span class="el_source">StartMenuViewer.java</span></div><h1>StartMenuViewer.java</h1><pre class="source lang-java linenums">package view;
+
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
+import model.menu.StartMenu;
+
+import java.io.IOException;
+
+public class StartMenuViewer {
+    private final StartMenu menu;
+
+<span class="fc" id="L13">    public StartMenuViewer(StartMenu menu) {</span>
+<span class="fc" id="L14">        this.menu = menu;</span>
+<span class="fc" id="L15">    }</span>
+
+    public void draw(GUI gui) throws IOException {
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        if (!(gui instanceof LanternaGUI)) {</span>
+<span class="nc" id="L19">            throw new IllegalStateException(&quot;GUI must be a LanternaGUI instance&quot;);</span>
+        }
+<span class="fc" id="L21">        LanternaGUI lg = (LanternaGUI) gui;</span>
+
+<span class="fc" id="L23">        Screen screen = lg.getScreen();</span>
+<span class="fc" id="L24">        screen.clear();</span>
+<span class="fc" id="L25">        TextGraphics tg = screen.newTextGraphics();</span>
+<span class="fc" id="L26">        tg.setBackgroundColor(TextColor.ANSI.BLACK);</span>
+<span class="fc" id="L27">        tg.setForegroundColor(TextColor.ANSI.WHITE);</span>
+
+<span class="fc" id="L29">        int cols = screen.getTerminalSize().getColumns();</span>
+<span class="fc" id="L30">        int rows = screen.getTerminalSize().getRows();</span>
+
+<span class="fc" id="L32">        String[] title = {</span>
+                &quot;  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ  â–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ &quot;,
+                &quot;     â–ˆâ–ˆ    â–ˆâ–ˆ         â–ˆâ–ˆ    â–ˆâ–ˆ   â–ˆâ–ˆ â–ˆâ–ˆ â–ˆâ–ˆ      &quot;,
+                &quot;     â–ˆâ–ˆ    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆ      â–ˆâ–ˆ    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ  â–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ &quot;,
+                &quot;     â–ˆâ–ˆ    â–ˆâ–ˆ         â–ˆâ–ˆ    â–ˆâ–ˆ   â–ˆâ–ˆ â–ˆâ–ˆ      â–ˆâ–ˆ &quot;,
+                &quot;     â–ˆâ–ˆ    â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ    â–ˆâ–ˆ    â–ˆâ–ˆ   â–ˆâ–ˆ â–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ &quot;
+
+        };
+<span class="fc" id="L40">        int startRow = (rows / 2) - (title.length / 2) - 2;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (int i = 0; i &lt; title.length; i++) {</span>
+<span class="fc" id="L42">            tg.putString((cols - title[i].length()) / 2, startRow + i, title[i]);</span>
+        }
+
+<span class="fc" id="L45">        String startText = &quot;Press S to Start Game&quot;;</span>
+<span class="fc" id="L46">        String exitText = &quot;Press E to Exit&quot;;</span>
+<span class="fc" id="L47">        tg.putString((cols - startText.length()) / 2, startRow + title.length + 2, startText);</span>
+<span class="fc" id="L48">        tg.putString((cols - exitText.length()) / 2, startRow + title.length + 4, exitText);</span>
+
+<span class="fc" id="L50">        screen.refresh();</span>
+<span class="fc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

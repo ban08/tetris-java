@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PositionedPiece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">PositionedPiece.java</span></div><h1>PositionedPiece.java</h1><pre class="source lang-java linenums">package model;
+
+public class PositionedPiece {
+    private final Piece piece;
+    private int x, y;
+
+<span class="fc" id="L7">    public PositionedPiece(Piece piece, int x, int y) {</span>
+<span class="fc" id="L8">        this.piece = piece;</span>
+<span class="fc" id="L9">        this.x = x;</span>
+<span class="fc" id="L10">        this.y = y;</span>
+<span class="fc" id="L11">    }</span>
+
+<span class="fc" id="L13">    public Piece getPiece() { return piece; }</span>
+<span class="fc" id="L14">    public int getX() { return x; }</span>
+<span class="fc" id="L15">    public int getY() { return y; }</span>
+
+<span class="fc" id="L17">    public void moveLeft() { x--; }</span>
+<span class="fc" id="L18">    public void moveRight() { x++; }</span>
+<span class="fc" id="L19">    public void moveDown() { y++; }</span>
+
+    public void rotate(Board board, RotationStrategy strategy) {
+<span class="fc" id="L22">        char[][] originalShape = piece.getShape();</span>
+<span class="fc" id="L23">        int originalX = x;</span>
+<span class="fc" id="L24">        int originalY = y;</span>
+
+<span class="fc" id="L26">        char[][] rotatedShape = strategy.rotate(originalShape);</span>
+<span class="fc" id="L27">        int adjustedX = Math.max(0, Math.min(board.getBoard()[0].length - rotatedShape[0].length, x));</span>
+<span class="fc" id="L28">        int adjustedY = Math.max(0, Math.min(board.getBoard().length - rotatedShape.length, y));</span>
+
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (board.canPlaceShape(rotatedShape, adjustedX, adjustedY)) {</span>
+<span class="fc" id="L31">            piece.setShape(rotatedShape);</span>
+<span class="fc" id="L32">            x = adjustedX;</span>
+<span class="fc" id="L33">            y = adjustedY;</span>
+        } else {
+<span class="fc" id="L35">            piece.setShape(originalShape);</span>
+<span class="fc" id="L36">            x = originalX;</span>
+<span class="fc" id="L37">            y = originalY;</span>
+        }
+<span class="fc" id="L39">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

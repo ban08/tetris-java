@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LanternaGUI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">view</a> &gt; <span class="el_source">LanternaGUI.java</span></div><h1>LanternaGUI.java</h1><pre class="source lang-java linenums">package view;
+
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
+import com.googlecode.lanterna.screen.Screen;
+
+import java.io.IOException;
+
+public class LanternaGUI implements GUI {
+    private final Screen screen;
+
+<span class="fc" id="L12">    public LanternaGUI(Screen screen) {</span>
+<span class="fc" id="L13">        this.screen = screen;</span>
+<span class="fc" id="L14">    }</span>
+
+    @Override
+    public ACTION getNextAction() throws IOException {
+<span class="fc" id="L18">        KeyStroke keyStroke = screen.pollInput();</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (keyStroke == null) return ACTION.NONE;</span>
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.NONE;</span>
+
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowUp) return ACTION.ARROW_UP;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowDown) return ACTION.ARROW_DOWN;</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowLeft) return ACTION.ARROW_LEFT;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowRight) return ACTION.ARROW_RIGHT;</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Escape) return ACTION.ESCAPE;</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Enter) return ACTION.SELECT;</span>
+
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Character) {</span>
+<span class="fc" id="L30">            char c = Character.toLowerCase(keyStroke.getCharacter());</span>
+<span class="pc bpc" id="L31" title="6 of 10 branches missed.">            return switch(c) {</span>
+<span class="fc" id="L32">                case ' ' -&gt; ACTION.SPACE;</span>
+<span class="fc" id="L33">                case 'a' -&gt; ACTION.A;</span>
+<span class="fc" id="L34">                case 'd' -&gt; ACTION.D;</span>
+<span class="fc" id="L35">                case 'p' -&gt; ACTION.P;</span>
+<span class="nc" id="L36">                case 's' -&gt; ACTION.S_KEY;</span>
+<span class="nc" id="L37">                case 'e' -&gt; ACTION.E_KEY;</span>
+<span class="nc" id="L38">                case 'r' -&gt; ACTION.R_KEY;</span>
+<span class="nc" id="L39">                case 'q' -&gt; ACTION.Q_KEY;</span>
+<span class="nc" id="L40">                case 'b' -&gt; ACTION.B_KEY;</span>
+<span class="nc" id="L41">                default -&gt; ACTION.NONE;</span>
+            };
+        }
+
+<span class="nc" id="L45">        return ACTION.NONE;</span>
+    }
+
+    @Override
+    public void clear() {
+<span class="nc" id="L50">        screen.clear();</span>
+<span class="nc" id="L51">    }</span>
+
+    @Override
+    public void refresh() throws IOException {
+<span class="nc" id="L55">        screen.refresh();</span>
+<span class="nc" id="L56">    }</span>
+
+    @Override
+    public void close() throws IOException {
+<span class="nc" id="L60">        screen.close();</span>
+<span class="nc" id="L61">    }</span>
+
+    public Screen getScreen() {
+<span class="nc" id="L64">        return screen;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

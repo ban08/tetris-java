@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">GameModel.java</span></div><h1>GameModel.java</h1><pre class="source lang-java linenums">package model;
+
+import com.googlecode.lanterna.TextColor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameModel {
+    private static final int INITIAL_PIECE_X = 4;
+    private static final int INITIAL_PIECE_Y = 0;
+
+    private final Board board;
+    private Score score;
+    private final PieceFactory pieceFactory;
+    private PositionedPiece currentPiece;
+    private PositionedPiece nextPiece;
+    private boolean running;
+    private int fallSpeed;
+    private int bonusCharge;
+    private boolean bonusActive;
+    private boolean paused;
+    private int lastScore;
+
+<span class="fc" id="L24">    public GameModel(Board board, Score score, PieceFactory pieceFactory) {</span>
+<span class="fc" id="L25">        this.board = board;</span>
+<span class="fc" id="L26">        this.score = score;</span>
+<span class="fc" id="L27">        this.pieceFactory = pieceFactory;</span>
+<span class="fc" id="L28">        initGameState();</span>
+<span class="fc" id="L29">        board.addObserver(score);</span>
+<span class="fc" id="L30">    }</span>
+
+    /**
+     * Default constructor initializing with default dependencies.
+     */
+    public GameModel() {
+<span class="fc" id="L36">        this(new Board(10, 20), new Score(), new RandomPieceFactory());</span>
+<span class="fc" id="L37">    }</span>
+    private void initGameState() {
+<span class="fc" id="L39">        this.running = true;</span>
+<span class="fc" id="L40">        this.fallSpeed = 500;</span>
+<span class="fc" id="L41">        this.bonusCharge = 0;</span>
+<span class="fc" id="L42">        this.bonusActive = false;</span>
+<span class="fc" id="L43">        this.paused = false;</span>
+<span class="fc" id="L44">        this.currentPiece = new PositionedPiece(pieceFactory.createPiece(), INITIAL_PIECE_X, INITIAL_PIECE_Y);</span>
+<span class="fc" id="L45">        this.nextPiece = new PositionedPiece(pieceFactory.createPiece(), 0, 0);</span>
+<span class="fc" id="L46">        this.lastScore = 0;</span>
+<span class="fc" id="L47">    }</span>
+
+    public void resetGame() {
+        // Clear board
+<span class="fc" id="L51">        board.resetBoard();</span>
+        // Reset score and re-add observer
+<span class="fc" id="L53">        this.score.reset();</span>
+<span class="fc" id="L54">        this.board.getObservers().clear();</span>
+<span class="fc" id="L55">        board.addObserver(score);</span>
+        // Reset all game state fields
+<span class="fc" id="L57">        initGameState();</span>
+<span class="fc" id="L58">    }</span>
+
+
+
+    private void spawnNewPiece() {
+<span class="fc" id="L63">        this.currentPiece = new PositionedPiece(nextPiece.getPiece(), INITIAL_PIECE_X, INITIAL_PIECE_Y);</span>
+<span class="fc" id="L64">        this.nextPiece = new PositionedPiece(pieceFactory.createPiece(), 0, 0);</span>
+<span class="fc" id="L65">    }</span>
+
+    public void moveLeft() {
+<span class="nc bnc" id="L68" title="All 4 branches missed.">        if (!paused &amp;&amp; board.canPlaceShape(currentPiece.getPiece().getShape(), currentPiece.getX() - 1, currentPiece.getY()))</span>
+<span class="nc" id="L69">            currentPiece.moveLeft();</span>
+<span class="nc" id="L70">    }</span>
+
+    public void moveRight() {
+<span class="nc bnc" id="L73" title="All 4 branches missed.">        if (!paused &amp;&amp; board.canPlaceShape(currentPiece.getPiece().getShape(), currentPiece.getX() + 1, currentPiece.getY()))</span>
+<span class="nc" id="L74">            currentPiece.moveRight();</span>
+<span class="nc" id="L75">    }</span>
+
+    public void moveDown() {
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (paused) return;</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (board.canPlaceShape(currentPiece.getPiece().getShape(), currentPiece.getX(), currentPiece.getY() + 1)) {</span>
+<span class="nc" id="L80">            currentPiece.moveDown();</span>
+        } else {
+<span class="nc" id="L82">            lockCurrentPiece();</span>
+        }
+<span class="nc" id="L84">    }</span>
+
+    public void rotateLeft() {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (!paused) currentPiece.rotate(board, new RotateLeftStrategy());</span>
+<span class="nc" id="L88">    }</span>
+
+    public void rotateRight() {
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (!paused) currentPiece.rotate(board, new RotateRightStrategy());</span>
+<span class="nc" id="L92">    }</span>
+
+    public void drop() {
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (paused) return;</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        while (board.canPlaceShape(currentPiece.getPiece().getShape(), currentPiece.getX(), currentPiece.getY() + 1))</span>
+<span class="fc" id="L97">            currentPiece.moveDown();</span>
+<span class="fc" id="L98">        lockCurrentPiece();</span>
+<span class="fc" id="L99">    }</span>
+
+    public void activateBonus() {
+<span class="pc bpc" id="L102" title="1 of 4 branches missed.">        if (!paused &amp;&amp; bonusCharge &gt;= 500) {</span>
+<span class="fc" id="L103">            bonusActive = true;</span>
+        }
+<span class="fc" id="L105">    }</span>
+
+    public void executeBonus(List&lt;Integer&gt; rowsToClear) {
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if (bonusActive) {</span>
+<span class="fc" id="L109">            List&lt;Integer&gt; sortedRows = new ArrayList&lt;&gt;(rowsToClear);</span>
+<span class="fc" id="L110">            sortedRows.sort((a, b) -&gt; b - a); // Sort in descending order to handle shifting correctly</span>
+
+<span class="fc" id="L112">            int linesCleared = 0;</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            for (int clearedRow : sortedRows) {</span>
+<span class="pc bpc" id="L114" title="2 of 4 branches missed.">                if (clearedRow &gt;= 0 &amp;&amp; clearedRow &lt; board.getBoard().length) { // Boundary check</span>
+<span class="fc" id="L115">                    clearLine(clearedRow);</span>
+<span class="fc" id="L116">                    shiftLinesDown(clearedRow);</span>
+<span class="fc" id="L117">                    linesCleared++;</span>
+                } else {
+                    // Optionally, log a warning or handle the error
+<span class="nc" id="L120">                    System.err.println(&quot;Attempted to clear invalid row: &quot; + clearedRow);</span>
+                }
+<span class="fc" id="L122">            }</span>
+
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">            if (linesCleared &gt; 0) {</span>
+<span class="fc" id="L125">                score.onLineCleared(linesCleared); // Notify Score of lines cleared</span>
+            }
+
+<span class="fc" id="L128">            bonusActive = false;</span>
+<span class="fc" id="L129">            bonusCharge = 0;</span>
+<span class="fc" id="L130">            lastScore = score.getPoints();</span>
+        }
+<span class="fc" id="L132">    }</span>
+
+
+
+
+
+    private void clearLine(int row) {
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        for (int col = 0; col &lt; board.getBoard()[0].length; col++) {</span>
+<span class="fc" id="L140">            board.getBoard()[row][col] = ' ';</span>
+<span class="fc" id="L141">            board.getColors()[row][col] = TextColor.ANSI.BLACK;</span>
+        }
+<span class="fc" id="L143">    }</span>
+
+    private void shiftLinesDown(int startRow) {
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        for (int r = startRow; r &gt; 0; r--) {</span>
+<span class="fc" id="L147">            System.arraycopy(board.getBoard()[r-1], 0, board.getBoard()[r], 0, board.getBoard()[0].length);</span>
+<span class="fc" id="L148">            System.arraycopy(board.getColors()[r-1], 0, board.getColors()[r], 0, board.getBoard()[0].length);</span>
+        }
+<span class="fc bfc" id="L150" title="All 2 branches covered.">        for (int col = 0; col &lt; board.getBoard()[0].length; col++) {</span>
+<span class="fc" id="L151">            board.getBoard()[0][col] = ' ';</span>
+<span class="fc" id="L152">            board.getColors()[0][col] = TextColor.ANSI.BLACK;</span>
+        }
+<span class="fc" id="L154">    }</span>
+
+    public void lockCurrentPiece() {
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if (paused) return;</span>
+<span class="fc" id="L158">        board.addPositionedPiece(currentPiece);</span>
+<span class="fc" id="L159">        board.deleteFullLines();</span>
+
+<span class="fc" id="L161">        int currentScore = score.getPoints();</span>
+<span class="fc" id="L162">        int gainedScore = currentScore - lastScore;</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        if (gainedScore &lt; 0) gainedScore = 0;</span>
+
+<span class="fc" id="L165">        bonusCharge = Math.min(500, bonusCharge + (gainedScore / 2));</span>
+
+<span class="fc" id="L167">        lastScore = currentScore;</span>
+
+<span class="fc bfc" id="L169" title="All 6 branches covered.">        if (currentScore &gt; 0 &amp;&amp; currentScore % 1000 == 0 &amp;&amp; fallSpeed &gt; 100) {</span>
+<span class="fc" id="L170">            fallSpeed -= 50;</span>
+        }
+
+<span class="fc" id="L173">        spawnNewPiece();</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        if (!board.canPlaceShape(currentPiece.getPiece().getShape(), currentPiece.getX(), currentPiece.getY())) {</span>
+<span class="fc" id="L175">            running = false;</span>
+
+        }
+<span class="fc" id="L178">    }</span>
+
+    public void togglePause() {
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        paused = !paused;</span>
+<span class="fc" id="L182">    }</span>
+
+    public boolean isPaused() {
+<span class="fc" id="L185">        return paused;</span>
+    }
+
+    public int getFallSpeed() {
+<span class="fc" id="L189">        return fallSpeed;</span>
+    }
+    public void setFallSpeed(int fallSpeed) {
+<span class="fc" id="L192">        this.fallSpeed = fallSpeed;</span>
+<span class="fc" id="L193">    }</span>
+
+    public int getBonusCharge() {
+<span class="fc" id="L196">        return bonusCharge;</span>
+    }
+    public void setBonusCharge(int bonusCharge) {
+<span class="fc" id="L199">        this.bonusCharge = bonusCharge;</span>
+<span class="fc" id="L200">    }</span>
+
+    public boolean isBonusActive() {
+<span class="fc" id="L203">        return bonusActive;</span>
+    }
+
+    public boolean isRunning() {
+<span class="fc" id="L207">        return running;</span>
+    }
+
+    public Board getBoard() {
+<span class="nc" id="L211">        return board;</span>
+    }
+
+    public PositionedPiece getCurrentPiece() {
+<span class="fc" id="L215">        return currentPiece;</span>
+    }
+
+    public PositionedPiece getNextPiece() {
+<span class="nc" id="L219">        return nextPiece;</span>
+    }
+    public void setCurrentPiece(PositionedPiece currentPiece) {
+<span class="fc" id="L222">        this.currentPiece = currentPiece;</span>
+<span class="fc" id="L223">    }</span>
+    public void setNextPiece(PositionedPiece nextPiece) {
+<span class="fc" id="L225">        this.nextPiece = nextPiece;</span>
+<span class="fc" id="L226">    }</span>
+
+    public int getScorePoints() {
+<span class="fc" id="L229">        return score.getPoints();</span>
+    }
+    public int getLastScore() {
+<span class="fc" id="L232">        return lastScore;</span>
+    }
+    public void setLastScore(int lastScore) {
+<span class="fc" id="L235">        this.lastScore = lastScore;</span>
+<span class="fc" id="L236">    }</span>
+
+    public void update() {
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        if (!paused) moveDown();</span>
+<span class="nc" id="L240">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

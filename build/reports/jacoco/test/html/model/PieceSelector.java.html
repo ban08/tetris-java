@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PieceSelector.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">model</a> &gt; <span class="el_source">PieceSelector.java</span></div><h1>PieceSelector.java</h1><pre class="source lang-java linenums">package model;
+
+import com.googlecode.lanterna.TextColor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A class responsible for generating random pieces.
+ */
+public class PieceSelector {
+    private final List&lt;Piece&gt; predefinedPieces;
+
+    /**
+     * Constructor that initializes the list of predefined pieces.
+     */
+<span class="fc" id="L17">    public PieceSelector() {</span>
+<span class="fc" id="L18">        this.predefinedPieces = initializePieces();</span>
+<span class="fc" id="L19">    }</span>
+
+    /**
+     * Getter for predefined pieces for tests use.
+     */
+    public List&lt;Piece&gt; getPredefinedPieces(){
+<span class="fc" id="L25">        return predefinedPieces;</span>
+    }
+    /**
+     * Initializes the list of predefined pieces.
+     * 
+     * @return the list of predefined pieces.
+     */
+    private List&lt;Piece&gt; initializePieces() {
+<span class="fc" id="L33">        List&lt;Piece&gt; pieces = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L34">        pieces.add(new Piece(new char[][]{{'O', 'O'}, {'O', 'O'}}, TextColor.ANSI.YELLOW)); // Square (O)</span>
+<span class="fc" id="L35">        pieces.add(new Piece(new char[][]{{'I', 'I', 'I', 'I'}}, TextColor.ANSI.CYAN)); // Line (I)</span>
+<span class="fc" id="L36">        pieces.add(new Piece(new char[][]{{' ', 'T', ' '}, {'T', 'T', 'T'}}, TextColor.ANSI.MAGENTA)); // T-Shape (T)</span>
+<span class="fc" id="L37">        pieces.add(new Piece(new char[][]{{'J', ' '}, {'J', ' '}, {'J', 'J'}}, TextColor.ANSI.BLUE)); // J-Shape (J)</span>
+<span class="fc" id="L38">        pieces.add(new Piece(new char[][]{{'L', ' '}, {'L', ' '}, {'L', 'L'}}, TextColor.ANSI.RED)); // L-Shape (L)</span>
+<span class="fc" id="L39">        return pieces;</span>
+    }
+
+    /**
+     * Generates a random piece from the list of predefined pieces.
+     * 
+     * @return a random piece.
+     */
+    public Piece randomPiece() {
+<span class="fc" id="L48">        int randomIndex = (int) (Math.random() * predefinedPieces.size());</span>
+<span class="fc" id="L49">        return predefinedPieces.get(randomIndex);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

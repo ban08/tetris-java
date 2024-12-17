@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Music.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tetris</a> &gt; <a href="index.source.html" class="el_package">music</a> &gt; <span class="el_source">Music.java</span></div><h1>Music.java</h1><pre class="source lang-java linenums">package music;
+
+import javax.sound.sampled.*;
+import java.io.IOException;
+import java.net.URL;
+
+public class Music {
+    private Clip clip;
+    private float currentVolume;
+    private float previousVolume;
+    private FloatControl fc;
+    private boolean muted;
+
+<span class="nc" id="L14">    public Music(String resourcePath) {</span>
+        try {
+<span class="nc" id="L16">            muted = false;</span>
+<span class="nc" id="L17">            currentVolume = 0;</span>
+<span class="nc" id="L18">            previousVolume = 0;</span>
+
+            // Load from classpath resource:
+<span class="nc" id="L21">            URL audioURL = Music.class.getResource(resourcePath);</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">            if (audioURL == null) {</span>
+<span class="nc" id="L23">                throw new IOException(&quot;Audio resource not found: &quot; + resourcePath);</span>
+            }
+
+<span class="nc" id="L26">            AudioInputStream inputStream = AudioSystem.getAudioInputStream(audioURL);</span>
+<span class="nc" id="L27">            clip = AudioSystem.getClip();</span>
+<span class="nc" id="L28">            clip.open(inputStream);</span>
+<span class="nc" id="L29">            fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);</span>
+<span class="nc" id="L30">        } catch (Exception e) {</span>
+<span class="nc" id="L31">            e.printStackTrace();</span>
+<span class="nc" id="L32">        }</span>
+<span class="nc" id="L33">    }</span>
+
+    // Refactored constructor for testing
+<span class="fc" id="L36">    public Music(String resourcePath, Clip clip, AudioInputStream audioInputStream) throws LineUnavailableException, IOException, UnsupportedAudioFileException {</span>
+<span class="fc" id="L37">        this.muted = false;</span>
+<span class="fc" id="L38">        this.currentVolume = 0;</span>
+<span class="fc" id="L39">        this.previousVolume = 0;</span>
+<span class="fc" id="L40">        this.clip = clip;</span>
+<span class="fc" id="L41">        this.clip.open(audioInputStream);</span>
+<span class="fc" id="L42">        this.fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);</span>
+<span class="fc" id="L43">    }</span>
+
+<span class="nc" id="L45">    public boolean isMuted() { return muted; }</span>
+
+    public void runMusic() {
+<span class="fc" id="L48">        play();</span>
+<span class="fc" id="L49">        loop();</span>
+<span class="fc" id="L50">    }</span>
+
+    public void play() {
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (clip != null) {</span>
+<span class="fc" id="L54">            clip.setFramePosition(0);</span>
+<span class="fc" id="L55">            clip.start();</span>
+        }
+<span class="fc" id="L57">    }</span>
+
+    public void loop() {
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (clip != null) {</span>
+<span class="fc" id="L61">            clip.loop(Clip.LOOP_CONTINUOUSLY);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+    public void volumeUp() {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if(!isMuted()) {</span>
+<span class="nc" id="L67">            currentVolume +=5.0f;</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">            if(currentVolume&gt;6.0f) currentVolume=6.0f;</span>
+<span class="nc" id="L69">            fc.setValue(currentVolume);</span>
+        }
+<span class="nc" id="L71">    }</span>
+
+    public void volumeDown() {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if(!isMuted()) {</span>
+<span class="nc" id="L75">            currentVolume -=5.0f;</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if(currentVolume&lt;-80.0f) currentVolume=-80.0f;</span>
+<span class="nc" id="L77">            fc.setValue(currentVolume);</span>
+        }
+<span class="nc" id="L79">    }</span>
+
+    public void volumeMute(){
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if(!isMuted()) {</span>
+<span class="nc" id="L83">            previousVolume=currentVolume;</span>
+<span class="nc" id="L84">            currentVolume=-80.0f;</span>
+<span class="nc" id="L85">            fc.setValue(currentVolume);</span>
+<span class="nc" id="L86">            muted=true;</span>
+        } else {
+<span class="nc" id="L88">            currentVolume=previousVolume;</span>
+<span class="nc" id="L89">            fc.setValue(currentVolume);</span>
+<span class="nc" id="L90">            muted=false;</span>
+        }
+<span class="nc" id="L92">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
