@@ -32,6 +32,16 @@ public class Music {
         }
     }
 
+    // Refactored constructor for testing
+    public Music(String resourcePath, Clip clip, AudioInputStream audioInputStream) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        this.muted = false;
+        this.currentVolume = 0;
+        this.previousVolume = 0;
+        this.clip = clip;
+        this.clip.open(audioInputStream);
+        this.fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+    }
+
     public boolean isMuted() { return muted; }
 
     public void runMusic() {

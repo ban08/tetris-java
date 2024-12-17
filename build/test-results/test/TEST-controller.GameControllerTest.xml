@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="controller.GameControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:32:25" hostname="DESKTOP-3JMO58F" time="1.184">
+<testsuite name="controller.GameControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-12-17T01:07:56" hostname="DESKTOP-3JMO58F" time="0.93">
   <properties/>
-  <testcase name="testPause()" classname="controller.GameControllerTest" time="1.152"/>
-  <testcase name="testDrop()" classname="controller.GameControllerTest" time="0.002"/>
+  <testcase name="testPause()" classname="controller.GameControllerTest" time="0.883"/>
+  <testcase name="testDrop()" classname="controller.GameControllerTest" time="0.005"/>
   <testcase name="testUpdateGame()" classname="controller.GameControllerTest" time="0.003"/>
-  <testcase name="testRotateLeft()" classname="controller.GameControllerTest" time="0.003"/>
-  <testcase name="testMoveDown()" classname="controller.GameControllerTest" time="0.002"/>
-  <testcase name="testMoveLeft()" classname="controller.GameControllerTest" time="0.002"/>
+  <testcase name="testRotateLeft()" classname="controller.GameControllerTest" time="0.004"/>
+  <testcase name="testMoveDown()" classname="controller.GameControllerTest" time="0.003"/>
+  <testcase name="testMoveLeft()" classname="controller.GameControllerTest" time="0.004"/>
   <testcase name="testRotateRight()" classname="controller.GameControllerTest" time="0.003"/>
-  <testcase name="testMoveRight()" classname="controller.GameControllerTest" time="0.001"/>
-  <testcase name="testIsGameRunning()" classname="controller.GameControllerTest" time="0.009"/>
+  <testcase name="testMoveRight()" classname="controller.GameControllerTest" time="0.003"/>
+  <testcase name="testIsGameRunning()" classname="controller.GameControllerTest" time="0.014"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

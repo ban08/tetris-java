@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="model.PositionedPieceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:32:26" hostname="DESKTOP-3JMO58F" time="0.006">
+<testsuite name="model.PositionedPieceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-12-17T01:07:57" hostname="DESKTOP-3JMO58F" time="0.007">
   <properties/>
-  <testcase name="testGettersAndSetters()" classname="model.PositionedPieceTest" time="0.0"/>
+  <testcase name="testGettersAndSetters()" classname="model.PositionedPieceTest" time="0.001"/>
   <testcase name="testRotate_givenPositionedPieceWithPieceIsPiece()" classname="model.PositionedPieceTest" time="0.001"/>
-  <testcase name="testRotate_givenPositionedPieceWithPieceIsPieceAndXIsZeroAndYIsMinusOne()" classname="model.PositionedPieceTest" time="0.001"/>
+  <testcase name="testRotate_givenPositionedPieceWithPieceIsPieceAndXIsZeroAndYIsMinusOne()" classname="model.PositionedPieceTest" time="0.0"/>
   <testcase name="testRotate_givenPositionedPieceWithPieceIsNull()" classname="model.PositionedPieceTest" time="0.002"/>
-  <testcase name="testRotate_givenEmptyArrayOfChar()" classname="model.PositionedPieceTest" time="0.0"/>
+  <testcase name="testRotate_givenEmptyArrayOfChar()" classname="model.PositionedPieceTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

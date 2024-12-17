@@ -15,52 +15,74 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-<span class="nc" id="L18">public class Main {</span>
+<span class="fc" id="L18">public class Main {</span>
     public static void main(String[] args) {
         try {
-            // Load custom font
-<span class="nc" id="L22">            Font loadedFont = loadCustomFont(&quot;/fonts/crs.otf&quot;, 25f);</span>
-<span class="nc" id="L23">            AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);</span>
+<span class="nc" id="L21">            new Main().start(args);</span>
+<span class="nc" id="L22">        } catch (Exception e) {</span>
+<span class="nc" id="L23">            e.printStackTrace();</span>
+<span class="nc" id="L24">        }</span>
+<span class="nc" id="L25">    }</span>
 
-<span class="nc" id="L25">            TerminalSize initialSize = new TerminalSize(80, 24);</span>
-<span class="nc" id="L26">            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()</span>
-<span class="nc" id="L27">                    .setInitialTerminalSize(initialSize)</span>
-<span class="nc" id="L28">                    .setForceAWTOverSwing(true)</span>
-<span class="nc" id="L29">                    .setTerminalEmulatorFontConfiguration(fontConfig);</span>
+    public void start(String[] args) throws Exception {
+        // Load custom font
+<span class="fc" id="L29">        Font loadedFont = loadCustomFont(&quot;/fonts/crs.otf&quot;, 25f);</span>
+<span class="fc" id="L30">        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);</span>
 
-<span class="nc" id="L31">            Screen screen = terminalFactory.createScreen();</span>
-<span class="nc" id="L32">            screen.startScreen();</span>
+<span class="fc" id="L32">        TerminalSize initialSize = new TerminalSize(80, 24);</span>
+<span class="fc" id="L33">        DefaultTerminalFactory terminalFactory = createTerminalFactory(loadedFont, initialSize)</span>
+<span class="fc" id="L34">                .setInitialTerminalSize(initialSize)</span>
+<span class="fc" id="L35">                .setForceAWTOverSwing(true)</span>
+<span class="fc" id="L36">                .setTerminalEmulatorFontConfiguration(fontConfig);</span>
 
-<span class="nc" id="L34">            GUI gui = new LanternaGUI(screen);</span>
+<span class="fc" id="L38">        Screen screen = terminalFactory.createScreen();</span>
+<span class="fc" id="L39">        screen.startScreen();</span>
 
-            // Start background music
-<span class="nc" id="L37">            Music music = new Music(&quot;/music/theme.wav&quot;);</span>
-<span class="nc" id="L38">            music.runMusic();</span>
+<span class="fc" id="L41">        GUI gui = createGUI(screen);</span>
 
-<span class="nc" id="L40">            State state = new StartMenuState(screen, music);</span>
+        // Start background music
+<span class="fc" id="L44">        Music music = createMusic(&quot;/music/theme.wav&quot;);</span>
+<span class="fc" id="L45">        music.runMusic();</span>
 
-<span class="nc bnc" id="L42" title="All 2 branches missed.">            while (state != null) {</span>
-<span class="nc" id="L43">                long startTime = System.currentTimeMillis();</span>
-<span class="nc" id="L44">                state = state.step(gui, startTime);</span>
-<span class="nc" id="L45">                long elapsed = System.currentTimeMillis() - startTime;</span>
-<span class="nc" id="L46">                long sleep = 16 - elapsed;</span>
-<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (sleep &gt; 0) Thread.sleep(sleep);</span>
-<span class="nc" id="L48">            }</span>
+<span class="fc" id="L47">        State state = createStartMenuState(screen, music);</span>
 
-<span class="nc" id="L50">            screen.close();</span>
-<span class="nc" id="L51">        } catch (Exception e) {</span>
-<span class="nc" id="L52">            e.printStackTrace();</span>
-<span class="nc" id="L53">        }</span>
-<span class="nc" id="L54">    }</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        while (state != null) {</span>
+<span class="fc" id="L50">            long startTime = System.currentTimeMillis();</span>
+<span class="fc" id="L51">            state = state.step(gui, startTime);</span>
+<span class="fc" id="L52">            long elapsed = System.currentTimeMillis() - startTime;</span>
+<span class="fc" id="L53">            long sleep = 16 - elapsed;</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">            if (sleep &gt; 0) Thread.sleep(sleep);</span>
+<span class="fc" id="L55">        }</span>
 
-    private static Font loadCustomFont(String resourcePath, float size) throws IOException, FontFormatException {
-<span class="nc" id="L57">        URL fontResource = Main.class.getResource(resourcePath);</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (fontResource == null) {</span>
-<span class="nc" id="L59">            throw new IOException(&quot;Font resource not found: &quot; + resourcePath);</span>
+<span class="fc" id="L57">        screen.close();</span>
+<span class="fc" id="L58">    }</span>
+
+    // Protected methods to allow mocking in tests
+    protected DefaultTerminalFactory createTerminalFactory(Font loadedFont, TerminalSize initialSize) {
+<span class="nc" id="L62">        return new DefaultTerminalFactory();</span>
+    }
+
+    protected GUI createGUI(Screen screen) {
+<span class="nc" id="L66">        return new LanternaGUI(screen);</span>
+    }
+
+    protected Music createMusic(String resourcePath) throws Exception {
+<span class="nc" id="L70">        return new Music(resourcePath);</span>
+    }
+
+    protected State createStartMenuState(Screen screen, Music music) {
+<span class="nc" id="L74">        return new StartMenuState(screen, music);</span>
+    }
+
+    // Changed from private to protected to allow mocking
+    protected Font loadCustomFont(String resourcePath, float size) throws IOException, FontFormatException {
+<span class="nc" id="L79">        URL fontResource = Main.class.getResource(resourcePath);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (fontResource == null) {</span>
+<span class="nc" id="L81">            throw new IOException(&quot;Font resource not found: &quot; + resourcePath);</span>
         }
-<span class="nc" id="L61">        try (InputStream fontStream = fontResource.openStream()) {</span>
-<span class="nc" id="L62">            Font font = Font.createFont(Font.TRUETYPE_FONT, fontStream);</span>
-<span class="nc" id="L63">            return font.deriveFont(Font.PLAIN, size);</span>
+<span class="nc" id="L83">        try (InputStream fontStream = fontResource.openStream()) {</span>
+<span class="nc" id="L84">            Font font = Font.createFont(Font.TRUETYPE_FONT, fontStream);</span>
+<span class="nc" id="L85">            return font.deriveFont(Font.PLAIN, size);</span>
         }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="states.StartMenuStateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:32:26" hostname="DESKTOP-3JMO58F" time="0.036">
+<testsuite name="states.StartMenuStateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-17T01:07:58" hostname="DESKTOP-3JMO58F" time="0.021">
   <properties/>
-  <testcase name="testPressingSTransitionsToGameState()" classname="states.StartMenuStateTest" time="0.018"/>
-  <testcase name="testPressingOtherKeysRemainsInStartMenuState()" classname="states.StartMenuStateTest" time="0.012"/>
-  <testcase name="testPressingETransitionsToExit()" classname="states.StartMenuStateTest" time="0.006"/>
+  <testcase name="testPressingSTransitionsToGameState()" classname="states.StartMenuStateTest" time="0.011"/>
+  <testcase name="testPressingOtherKeysRemainsInStartMenuState()" classname="states.StartMenuStateTest" time="0.003"/>
+  <testcase name="testPressingETransitionsToExit()" classname="states.StartMenuStateTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

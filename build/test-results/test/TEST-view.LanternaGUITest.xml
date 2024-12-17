@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="view.LanternaGUITest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:32:27" hostname="DESKTOP-3JMO58F" time="0.082">
+<testsuite name="view.LanternaGUITest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-12-17T01:07:58" hostname="DESKTOP-3JMO58F" time="0.038">
   <properties/>
-  <testcase name="testLanternaGUI_InputHandling_NoInput()" classname="view.LanternaGUITest" time="0.003"/>
-  <testcase name="testLanternaGUI_InputHandling_A_Key()" classname="view.LanternaGUITest" time="0.025"/>
-  <testcase name="testLanternaGUI_InputHandling_D_Key()" classname="view.LanternaGUITest" time="0.008"/>
-  <testcase name="testLanternaGUI_InputHandling_P_Key()" classname="view.LanternaGUITest" time="0.007"/>
-  <testcase name="testLanternaGUI_InputHandling_Space()" classname="view.LanternaGUITest" time="0.006"/>
-  <testcase name="testLanternaGUI_InputHandling_ArrowUp()" classname="view.LanternaGUITest" time="0.005"/>
-  <testcase name="testLanternaGUI_InputHandling_ArrowDown()" classname="view.LanternaGUITest" time="0.007"/>
-  <testcase name="testLanternaGUI_InputHandling_ArrowLeft()" classname="view.LanternaGUITest" time="0.009"/>
-  <testcase name="testLanternaGUI_InputHandling_ArrowRight()" classname="view.LanternaGUITest" time="0.006"/>
+  <testcase name="testLanternaGUI_InputHandling_NoInput()" classname="view.LanternaGUITest" time="0.002"/>
+  <testcase name="testLanternaGUI_InputHandling_A_Key()" classname="view.LanternaGUITest" time="0.018"/>
+  <testcase name="testLanternaGUI_InputHandling_D_Key()" classname="view.LanternaGUITest" time="0.001"/>
+  <testcase name="testLanternaGUI_InputHandling_P_Key()" classname="view.LanternaGUITest" time="0.001"/>
+  <testcase name="testLanternaGUI_InputHandling_Space()" classname="view.LanternaGUITest" time="0.005"/>
+  <testcase name="testLanternaGUI_InputHandling_ArrowUp()" classname="view.LanternaGUITest" time="0.002"/>
+  <testcase name="testLanternaGUI_InputHandling_ArrowDown()" classname="view.LanternaGUITest" time="0.001"/>
+  <testcase name="testLanternaGUI_InputHandling_ArrowLeft()" classname="view.LanternaGUITest" time="0.002"/>
+  <testcase name="testLanternaGUI_InputHandling_ArrowRight()" classname="view.LanternaGUITest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

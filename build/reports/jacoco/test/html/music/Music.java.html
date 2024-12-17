@@ -32,53 +32,63 @@ public class Music {
 <span class="nc" id="L32">        }</span>
 <span class="nc" id="L33">    }</span>
 
-<span class="nc" id="L35">    public boolean isMuted() { return muted; }</span>
+    // Refactored constructor for testing
+<span class="fc" id="L36">    public Music(String resourcePath, Clip clip, AudioInputStream audioInputStream) throws LineUnavailableException, IOException, UnsupportedAudioFileException {</span>
+<span class="fc" id="L37">        this.muted = false;</span>
+<span class="fc" id="L38">        this.currentVolume = 0;</span>
+<span class="fc" id="L39">        this.previousVolume = 0;</span>
+<span class="fc" id="L40">        this.clip = clip;</span>
+<span class="fc" id="L41">        this.clip.open(audioInputStream);</span>
+<span class="fc" id="L42">        this.fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);</span>
+<span class="fc" id="L43">    }</span>
+
+<span class="nc" id="L45">    public boolean isMuted() { return muted; }</span>
 
     public void runMusic() {
-<span class="nc" id="L38">        play();</span>
-<span class="nc" id="L39">        loop();</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L48">        play();</span>
+<span class="fc" id="L49">        loop();</span>
+<span class="fc" id="L50">    }</span>
 
     public void play() {
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (clip != null) {</span>
-<span class="nc" id="L44">            clip.setFramePosition(0);</span>
-<span class="nc" id="L45">            clip.start();</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (clip != null) {</span>
+<span class="fc" id="L54">            clip.setFramePosition(0);</span>
+<span class="fc" id="L55">            clip.start();</span>
         }
-<span class="nc" id="L47">    }</span>
+<span class="fc" id="L57">    }</span>
 
     public void loop() {
-<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (clip != null) {</span>
-<span class="nc" id="L51">            clip.loop(Clip.LOOP_CONTINUOUSLY);</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (clip != null) {</span>
+<span class="fc" id="L61">            clip.loop(Clip.LOOP_CONTINUOUSLY);</span>
         }
-<span class="nc" id="L53">    }</span>
+<span class="fc" id="L63">    }</span>
 
     public void volumeUp() {
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if(!isMuted()) {</span>
-<span class="nc" id="L57">            currentVolume +=5.0f;</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">            if(currentVolume&gt;6.0f) currentVolume=6.0f;</span>
-<span class="nc" id="L59">            fc.setValue(currentVolume);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if(!isMuted()) {</span>
+<span class="nc" id="L67">            currentVolume +=5.0f;</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">            if(currentVolume&gt;6.0f) currentVolume=6.0f;</span>
+<span class="nc" id="L69">            fc.setValue(currentVolume);</span>
         }
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L71">    }</span>
 
     public void volumeDown() {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if(!isMuted()) {</span>
-<span class="nc" id="L65">            currentVolume -=5.0f;</span>
-<span class="nc bnc" id="L66" title="All 2 branches missed.">            if(currentVolume&lt;-80.0f) currentVolume=-80.0f;</span>
-<span class="nc" id="L67">            fc.setValue(currentVolume);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if(!isMuted()) {</span>
+<span class="nc" id="L75">            currentVolume -=5.0f;</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if(currentVolume&lt;-80.0f) currentVolume=-80.0f;</span>
+<span class="nc" id="L77">            fc.setValue(currentVolume);</span>
         }
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L79">    }</span>
 
     public void volumeMute(){
-<span class="nc bnc" id="L72" title="All 2 branches missed.">        if(!isMuted()) {</span>
-<span class="nc" id="L73">            previousVolume=currentVolume;</span>
-<span class="nc" id="L74">            currentVolume=-80.0f;</span>
-<span class="nc" id="L75">            fc.setValue(currentVolume);</span>
-<span class="nc" id="L76">            muted=true;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if(!isMuted()) {</span>
+<span class="nc" id="L83">            previousVolume=currentVolume;</span>
+<span class="nc" id="L84">            currentVolume=-80.0f;</span>
+<span class="nc" id="L85">            fc.setValue(currentVolume);</span>
+<span class="nc" id="L86">            muted=true;</span>
         } else {
-<span class="nc" id="L78">            currentVolume=previousVolume;</span>
-<span class="nc" id="L79">            fc.setValue(currentVolume);</span>
-<span class="nc" id="L80">            muted=false;</span>
+<span class="nc" id="L88">            currentVolume=previousVolume;</span>
+<span class="nc" id="L89">            fc.setValue(currentVolume);</span>
+<span class="nc" id="L90">            muted=false;</span>
         }
-<span class="nc" id="L82">    }</span>
+<span class="nc" id="L92">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

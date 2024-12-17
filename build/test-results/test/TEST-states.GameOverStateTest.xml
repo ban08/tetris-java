@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="states.GameOverStateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-17T00:32:26" hostname="DESKTOP-3JMO58F" time="0.151">
+<testsuite name="states.GameOverStateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-12-17T01:07:57" hostname="DESKTOP-3JMO58F" time="0.1">
   <properties/>
-  <testcase name="testPressingOtherKeysRemainsInGameOverState()" classname="states.GameOverStateTest" time="0.127"/>
-  <testcase name="testPressingQTransitionsToExit()" classname="states.GameOverStateTest" time="0.012"/>
+  <testcase name="testPressingOtherKeysRemainsInGameOverState()" classname="states.GameOverStateTest" time="0.078"/>
+  <testcase name="testPressingQTransitionsToExit()" classname="states.GameOverStateTest" time="0.009"/>
   <testcase name="testPressingRTransitionsToStartMenuState()" classname="states.GameOverStateTest" time="0.012"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
