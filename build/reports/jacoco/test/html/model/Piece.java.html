@@ -2,17 +2,50 @@
 
 import com.googlecode.lanterna.TextColor;
 
+/**
+ * Represents a Tetris piece with a specific shape and color.
+ * Each piece is defined by a 2D array of characters and a color.
+ */
 public class Piece {
     private char[][] shape;
     private final TextColor color;
 
-<span class="fc" id="L9">    public Piece(char[][] shape, TextColor color) {</span>
-<span class="fc" id="L10">        this.shape = shape;</span>
-<span class="fc" id="L11">        this.color = color;</span>
-<span class="fc" id="L12">    }</span>
+    /**
+     * Constructs a Piece object with the specified shape and color.
+     *
+     * @param shape the 2D array of characters representing the piece's shape
+     * @param color the color of the piece
+     */
+<span class="fc" id="L19">    public Piece(char[][] shape, TextColor color) {</span>
+<span class="fc" id="L20">        this.shape = shape;</span>
+<span class="fc" id="L21">        this.color = color;</span>
+<span class="fc" id="L22">    }</span>
 
-<span class="fc" id="L14">    public char[][] getShape() { return shape; }</span>
-<span class="fc" id="L15">    public void setShape(char[][] shape) { this.shape = shape; }</span>
-<span class="fc" id="L16">    public TextColor getColor() { return color; }</span>
+    /**
+     * Returns the shape of the piece.
+     *
+     * @return the 2D array of characters representing the piece's shape
+     */
+    public char[][] getShape() {
+<span class="fc" id="L30">        return shape;</span>
+    }
+
+    /**
+     * Sets the shape of the piece.
+     *
+     * @param shape the 2D array of characters representing the new shape
+     */
+    public void setShape(char[][] shape) {
+<span class="fc" id="L39">        this.shape = shape;</span>
+<span class="fc" id="L40">    }</span>
+
+    /**
+     * Returns the color of the piece.
+     *
+     * @return the color of the piece
+     */
+    public TextColor getColor() {
+<span class="fc" id="L48">        return color;</span>
+    }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

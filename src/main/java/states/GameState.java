@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the main game state, handling the game loop, input processing, and rendering.
+ */
 public class GameState extends State {
     private final GameModel model;
     private final GameController controller;
@@ -28,6 +31,13 @@ public class GameState extends State {
     private long lastUpdateTime;
     private long elapsedTime; // in milliseconds
 
+    /**
+     * Constructs a GameState with the specified screen and music.
+     * Initializes the game model, controller, renderer, and timer.
+     *
+     * @param screen the Lanterna Screen
+     * @param music  the Music instance
+     */
     public GameState(Screen screen, Music music) {
         this.screen = screen;
         this.music = music;
@@ -40,6 +50,7 @@ public class GameState extends State {
         this.elapsedTime = 0;
         this.lastUpdateTime = System.currentTimeMillis();
     }
+
     /**
      * Overloaded constructor for testing purposes.
      * Allows injection of mocked GameModel and GameController.
@@ -61,9 +72,17 @@ public class GameState extends State {
         this.lastUpdateTime = System.currentTimeMillis();
     }
 
+    /**
+     * Performs a single step in the game loop, handling input, updating the model,
+     * rendering the scene, and managing state transitions.
+     *
+     * @param gui  the GUI instance to handle input
+     * @param time the current time in milliseconds
+     * @return the next State
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public State step(GUI gui, long time) throws IOException {
-        // Calculate delta time
         long currentTime = System.currentTimeMillis();
         long deltaTime = currentTime - lastUpdateTime;
         lastUpdateTime = currentTime;
@@ -86,7 +105,7 @@ public class GameState extends State {
                 chosenLines,
                 model.isPaused(),
                 model.getNextPiece().getPiece(),
-                formattedTime // Pass the timer string
+                formattedTime
         );
 
         if (!model.isRunning()) {
@@ -111,6 +130,12 @@ public class GameState extends State {
         return this;
     }
 
+    /**
+     * Formats the elapsed time into a string representation.
+     *
+     * @param elapsedMillis the elapsed time in milliseconds
+     * @return the formatted time string
+     */
     private String formatElapsedTime(long elapsedMillis) {
         long totalSeconds = elapsedMillis / 1000;
         long seconds = totalSeconds % 60;
@@ -124,6 +149,11 @@ public class GameState extends State {
         }
     }
 
+    /**
+     * Handles user input and updates the game state accordingly.
+     *
+     * @param action the action input from the GUI
+     */
     private void handleInput(GUI.ACTION action) {
         boolean inBonusOrChoosing = model.isBonusActive() || choosingLines;
         switch (action) {
@@ -191,6 +221,11 @@ public class GameState extends State {
         }
     }
 
+    /**
+     * Flushes any remaining input events from the screen's input queue.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     private void flushInput() throws IOException {
         while (screen.pollInput() != null) {}
     }

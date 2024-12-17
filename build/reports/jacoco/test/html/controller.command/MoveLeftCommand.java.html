@@ -2,9 +2,28 @@
 
 import controller.ControllerInterface;
 
+/**
+ * Command to move the current piece left in the game.
+ */
+
 public class MoveLeftCommand implements Command {
     private final ControllerInterface controller;
-<span class="fc" id="L7">    public MoveLeftCommand(ControllerInterface controller) { this.controller = controller; }</span>
-<span class="fc" id="L8">    @Override public void execute() { controller.moveLeft(); }</span>
+
+    /**
+     * Creates a new MoveLeftCommand.
+     *
+     * @param controller the controller to use
+     */
+<span class="fc" id="L17">    public MoveLeftCommand(ControllerInterface controller) {</span>
+<span class="fc" id="L18">        this.controller = controller;</span>
+<span class="fc" id="L19">    }</span>
+
+    /**
+     * Executes the command.
+     */
+    @Override
+    public void execute() {
+<span class="fc" id="L26">        controller.moveLeft();</span>
+<span class="fc" id="L27">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

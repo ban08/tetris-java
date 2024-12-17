@@ -5,63 +5,99 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
-
+/**
+ * A GUI implementation using Lanterna library.
+ *
+ * &lt;p&gt;This class provides an implementation of the {@link GUI} interface using the Lanterna library.
+ * It provides methods to retrieve the next user action, clear the screen, and refresh the screen.
+ *
+ *
+ */
 public class LanternaGUI implements GUI {
     private final Screen screen;
 
-<span class="fc" id="L12">    public LanternaGUI(Screen screen) {</span>
-<span class="fc" id="L13">        this.screen = screen;</span>
-<span class="fc" id="L14">    }</span>
+    /**
+     * Creates a new instance of the LanternaGUI class.
+     *
+     * @param screen the Lanterna screen to use
+     */
+<span class="fc" id="L24">    public LanternaGUI(Screen screen) {</span>
+<span class="fc" id="L25">        this.screen = screen;</span>
+<span class="fc" id="L26">    }</span>
 
+    /**
+     * Retrieves the next user action from the GUI.
+     *
+     * @return the next user action
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public ACTION getNextAction() throws IOException {
-<span class="fc" id="L18">        KeyStroke keyStroke = screen.pollInput();</span>
-<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (keyStroke == null) return ACTION.NONE;</span>
-<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.NONE;</span>
+<span class="fc" id="L36">        KeyStroke keyStroke = screen.pollInput();</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (keyStroke == null) return ACTION.NONE;</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.NONE;</span>
 
-<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowUp) return ACTION.ARROW_UP;</span>
-<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowDown) return ACTION.ARROW_DOWN;</span>
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowLeft) return ACTION.ARROW_LEFT;</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowRight) return ACTION.ARROW_RIGHT;</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Escape) return ACTION.ESCAPE;</span>
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Enter) return ACTION.SELECT;</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowUp) return ACTION.ARROW_UP;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowDown) return ACTION.ARROW_DOWN;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowLeft) return ACTION.ARROW_LEFT;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (keyStroke.getKeyType() == KeyType.ArrowRight) return ACTION.ARROW_RIGHT;</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Escape) return ACTION.ESCAPE;</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Enter) return ACTION.SELECT;</span>
 
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Character) {</span>
-<span class="fc" id="L30">            char c = Character.toLowerCase(keyStroke.getCharacter());</span>
-<span class="pc bpc" id="L31" title="6 of 10 branches missed.">            return switch(c) {</span>
-<span class="fc" id="L32">                case ' ' -&gt; ACTION.SPACE;</span>
-<span class="fc" id="L33">                case 'a' -&gt; ACTION.A;</span>
-<span class="fc" id="L34">                case 'd' -&gt; ACTION.D;</span>
-<span class="fc" id="L35">                case 'p' -&gt; ACTION.P;</span>
-<span class="nc" id="L36">                case 's' -&gt; ACTION.S_KEY;</span>
-<span class="nc" id="L37">                case 'e' -&gt; ACTION.E_KEY;</span>
-<span class="nc" id="L38">                case 'r' -&gt; ACTION.R_KEY;</span>
-<span class="nc" id="L39">                case 'q' -&gt; ACTION.Q_KEY;</span>
-<span class="nc" id="L40">                case 'b' -&gt; ACTION.B_KEY;</span>
-<span class="nc" id="L41">                default -&gt; ACTION.NONE;</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (keyStroke.getKeyType() == KeyType.Character) {</span>
+<span class="fc" id="L48">            char c = Character.toLowerCase(keyStroke.getCharacter());</span>
+<span class="pc bpc" id="L49" title="6 of 10 branches missed.">            return switch (c) {</span>
+<span class="fc" id="L50">                case ' ' -&gt; ACTION.SPACE;</span>
+<span class="fc" id="L51">                case 'a' -&gt; ACTION.A;</span>
+<span class="fc" id="L52">                case 'd' -&gt; ACTION.D;</span>
+<span class="fc" id="L53">                case 'p' -&gt; ACTION.P;</span>
+<span class="nc" id="L54">                case 's' -&gt; ACTION.S_KEY;</span>
+<span class="nc" id="L55">                case 'e' -&gt; ACTION.E_KEY;</span>
+<span class="nc" id="L56">                case 'r' -&gt; ACTION.R_KEY;</span>
+<span class="nc" id="L57">                case 'q' -&gt; ACTION.Q_KEY;</span>
+<span class="nc" id="L58">                case 'b' -&gt; ACTION.B_KEY;</span>
+<span class="nc" id="L59">                default -&gt; ACTION.NONE;</span>
             };
         }
 
-<span class="nc" id="L45">        return ACTION.NONE;</span>
+<span class="nc" id="L63">        return ACTION.NONE;</span>
     }
 
+    /**
+     * Clears the screen.
+     */
     @Override
     public void clear() {
-<span class="nc" id="L50">        screen.clear();</span>
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L71">        screen.clear();</span>
+<span class="nc" id="L72">    }</span>
 
+    /**
+     * Refreshes the screen.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public void refresh() throws IOException {
-<span class="nc" id="L55">        screen.refresh();</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L81">        screen.refresh();</span>
+<span class="nc" id="L82">    }</span>
 
+    /**
+     * Closes the GUI.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public void close() throws IOException {
-<span class="nc" id="L60">        screen.close();</span>
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L91">        screen.close();</span>
+<span class="nc" id="L92">    }</span>
 
+    /**
+     * Returns the underlying Lanterna screen.
+     *
+     * @return the Lanterna screen
+     */
     public Screen getScreen() {
-<span class="nc" id="L64">        return screen;</span>
+<span class="nc" id="L100">        return screen;</span>
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

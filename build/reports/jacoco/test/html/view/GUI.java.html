@@ -2,16 +2,46 @@
 
 import java.io.IOException;
 
+/**
+ * The GUI interface defines the structure for graphical user interface
+ * interactions in the game, including actions, screen management, and
+ * resource cleanup.
+ */
 public interface GUI {
-<span class="fc" id="L6">    enum ACTION {</span>
-<span class="fc" id="L7">        ARROW_UP, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT,</span>
-<span class="fc" id="L8">        SPACE, A, D, P, S_KEY, E_KEY, R_KEY, Q_KEY, B_KEY,</span>
-<span class="fc" id="L9">        NONE, SELECT, ESCAPE</span>
+    /**
+     * Enum representing possible user actions captured by the GUI.
+     */
+<span class="fc" id="L14">    enum ACTION {</span>
+<span class="fc" id="L15">        ARROW_UP, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT,</span>
+<span class="fc" id="L16">        SPACE, A, D, P, S_KEY, E_KEY, R_KEY, Q_KEY, B_KEY,</span>
+<span class="fc" id="L17">        NONE, SELECT, ESCAPE</span>
     }
 
+    /**
+     * Retrieves the next user action from the GUI input.
+     *
+     * @return the next ACTION captured by the GUI
+     * @throws IOException if an I/O error occurs during input retrieval
+     */
     ACTION getNextAction() throws IOException;
+
+    /**
+     * Clears the current display on the GUI.
+     */
     void clear();
+
+    /**
+     * Refreshes the GUI display to reflect any changes.
+     *
+     * @throws IOException if an I/O error occurs during the refresh
+     */
     void refresh() throws IOException;
+
+    /**
+     * Closes the GUI and releases any resources associated with it.
+     *
+     * @throws IOException if an I/O error occurs during closing
+     */
     void close() throws IOException;
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

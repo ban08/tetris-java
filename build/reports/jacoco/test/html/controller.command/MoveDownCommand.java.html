@@ -2,9 +2,27 @@
 
 import controller.ControllerInterface;
 
+/**
+ * Command to move the current piece down in the game.
+ */
 public class MoveDownCommand implements Command {
     private final ControllerInterface controller;
-<span class="fc" id="L7">    public MoveDownCommand(ControllerInterface controller) { this.controller = controller; }</span>
-<span class="fc" id="L8">    @Override public void execute() { controller.moveDown(); }</span>
+
+    /**
+     * Constructs a MoveDownCommand with the specified controller.
+     *
+     * @param controller the controller to execute the move down command on
+     */
+<span class="fc" id="L16">    public MoveDownCommand(ControllerInterface controller) {</span>
+<span class="fc" id="L17">        this.controller = controller;</span>
+<span class="fc" id="L18">    }</span>
+
+    /**
+     * Executes the command to move the current piece down.
+     */
+    @Override
+    public void execute() {
+<span class="fc" id="L25">        controller.moveDown();</span>
+<span class="fc" id="L26">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

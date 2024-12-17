@@ -4,6 +4,30 @@ import com.googlecode.lanterna.TextColor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing a Tetris board.
+ *
+ * &lt;p&gt;The board is a 2D array of characters, where each character represents a cell in the board.
+ * The board also has a corresponding 2D array of colors, where each color corresponds to the color
+ * of the cell in the same position in the board.
+ *
+ * &lt;p&gt;The board is initialized with all cells set to the space character, and all colors set to black.
+ * The board can be modified by adding positioned pieces to it, which will update the board and color
+ * arrays accordingly.
+ *
+ * &lt;p&gt;The board also has methods for checking if a line is full, clearing a line, and shifting lines
+ * down. These methods are used in the deleteFullLines method, which deletes all full lines and shifts
+ * the remaining lines down.
+ *
+ * &lt;p&gt;The board also has a method for checking if the game is over, which is done by checking if the
+ * next piece can be placed on the board.
+ *
+ * &lt;p&gt;The board also has a method for resetting the board, which sets all cells to the space character
+ * and all colors to black.
+ *
+ *
+ */
+
 public class Board {
     private final char[][] board;
     private final TextColor[][] colors;
@@ -11,121 +35,220 @@ public class Board {
     private final int height;
     private final List&lt;BoardObserver&gt; observers;
 
-<span class="fc" id="L14">    public Board(int width, int height) {</span>
-<span class="fc" id="L15">        this.width = width;</span>
-<span class="fc" id="L16">        this.height = height;</span>
-<span class="fc" id="L17">        this.board = new char[height][width];</span>
-<span class="fc" id="L18">        this.colors = new TextColor[height][width];</span>
-<span class="fc" id="L19">        this.observers = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L20">        initializeBoard();</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L38">    public Board(int width, int height) {</span>
+<span class="fc" id="L39">        this.width = width;</span>
+<span class="fc" id="L40">        this.height = height;</span>
+<span class="fc" id="L41">        this.board = new char[height][width];</span>
+<span class="fc" id="L42">        this.colors = new TextColor[height][width];</span>
+<span class="fc" id="L43">        this.observers = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L44">        initializeBoard();</span>
+<span class="fc" id="L45">    }</span>
 
+    /**
+     * Initializes the board and color arrays by setting all cells to the space
+     * character and all colors to black.
+     */
     private void initializeBoard() {
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (int i = 0; i &lt; height; i++)</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">            for (int j = 0; j &lt; width; j++) {</span>
-<span class="fc" id="L26">                board[i][j] = ' ';</span>
-<span class="fc" id="L27">                colors[i][j] = TextColor.ANSI.BLACK;</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        for (int i = 0; i &lt; height; i++)</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            for (int j = 0; j &lt; width; j++) {</span>
+<span class="fc" id="L54">                board[i][j] = ' ';</span>
+<span class="fc" id="L55">                colors[i][j] = TextColor.ANSI.BLACK;</span>
             }
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L57">    }</span>
 
-<span class="fc" id="L31">    public char[][] getBoard() { return board; }</span>
-<span class="fc" id="L32">    public TextColor[][] getColors() { return colors; }</span>
+    /**
+     * Returns the 2D array of characters representing the game board.
+     * Each character represents a cell on the board. The character can be one of:
+     * &lt;ul&gt;
+     * &lt;li&gt; ' ' (space) meaning the cell is empty
+     * &lt;li&gt; 'X' meaning the cell is occupied by a piece
+     * &lt;/ul&gt;
+     *
+     * @return a 2D array of characters representing the game board
+     */
+<span class="fc" id="L69">    public char[][] getBoard() { return board; }</span>
+    /**
+     * Returns the 2D array of TextColors representing the colors of the cells
+     * on the board. The color of a cell is the color of the piece that occupies
+     * the cell, or black if the cell is empty.
+     *
+     * @return a 2D array of TextColors representing the colors of the cells on the board
+     */
+<span class="fc" id="L77">    public TextColor[][] getColors() { return colors; }</span>
+    /**
+     * Adds a BoardObserver to the list of observers that are notified when
+     * lines are cleared or when the game is over.
+     *
+     * @param observer the observer to add
+     * @throws NullPointerException if observer is null
+     */
     public void addObserver(BoardObserver observer) {
-<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (observer == null) {</span>
-<span class="fc" id="L35">            throw new NullPointerException(&quot;Adding null observer should throw NullPointerException.&quot;);</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (observer == null) {</span>
+<span class="fc" id="L87">            throw new NullPointerException(&quot;Adding null observer should throw NullPointerException.&quot;);</span>
         }
-<span class="fc" id="L37">        observers.add(observer);</span>
-<span class="fc" id="L38">    }</span>
-<span class="fc" id="L39">    public List&lt;BoardObserver&gt; getObservers() { return observers; }</span>
+<span class="fc" id="L89">        observers.add(observer);</span>
+<span class="fc" id="L90">    }</span>
+    /**
+     * Returns a list of BoardObserver objects that are notified when
+     * lines are cleared or when the game is over.
+     *
+     * @return a list of BoardObserver objects
+     */
+<span class="fc" id="L97">    public List&lt;BoardObserver&gt; getObservers() { return observers; }</span>
 
+    /**
+     * Notifies all observers that a certain number of lines have been cleared.
+     * This will call the onLineCleared method of each observer with the number
+     * of lines cleared as argument.
+     *
+     * @param linesCleared the number of lines that have been cleared
+     */
     private void notifyLineCleared(int linesCleared) {
-<span class="fc bfc" id="L42" title="All 2 branches covered.">        for (BoardObserver obs : observers) obs.onLineCleared(linesCleared);</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (BoardObserver obs : observers) obs.onLineCleared(linesCleared);</span>
+<span class="fc" id="L108">    }</span>
 
+    /**
+     * Notifies all observers that the game is over.
+     * This will call the onGameOver method of each observer.
+     */
     private void notifyGameOver() {
-<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (BoardObserver obs : observers) obs.onGameOver();</span>
-<span class="fc" id="L47">    }</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        for (BoardObserver obs : observers) obs.onGameOver();</span>
+<span class="fc" id="L116">    }</span>
 
+    /**
+     * Returns true if the given shape can be placed at the given position.
+     * The shape is placed at the given position (x, y) if and only if
+     * the shape does not stick out of the board and does not overlap with
+     * any existing pieces.
+     *
+     * @param shape the shape to place
+     * @param x the x-coordinate of the position
+     * @param y the y-coordinate of the position
+     * @return true if the shape can be placed at the given position
+     */
     public boolean canPlaceShape(char[][] shape, int x, int y) {
-<span class="pc bpc" id="L50" title="1 of 8 branches missed.">        if (x &lt; 0 || y &lt; 0 || x+shape[0].length &gt; width || y+shape.length &gt; height) return false;</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (int row = 0; row &lt; shape.length; row++) {</span>
-<span class="fc bfc" id="L52" title="All 2 branches covered.">            for (int col = 0; col &lt; shape[row].length; col++) {</span>
-<span class="fc bfc" id="L53" title="All 4 branches covered.">                if (shape[row][col] != ' ' &amp;&amp; board[y+row][x+col] != ' ') return false;</span>
+<span class="pc bpc" id="L130" title="1 of 8 branches missed.">        if (x &lt; 0 || y &lt; 0 || x+shape[0].length &gt; width || y+shape.length &gt; height) return false;</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        for (int row = 0; row &lt; shape.length; row++) {</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">            for (int col = 0; col &lt; shape[row].length; col++) {</span>
+<span class="fc bfc" id="L133" title="All 4 branches covered.">                if (shape[row][col] != ' ' &amp;&amp; board[y+row][x+col] != ' ') return false;</span>
             }
         }
-<span class="fc" id="L56">        return true;</span>
+<span class="fc" id="L136">        return true;</span>
     }
 
+    /**
+     * Adds a positioned piece to the board. The piece is placed at the
+     * given position (x, y) on the board, and the board and color arrays
+     * are updated accordingly.
+     *
+     * @param positionedPiece the piece to add
+     */
     public void addPositionedPiece(PositionedPiece positionedPiece) {
-<span class="fc" id="L60">        char[][] shape = positionedPiece.getPiece().getShape();</span>
-<span class="fc" id="L61">        TextColor color = positionedPiece.getPiece().getColor();</span>
-<span class="fc" id="L62">        int x = positionedPiece.getX();</span>
-<span class="fc" id="L63">        int y = positionedPiece.getY();</span>
+<span class="fc" id="L147">        char[][] shape = positionedPiece.getPiece().getShape();</span>
+<span class="fc" id="L148">        TextColor color = positionedPiece.getPiece().getColor();</span>
+<span class="fc" id="L149">        int x = positionedPiece.getX();</span>
+<span class="fc" id="L150">        int y = positionedPiece.getY();</span>
 
-<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (int row = 0; row &lt; shape.length; row++) {</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            for (int col = 0; col &lt; shape[row].length; col++) {</span>
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">                if (shape[row][col] != ' ') {</span>
-<span class="fc" id="L68">                    board[y+row][x+col] = shape[row][col];</span>
-<span class="fc" id="L69">                    colors[y+row][x+col] = color;</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        for (int row = 0; row &lt; shape.length; row++) {</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            for (int col = 0; col &lt; shape[row].length; col++) {</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">                if (shape[row][col] != ' ') {</span>
+<span class="fc" id="L155">                    board[y+row][x+col] = shape[row][col];</span>
+<span class="fc" id="L156">                    colors[y+row][x+col] = color;</span>
                 }
             }
         }
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L160">    }</span>
 
+    /**
+     * Deletes all full lines on the board. A line is considered full
+     * if all its cells are occupied by a piece.
+     * After deleting all full lines, the remaining lines are shifted
+     * down to fill the empty space created by the deleted lines.
+     * If any lines were deleted, all observers are notified with the
+     * number of lines that were deleted.
+     */
     public void deleteFullLines() {
-<span class="fc" id="L76">        int linesCleared = 0;</span>
+<span class="fc" id="L171">        int linesCleared = 0;</span>
 
-<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (int row = height - 1; row &gt;= 0; ) {</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">            if (isFullLine(row)) {</span>
-<span class="fc" id="L80">                clearLine(row);</span>
-<span class="fc" id="L81">                shiftLinesDown(row);</span>
-<span class="fc" id="L82">                linesCleared++;</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        for (int row = height - 1; row &gt;= 0; ) {</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">            if (isFullLine(row)) {</span>
+<span class="fc" id="L175">                clearLine(row);</span>
+<span class="fc" id="L176">                shiftLinesDown(row);</span>
+<span class="fc" id="L177">                linesCleared++;</span>
             } else {
-<span class="fc" id="L84">                row--;</span>
+<span class="fc" id="L179">                row--;</span>
             }
         }
 
-<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (linesCleared &gt; 0) notifyLineCleared(linesCleared);</span>
-<span class="fc" id="L89">    }</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        if (linesCleared &gt; 0) notifyLineCleared(linesCleared);</span>
+<span class="fc" id="L184">    }</span>
 
-
-
+    /**
+     * Checks if the specified row on the board is fully occupied by pieces.
+     *
+     * @param row the index of the row to check
+     * @return true if the row is fully occupied, false otherwise
+     */
     private boolean isFullLine(int row) {
-<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++)</span>
-<span class="fc bfc" id="L95" title="All 2 branches covered.">            if (board[row][col] == ' ') return false;</span>
-<span class="fc" id="L96">        return true;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++)</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">            if (board[row][col] == ' ') return false;</span>
+<span class="fc" id="L195">        return true;</span>
     }
 
+    /**
+     * Clears a line on the board by setting all its cells to empty space
+     * and resetting their color to black.
+     *
+     * @param row the index of the row to clear
+     */
     private void clearLine(int row) {
-<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++) {</span>
-<span class="fc" id="L101">            board[row][col] = ' ';</span>
-<span class="fc" id="L102">            colors[row][col] = TextColor.ANSI.BLACK;</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++) {</span>
+<span class="fc" id="L206">            board[row][col] = ' ';</span>
+<span class="fc" id="L207">            colors[row][col] = TextColor.ANSI.BLACK;</span>
         }
-<span class="fc" id="L104">    }</span>
+<span class="fc" id="L209">    }</span>
 
+    /**
+     * Shifts all lines of the board down from the given start row (inclusive),
+     * by copying the content of each row to the row below it, and then clears
+     * the top row.
+     *
+     * @param startRow the index of the row from which to start the shift
+     */
     private void shiftLinesDown(int startRow) {
-<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (int r = startRow; r &gt; 0; r--) {</span>
-<span class="fc" id="L108">            System.arraycopy(board[r-1], 0, board[r], 0, width);</span>
-<span class="fc" id="L109">            System.arraycopy(colors[r-1], 0, colors[r], 0, width);</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">        for (int r = startRow; r &gt; 0; r--) {</span>
+<span class="fc" id="L220">            System.arraycopy(board[r-1], 0, board[r], 0, width);</span>
+<span class="fc" id="L221">            System.arraycopy(colors[r-1], 0, colors[r], 0, width);</span>
         }
-<span class="fc bfc" id="L111" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++) {</span>
-<span class="fc" id="L112">            board[0][col] = ' ';</span>
-<span class="fc" id="L113">            colors[0][col] = TextColor.ANSI.BLACK;</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        for (int col = 0; col &lt; width; col++) {</span>
+<span class="fc" id="L224">            board[0][col] = ' ';</span>
+<span class="fc" id="L225">            colors[0][col] = TextColor.ANSI.BLACK;</span>
         }
-<span class="fc" id="L115">    }</span>
+<span class="fc" id="L227">    }</span>
 
-
+    /**
+     * Checks if the game is over by trying to place the given piece on the
+     * board. If the piece cannot be placed, all observers are notified that
+     * the game is over.
+     *
+     * @param piece the piece to try to place
+     */
     public void checkGameOver(PositionedPiece piece) {
-<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if (!canPlaceShape(piece.getPiece().getShape(), piece.getX(), piece.getY())) notifyGameOver();</span>
-<span class="fc" id="L120">    }</span>
+<span class="pc bpc" id="L237" title="1 of 2 branches missed.">        if (!canPlaceShape(piece.getPiece().getShape(), piece.getX(), piece.getY())) notifyGameOver();</span>
+<span class="fc" id="L238">    }</span>
 
+    /**
+     * Resets the board to its initial state by setting all cells to empty spaces
+     * and all colors to black. This effectively clears any pieces or colors
+     * from the board, preparing it for a new game or round.
+     */
     public void resetBoard() {
-<span class="fc bfc" id="L123" title="All 2 branches covered.">        for (int i = 0; i &lt; board.length; i++) {</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">            for (int j = 0; j &lt; board[i].length; j++) {</span>
-<span class="fc" id="L125">                board[i][j] = ' ';</span>
-<span class="fc" id="L126">                colors[i][j] = TextColor.ANSI.BLACK;</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">        for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">            for (int j = 0; j &lt; board[i].length; j++) {</span>
+<span class="fc" id="L248">                board[i][j] = ' ';</span>
+<span class="fc" id="L249">                colors[i][j] = TextColor.ANSI.BLACK;</span>
             }
         }
-<span class="fc" id="L129">    }</span>
+<span class="fc" id="L252">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

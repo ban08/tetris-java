@@ -1,15 +1,70 @@
- .idea/
- .gradle/
- out/
- build/
- *.iml
+# ==============================
+# IDE Specific
+# ==============================
 
- # Ignore Gradle files
- *.class
- *.lock
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
 
- # Ignore test reports and results
- build/reports/
- build/test-results/
- build/tmp/
-build/resources/main/music/theme.wav
+# ==============================
+# Build Artifacts
+# ==============================
+
+# Gradle build directories
+/build/
+/out/
+/**/build/
+
+# Gradle cache
+.gradle/
+
+# Temporary build files
+/build/tmp/
+/build/resources/main/music/theme.wav
+
+# ==============================
+# Compiled Files
+# ==============================
+
+# Java class files
+*.class
+
+# ==============================
+# Dependency Files
+# ==============================
+
+# Gradle lock files
+*.lock
+
+# ==============================
+# Test Reports and Results
+# ==============================
+
+# Test reports
+/build/reports/
+/build/test-results/
+
+# ==============================
+# Other Generated Files
+# ==============================
+
+# Log files
+*.log
+
+# JVM crash logs
+hs_err_pid*
+
+# ==============================
+# OS Specific
+# ==============================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# macOS
+.DS_Store
+
+# Linux
+*~

@@ -2,9 +2,27 @@
 
 import controller.ControllerInterface;
 
+/**
+ * Command to pause the game.
+ */
 public class PauseCommand implements Command {
     private final ControllerInterface controller;
-<span class="fc" id="L7">    public PauseCommand(ControllerInterface controller) { this.controller = controller; }</span>
-<span class="fc" id="L8">    @Override public void execute() { controller.pause(); }</span>
+
+    /**
+     * Constructs a PauseCommand with the given controller.
+     *
+     * @param controller the controller to be paused
+     */
+<span class="fc" id="L16">    public PauseCommand(ControllerInterface controller) {</span>
+<span class="fc" id="L17">        this.controller = controller;</span>
+<span class="fc" id="L18">    }</span>
+
+    /**
+     * Executes the pause command, pausing the game.
+     */
+    @Override
+    public void execute() {
+<span class="fc" id="L25">        controller.pause();</span>
+<span class="fc" id="L26">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

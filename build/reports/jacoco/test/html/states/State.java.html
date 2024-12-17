@@ -2,8 +2,25 @@
 
 import view.GUI;
 import java.io.IOException;
-
-<span class="fc" id="L6">public abstract class State {</span>
+/**
+ * An abstract class representing a state in the game's state machine.
+ *
+ * &lt;p&gt;A state is responsible for handling user input and updating the game model
+ * accordingly. A state can also transition to another state when certain
+ * conditions are met.
+ *
+ *
+ */
+<span class="fc" id="L14">public abstract class State {</span>
+    /**
+     * Handles user input and updates the game model accordingly.
+     *
+     * @param gui the GUI interface to use for rendering and input handling
+     * @param time the current time in milliseconds
+     * @return the next state to transition to, or {@code null} if the game should
+     *         exit
+     * @throws IOException if an I/O error occurs
+     */
     public abstract State step(GUI gui, long time) throws IOException;
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -3,7 +3,13 @@ package music;
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
-
+/**
+ * A class responsible for playing music.
+ * <p>
+ * This class is designed to load and play audio files from the classpath.
+ *
+ *
+ */
 public class Music {
     private Clip clip;
     private float currentVolume;
@@ -11,6 +17,10 @@ public class Music {
     private FloatControl fc;
     private boolean muted;
 
+    /**
+     * Creates a new instance of the Music class.
+     * @param resourcePath the path to the audio file
+     */
     public Music(String resourcePath) {
         try {
             muted = false;
@@ -42,13 +52,25 @@ public class Music {
         this.fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
     }
 
-    public boolean isMuted() { return muted; }
+    /**
+     * Checks if the music is muted.
+     * @return true if the music is muted, false otherwise.
+     */
+    public boolean isMuted() {
+        return muted;
+    }
 
+    /**
+     * Starts playing the music.
+     */
     public void runMusic() {
         play();
         loop();
     }
 
+    /**
+     * Starts playing the music from the beginning.
+     */
     public void play() {
         if (clip != null) {
             clip.setFramePosition(0);
@@ -56,38 +78,50 @@ public class Music {
         }
     }
 
+    /**
+     * Loops the music continuously.
+     */
     public void loop() {
         if (clip != null) {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
 
+    /**
+     * Increases the volume of the music.
+     */
     public void volumeUp() {
-        if(!isMuted()) {
-            currentVolume +=5.0f;
-            if(currentVolume>6.0f) currentVolume=6.0f;
+        if (!isMuted()) {
+            currentVolume += 5.0f;
+            if (currentVolume > 6.0f) currentVolume = 6.0f;
             fc.setValue(currentVolume);
         }
     }
 
+    /**
+     * Decreases the volume of the music.
+     */
     public void volumeDown() {
-        if(!isMuted()) {
-            currentVolume -=5.0f;
-            if(currentVolume<-80.0f) currentVolume=-80.0f;
+        if (!isMuted()) {
+            currentVolume -= 5.0f;
+            if (currentVolume < -80.0f) currentVolume = -80.0f;
             fc.setValue(currentVolume);
         }
     }
 
-    public void volumeMute(){
-        if(!isMuted()) {
-            previousVolume=currentVolume;
-            currentVolume=-80.0f;
+    /**
+     * Toggles the mute state of the music.
+     */
+    public void volumeMute() {
+        if (!isMuted()) {
+            previousVolume = currentVolume;
+            currentVolume = -80.0f;
             fc.setValue(currentVolume);
-            muted=true;
+            muted = true;
         } else {
-            currentVolume=previousVolume;
+            currentVolume = previousVolume;
             fc.setValue(currentVolume);
-            muted=false;
+            muted = false;
         }
     }
 }
