@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="controller.command.MoveRightCommandTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-12-17T22:06:32" hostname="DESKTOP-3JMO58F" time="0.003">
-  <properties/>
-  <testcase name="execute_ShouldCallMoveRightOnController()" classname="controller.command.MoveRightCommandTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
