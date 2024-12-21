@@ -21,9 +21,28 @@ Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Caroli
 - **Remoção de Linhas Completas** - Deteta e remove linha totalmente preenchidas e as linhas superiores deslocam-se para baixo e o jogador ganha pontos.O sistema notifica os observadores quando uma linha é limpa, para atualizar o placar do jogo, como a pontuação.
 - **Sistema de pontuação** - O jogo possui um sistema de pontuação(score), que será atualizado à medida que cada linha é removida.
 - **Sistema de Bônus** - Use pontos acumulados para desbloquear bônus que ajudam a limpar linhas ou áreas críticas.
+- - **Registro de Tempo**: O jogo mede quanto tempo o jogador sobrevive.
 - **Animações e efeitos** - Inclui animações de desaparecimento de linhas e efeitos de som para ações como a rotação e eliminação de linhas.
 - **Testes** - O códigos conta com vários testes automatizados que verificam desde a movimentação das peças até a remoção de linhas e cálculo da pontuação.
 - Música de fundo.
+
+
+## CONTROLES
+
+- **MOVIMENTAÇÃO**:
+    - **Mover peça para a esquerda**: Seta Esquerda (←)
+    - **Mover peça para a direita**: Seta Direita (→)
+    - **Mover peça para baixo**: Seta para Baixo (↓)
+    - **Rodar peça para a esquerda**: Tecla A
+    - **Rodar peça para a direita**: Tecla D
+    - **Mover peça para o fundo**: Tecla Espaço
+
+- **BÔNUS**:
+    - **Ativar bônus**: Tecla
+
+- **OUTROS**:
+    - **Pausar o jogo**: Tecla P
+    - **Reiniciar o jogo**: Tecla R
 
 ## Features planeadas
 
@@ -153,8 +172,7 @@ Além dos testes unitários, foram implementadas as estratégias de Mocking e de
 Como resultado, foi possível alcançar um conjunto de testes eficiente.
 
 ### Screenshot of Coverage Report
-![screenshot_of_coverage_report.png](..%2F..%2F..%2F..%2FImagens%2Fscreenshot_of_coverage_report.png)
-
+![screenshot_of_coverage_report.png](screenshot_of_coverage_report.png)
 ### Link para o relatório de teste de mutação
 [Test Results - Tests_in_'tetris_test'.html](TestingReport%2FTest%20Results%20-%20Tests_in_%27tetris_test%27.html)
 

@@ -11,36 +11,6 @@ Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Caroli
 
 ---
 
-## CONTROLES
-
-- **MOVIMENTAÇÃO**:
-    - **Mover peça para a esquerda**: Seta Esquerda (←)
-    - **Mover peça para a direita**: Seta Direita (→)
-    - **Mover peça para baixo**: Seta para Baixo (↓)
-    - **Rodar peça para a esquerda**: Tecla A
-    - **Rodar peça para a direita**: Tecla D
-    - **Mover peça para o fundo**: Tecla Espaço
-
-
-- **BÔNUS**:
-    - **Ativar bônus**: Tecla 
-
-
-- **OUTROS**:
-    - **Pausar o jogo**: Tecla P
-    - **Reiniciar o jogo**: Tecla R
-
----
-## FUNCIONALIDADES
-
-- **Jogabilidade Clássica do Tetris**: Elimine linhas ao posicionar as peças no tabuleiro de 10x20.
-- **Seleção Aleatória de Peças**: O jogo escolhe uma peça aleatória entre cinco formatos diferentes.
-- **Sistema de Pontuação**: Receba pontos por cada linha eliminada.
-- **Sistema de Bônus**: Use pontos acumulados para desbloquear bônus que ajudam a limpar linhas ou áreas críticas.
-- **Registro de Tempo**: O jogo mede quanto tempo o jogador sobrevive.
-
----
-
 ## DIAGRAMA UML
 
 ![img.png](img.png)
@@ -52,3 +22,5 @@ Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Caroli
 ![TetrisMockup](https://github.com/user-attachments/assets/7b8f1ce1-1e0d-4085-80ca-73b879b3fc85)
 
 ![TetrisGameOver](https://github.com/user-attachments/assets/26e3dae0-6c15-4c20-87a7-bbfcb739ce82)
+
+Para uma versão mais detalhada desta descrição, clique aqui [here](./docs/README.md).
