@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GameView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">view</a>
+</div>
+
+<h1>Coverage Summary for Class: GameView (view)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package view;
+&nbsp;
+&nbsp;import model.GameModel;
+&nbsp;import java.util.List;
+&nbsp;/**
+&nbsp; * The GameView class is responsible for rendering the game state using a
+&nbsp; * {@link GameRenderer}. It provides two methods for rendering the game state:
+&nbsp; * one for rendering the normal game state, and one for rendering the game state
+&nbsp; * while the user is choosing lines to clear during the bonus round.
+&nbsp; *
+&nbsp; */
+&nbsp;public class GameView {
+&nbsp;    private final GameRenderer renderer;
+&nbsp;    private final GameModel model;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new GameView instance.
+&nbsp;     *
+&nbsp;     * @param renderer the {@link GameRenderer} to use for rendering
+&nbsp;     * @param model the {@link GameModel} to render
+&nbsp;     */
+<b class="nc">&nbsp;    public GameView(GameRenderer renderer, GameModel model) {</b>
+<b class="nc">&nbsp;        this.renderer = renderer;</b>
+<b class="nc">&nbsp;        this.model = model;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Renders the game state using the given timer string.
+&nbsp;     *
+&nbsp;     * @param timer the timer string to display
+&nbsp;     */
+&nbsp;    public void render(String timer) {
+<b class="nc">&nbsp;        renderer.render(</b>
+<b class="nc">&nbsp;                model.getBoard(),</b>
+<b class="nc">&nbsp;                model.getCurrentPiece(),</b>
+<b class="nc">&nbsp;                model.getScorePoints(),</b>
+<b class="nc">&nbsp;                model.getBonusCharge(),</b>
+<b class="nc">&nbsp;                model.isBonusActive(),</b>
+&nbsp;                false,        
+&nbsp;                0,            
+<b class="nc">&nbsp;                List.of(),    </b>
+<b class="nc">&nbsp;                model.isPaused(),</b>
+<b class="nc">&nbsp;                model.getNextPiece().getPiece(),</b>
+&nbsp;                timer
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Renders the game state while the user is choosing lines to clear during
+&nbsp;     * the bonus round.
+&nbsp;     *
+&nbsp;     * @param choosingLines whether the user is currently choosing lines
+&nbsp;     * @param selectedLine the currently selected line
+&nbsp;     * @param chosenLines the lines that have already been chosen
+&nbsp;     * @param timer the timer string to display
+&nbsp;     */
+&nbsp;    public void render(boolean choosingLines, int selectedLine, List&lt;Integer&gt; chosenLines, String timer) {
+<b class="nc">&nbsp;        renderer.render(</b>
+<b class="nc">&nbsp;                model.getBoard(),</b>
+<b class="nc">&nbsp;                model.getCurrentPiece(),</b>
+<b class="nc">&nbsp;                model.getScorePoints(),</b>
+<b class="nc">&nbsp;                model.getBonusCharge(),</b>
+<b class="nc">&nbsp;                model.isBonusActive(),</b>
+&nbsp;                choosingLines,
+&nbsp;                selectedLine,
+&nbsp;                chosenLines,
+<b class="nc">&nbsp;                model.isPaused(),</b>
+<b class="nc">&nbsp;                model.getNextPiece().getPiece(),</b>
+&nbsp;                timer
+&nbsp;        );
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>

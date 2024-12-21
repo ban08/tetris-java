@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Score</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model</a>
+</div>
+
+<h1>Coverage Summary for Class: Score (model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Score</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Score$MockitoMock$545693280</td>
+  </tr>
+  <tr>
+    <td class="name">Score$MockitoMock$545693280$auxiliary$eVAsHhjW</td>
+  </tr>
+  <tr>
+    <td class="name">Score$MockitoMock$545693280$auxiliary$gLs9Igv2</td>
+  </tr>
+  <tr>
+    <td class="name">Score$MockitoMock$545693280$auxiliary$iKJKyLl4</td>
+  </tr>
+  <tr>
+    <td class="name">Score$MockitoMock$545693280$auxiliary$Ng8uWaCa</td>
+  </tr>
+  <tr>
+    <td class="name">Score$MockitoMock$545693280$auxiliary$ObDez7ld</td>
+  </tr>
+  <tr>
+    <td class="name">Score$MockitoMock$545693280$auxiliary$USuesxUq</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package model;
+&nbsp;/**
+&nbsp; * A class representing a score in the game.
+&nbsp; *
+&nbsp; * &lt;p&gt;The score is initially zero and is incremented by 100 points for each
+&nbsp; * line cleared. The score is reset to zero when the game is reset.
+&nbsp; *
+&nbsp; * &lt;p&gt;This class also implements the BoardObserver interface, which means it
+&nbsp; * receives notifications when lines are cleared or when the game is over.
+&nbsp; *
+&nbsp; *
+&nbsp; */
+&nbsp;public class Score implements BoardObserver {
+&nbsp;    private int points;
+&nbsp;    /**
+&nbsp;     * Creates a new Score object with an initial score of zero.
+&nbsp;     */
+<b class="fc">&nbsp;    public Score() { this.points = 0; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the current score.
+&nbsp;     *
+&nbsp;     * @return the current score
+&nbsp;     */
+<b class="fc">&nbsp;    public int getPoints() { return points; }</b>
+&nbsp;    /**
+&nbsp;     * Notification that one or more lines have been cleared.
+&nbsp;     *
+&nbsp;     * @param linesCleared the number of lines cleared
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void onLineCleared(int linesCleared) {
+<b class="fc">&nbsp;        points += linesCleared * 100;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Resets the score to zero.
+&nbsp;     */
+&nbsp;    public void reset() {
+<b class="nc">&nbsp;        this.points = 0;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;    /**
+&nbsp;     * Notification that the game is over.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void onGameOver() {
+<b class="fc">&nbsp;        System.out.println(&quot;Game Over! Final Score: &quot; + points);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>

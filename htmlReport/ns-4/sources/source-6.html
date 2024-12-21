@@ -1,0 +1,183 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RandomPieceFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model</a>
+</div>
+
+<h1>Coverage Summary for Class: RandomPieceFactory (model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RandomPieceFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package model;
+&nbsp;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Random;
+&nbsp;
+&nbsp;/**
+&nbsp; * A factory class for generating random Tetris pieces.
+&nbsp; * This class implements the PieceFactory interface and provides
+&nbsp; * a method to create random Tetris pieces from a predefined list of shapes.
+&nbsp; */
+&nbsp;public class RandomPieceFactory implements PieceFactory {
+&nbsp;    private final List&lt;Piece&gt; predefinedPieces;
+&nbsp;    private final Random random;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a RandomPieceFactory and initializes predefined Tetris pieces.
+&nbsp;     */
+<b class="fc">&nbsp;    public RandomPieceFactory() {</b>
+<b class="fc">&nbsp;        this.predefinedPieces = initializePieces();</b>
+<b class="fc">&nbsp;        this.random = new Random();</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes the list of predefined Tetris pieces.
+&nbsp;     *
+&nbsp;     * @return a list of predefined Tetris pieces.
+&nbsp;     */
+&nbsp;    private List&lt;Piece&gt; initializePieces() {
+<b class="fc">&nbsp;        List&lt;Piece&gt; pieces = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        pieces.add(new Piece(new char[][]{{&#39;O&#39;, &#39;O&#39;}, {&#39;O&#39;, &#39;O&#39;}}, TextColor.ANSI.WHITE)); // Square</b>
+<b class="fc">&nbsp;        pieces.add(new Piece(new char[][]{{&#39;I&#39;, &#39;I&#39;, &#39;I&#39;, &#39;I&#39;}}, TextColor.ANSI.CYAN)); // Line</b>
+<b class="fc">&nbsp;        pieces.add(new Piece(new char[][]{{&#39; &#39;, &#39;T&#39;, &#39; &#39;}, {&#39;T&#39;, &#39;T&#39;, &#39;T&#39;}}, TextColor.ANSI.YELLOW)); // T-Shape</b>
+<b class="fc">&nbsp;        pieces.add(new Piece(new char[][]{{&#39;J&#39;, &#39; &#39;}, {&#39;J&#39;, &#39; &#39;}, {&#39;J&#39;, &#39;J&#39;}}, TextColor.ANSI.BLUE)); // J-Shape</b>
+<b class="fc">&nbsp;        pieces.add(new Piece(new char[][]{{&#39; &#39;, &#39;L&#39;}, {&#39; &#39;, &#39;L&#39;}, {&#39;L&#39;, &#39;L&#39;}}, TextColor.ANSI.RED)); // L-Shape</b>
+<b class="fc">&nbsp;        pieces.add(new Piece(new char[][]{{&#39; &#39;, &#39;S&#39;, &#39;S&#39;}, {&#39;S&#39;, &#39;S&#39;, &#39; &#39;}}, TextColor.ANSI.GREEN)); // S-Shape</b>
+<b class="fc">&nbsp;        pieces.add(new Piece(new char[][]{{&#39;Z&#39;, &#39;Z&#39;, &#39; &#39;}, {&#39; &#39;, &#39;Z&#39;, &#39;Z&#39;}}, TextColor.ANSI.GREEN)); // Z-Shape</b>
+<b class="fc">&nbsp;        return pieces;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a random Tetris piece by selecting a piece from the predefined list.
+&nbsp;     *
+&nbsp;     * @return a new random Tetris piece.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Piece createPiece() {
+<b class="fc">&nbsp;        int index = random.nextInt(predefinedPieces.size());</b>
+<b class="fc">&nbsp;        Piece template = predefinedPieces.get(index);</b>
+<b class="fc">&nbsp;        char[][] shapeCopy = copyShape(template.getShape());</b>
+<b class="fc">&nbsp;        return new Piece(shapeCopy, template.getColor());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a deep copy of the given shape array.
+&nbsp;     *
+&nbsp;     * @param original the original shape array.
+&nbsp;     * @return a deep copy of the shape array.
+&nbsp;     */
+&nbsp;    private char[][] copyShape(char[][] original) {
+<b class="fc">&nbsp;        char[][] copy = new char[original.length][original[0].length];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; original.length; i++)</b>
+<b class="fc">&nbsp;            System.arraycopy(original[i], 0, copy[i], 0, original[i].length);</b>
+<b class="fc">&nbsp;        return copy;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>

@@ -23,6 +23,7 @@ Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Caroli
 - **Sistema de Bônus** - Use pontos acumulados para desbloquear bônus que ajudam a limpar linhas ou áreas críticas.
 - **Animações e efeitos** - Inclui animações de desaparecimento de linhas e efeitos de som para ações como a rotação e eliminação de linhas.
 - **Testes** - O códigos conta com vários testes automatizados que verificam desde a movimentação das peças até a remoção de linhas e cálculo da pontuação.
+- Música de fundo.
 
 ## Features planeadas
 
@@ -144,19 +145,25 @@ Cada uma dessas ações pode ser encapsulada em um objeto de comando, que é exe
 
 
 ## Testing 
+O grupo utilizou diversas ferramentas e frameworks para realizar os testes, incluindo:
+- JUnit: Empregado na criação e execução de testes unitários.
+- Mockito: Usado para gerar mocks e simular comportamentos.
+- PIT Mutation Testing: Aplicado para avaliar a qualidade dos testes unitários, detectando falhas por meio de mutações no código.
+Além dos testes unitários, foram implementadas as estratégias de Mocking e de Property-Based Testing .
+Como resultado, foi possível alcançar um conjunto de testes eficiente.
 
 ### Screenshot of Coverage Report
-
+![screenshot_of_coverage_report.png](..%2F..%2F..%2F..%2FImagens%2Fscreenshot_of_coverage_report.png)
 
 ### Link para o relatório de teste de mutação
-
+[Test Results - Tests_in_'tetris_test'.html](TestingReport%2FTest%20Results%20-%20Tests_in_%27tetris_test%27.html)
 
 ## Autoavaliação
 O trabalho foi dividido de forma mútua e todos contribuímos com o nosso melhor. Ajudou-nos a enriquecer o nosso java e o nosso trabalho de equipa.
 
-- Carolina Roque:
-- Filipe Camacho:
-- Raul Oliveira:
+- Filipe Camacho: 33.3%
+- Carolina Roque: 33.3%
+- Raul Oliveira: 33.3%
 
 
 

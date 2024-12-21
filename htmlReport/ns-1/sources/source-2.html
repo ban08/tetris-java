@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ControllerInterface</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ControllerInterface (controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ControllerInterface$MockitoMock$86072015</td>
+  </tr>
+  <tr>
+    <td class="name">ControllerInterface$MockitoMock$86072015$auxiliary$dpfBNO6d</td>
+  </tr>
+  <tr>
+    <td class="name">ControllerInterface$MockitoMock$86072015$auxiliary$rIbN3L9p</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package controller;
+&nbsp;/**
+&nbsp; * Interface for a controller that can be used to control a game of Tetris.
+&nbsp; *
+&nbsp; * A controller should be able to control the game by moving the current piece
+&nbsp; * left, right, or down, rotating the current piece left or right, dropping the
+&nbsp; * current piece, and pausing the game.
+&nbsp; */
+&nbsp;public interface ControllerInterface {
+&nbsp;    /**
+&nbsp;     * Moves the current piece left.
+&nbsp;     */
+&nbsp;    void moveLeft();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Moves the current piece right.
+&nbsp;     */
+&nbsp;    void moveRight();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Moves the current piece down.
+&nbsp;     */
+&nbsp;    void moveDown();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Rotates the current piece left.
+&nbsp;     */
+&nbsp;    void rotateLeft();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Rotates the current piece right.
+&nbsp;     */
+&nbsp;    void rotateRight();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Drops the current piece.
+&nbsp;     */
+&nbsp;    void drop();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Pauses the game.
+&nbsp;     */
+&nbsp;    void pause();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>

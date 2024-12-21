@@ -1,0 +1,360 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GameRenderer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">view</a>
+</div>
+
+<h1>Coverage Summary for Class: GameRenderer (view)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameRenderer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97,1%
+  </span>
+  <span class="absValue">
+    (33/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97,9%
+  </span>
+  <span class="absValue">
+    (94/96)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package view;
+&nbsp;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;import com.googlecode.lanterna.screen.Screen;
+&nbsp;import model.Board;
+&nbsp;import model.PositionedPiece;
+&nbsp;import model.Piece;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;/**
+&nbsp; * A class responsible for rendering the game state to the screen.
+&nbsp; *
+&nbsp; */
+&nbsp;public class GameRenderer {
+&nbsp;    private final Screen screen;
+&nbsp;
+<b class="fc">&nbsp;    public GameRenderer(Screen screen) {</b>
+<b class="fc">&nbsp;        this.screen = screen;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Renders the game state to the screen.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method takes the following parameters:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     *     &lt;li&gt;board: the game board to render&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;currentPiece: the active piece to render&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;score: the score to render&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;bonusCharge: the bonus charge to render&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;bonusActive: whether the bonus is active or not&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;choosingLines: whether the player is choosing lines or not&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;selectedLine: the currently selected line&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;chosenLines: the lines chosen by the player&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;paused: whether the game is paused or not&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;nextPiece: the next piece to render&lt;/li&gt;
+&nbsp;     *     &lt;li&gt;timer: the timer string to render&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method first clears the screen, then renders the game board, the active piece, the
+&nbsp;     * next piece, the score, the bonus charge, the timer, and the instructions. It also handles the
+&nbsp;     * bonus active and choosing lines states.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method is called by the {@link model.GameModel} class when the game state changes.
+&nbsp;     */
+&nbsp;    public void render(Board board,
+&nbsp;                       PositionedPiece currentPiece,
+&nbsp;                       int score,
+&nbsp;                       int bonusCharge,
+&nbsp;                       boolean bonusActive,
+&nbsp;                       boolean choosingLines,
+&nbsp;                       int selectedLine,
+&nbsp;                       List&lt;Integer&gt; chosenLines,
+&nbsp;                       boolean paused,
+&nbsp;                       Piece nextPiece,
+&nbsp;                       String timer) {
+<b class="fc">&nbsp;        screen.clear();</b>
+<b class="fc">&nbsp;        TextGraphics g = screen.newTextGraphics();</b>
+<b class="fc">&nbsp;        g.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="fc">&nbsp;        g.setForegroundColor(TextColor.ANSI.WHITE);</b>
+&nbsp;
+<b class="fc">&nbsp;        int cols = screen.getTerminalSize().getColumns();</b>
+<b class="fc">&nbsp;        int rows = screen.getTerminalSize().getRows();</b>
+&nbsp;
+<b class="fc">&nbsp;        int boardWidth = board.getBoard()[0].length;</b>
+<b class="fc">&nbsp;        int boardHeight = board.getBoard().length;</b>
+&nbsp;
+<b class="fc">&nbsp;        int boardX = (cols - boardWidth) / 2;</b>
+<b class="fc">&nbsp;        int boardY = (rows - boardHeight) / 2;</b>
+&nbsp;
+<b class="fc">&nbsp;        drawBox(g, boardX - 1, boardY - 1, boardWidth + 2, boardHeight + 2, TextColor.ANSI.WHITE);</b>
+<b class="fc">&nbsp;        renderBoard(g, board, boardX, boardY);</b>
+<b class="fc">&nbsp;        renderActivePiece(g, currentPiece, boardX, boardY);</b>
+&nbsp;
+<b class="fc">&nbsp;        g.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="fc">&nbsp;        g.setForegroundColor(TextColor.ANSI.WHITE);</b>
+&nbsp;
+<b class="fc">&nbsp;        g.putString(2, rows / 2, &quot;Score: &quot; + score);</b>
+&nbsp;
+<b class="fc">&nbsp;        int filled = bonusCharge / 50;</b>
+<b class="fc">&nbsp;        String bonusBar = &quot;Bonus: [&quot; + &quot;=&quot;.repeat(filled) + &quot; &quot;.repeat(10 - filled) + &quot;]&quot;;</b>
+<b class="fc">&nbsp;        g.putString(2, (rows / 2) + 2, bonusBar);</b>
+&nbsp;
+<b class="fc">&nbsp;        g.putString(cols - 15, 2, timer);</b>
+&nbsp;
+<b class="fc">&nbsp;        renderNextPiece(g, nextPiece, cols - 15, 4);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (bonusActive &amp;&amp; choosingLines) {</b>
+<b class="fc">&nbsp;            g.putString(2, (rows / 2) + 4, &quot;Select 3 lines with ENTER:&quot;);</b>
+<b class="fc">&nbsp;            for (int y = 0; y &lt; boardHeight; y++) {</b>
+<b class="fc">&nbsp;                String marker = &quot; &quot;;</b>
+<b class="fc">&nbsp;                if (y == selectedLine) marker = &quot;&gt;&quot;;</b>
+<b class="fc">&nbsp;                if (chosenLines.contains(y)) marker = &quot;*&quot;;</b>
+<b class="fc">&nbsp;                g.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="fc">&nbsp;                g.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="fc">&nbsp;                g.putString(boardX - 3, boardY + y, marker);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        String instructions = &quot;[Arrows: Move | Space: Drop | A/D: Rotate | B: Bonus | P: Pause | E: Exit ]&quot;;</b>
+<b class="fc">&nbsp;        g.putString((cols - instructions.length()) / 2, rows - 1, instructions);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (paused) {</b>
+<b class="fc">&nbsp;            String pausedText = &quot;PAUSED&quot;;</b>
+<b class="fc">&nbsp;            g.putString((cols - pausedText.length()) / 2, rows / 2 - 2, pausedText);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        refreshScreen();</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Draws a rectangular box on the screen with specified dimensions and color.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;The box is drawn using ASCII characters with the corners represented by:
+&nbsp;     * &lt;ul&gt;
+&nbsp;     *     &lt;li&gt; &#39;┌&#39; for the top-left corner&lt;/li&gt;
+&nbsp;     *     &lt;li&gt; &#39;┐&#39; for the top-right corner&lt;/li&gt;
+&nbsp;     *     &lt;li&gt; &#39;└&#39; for the bottom-left corner&lt;/li&gt;
+&nbsp;     *     &lt;li&gt; &#39;┘&#39; for the bottom-right corner&lt;/li&gt;
+&nbsp;     * &lt;/ul&gt;
+&nbsp;     * The sides of the box are drawn using &#39;─&#39; for horizontal lines and &#39;│&#39; for vertical lines.
+&nbsp;     *
+&nbsp;     * @param g the TextGraphics object used to draw on the screen
+&nbsp;     * @param x the x-coordinate of the top-left corner of the box
+&nbsp;     * @param y the y-coordinate of the top-left corner of the box
+&nbsp;     * @param width the width of the box
+&nbsp;     * @param height the height of the box
+&nbsp;     * @param color the color of the box&#39;s outline
+&nbsp;     */
+&nbsp;    private void drawBox(TextGraphics g, int x, int y, int width, int height, TextColor color) {
+<b class="fc">&nbsp;        g.setForegroundColor(color);</b>
+<b class="fc">&nbsp;        g.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="fc">&nbsp;        char topLeft = &#39;┌&#39;, topRight = &#39;┐&#39;, bottomLeft = &#39;└&#39;, bottomRight = &#39;┘&#39;, horizontal = &#39;─&#39;, vertical = &#39;│&#39;;</b>
+&nbsp;
+<b class="fc">&nbsp;        g.putString(x, y, String.valueOf(topLeft));</b>
+<b class="fc">&nbsp;        for (int i = 1; i &lt; width - 1; i++) g.putString(x + i, y, String.valueOf(horizontal));</b>
+<b class="fc">&nbsp;        g.putString(x + width - 1, y, String.valueOf(topRight));</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int row = 1; row &lt; height - 1; row++) {</b>
+<b class="fc">&nbsp;            g.putString(x, y + row, String.valueOf(vertical));</b>
+<b class="fc">&nbsp;            g.putString(x + width - 1, y + row, String.valueOf(vertical));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        g.putString(x, y + height - 1, String.valueOf(bottomLeft));</b>
+<b class="fc">&nbsp;        for (int i = 1; i &lt; width -1; i++) g.putString(x + i, y + height - 1, String.valueOf(horizontal));</b>
+<b class="fc">&nbsp;        g.putString(x + width - 1, y + height - 1, String.valueOf(bottomRight));</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Renders the game board on the screen.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method iterates over each cell of the board, setting the background color
+&nbsp;     * according to the color of the cell and placing the character representing the cell
+&nbsp;     * at the appropriate position on the screen using the provided TextGraphics object.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;The board is rendered at the specified offset coordinates, effectively positioning
+&nbsp;     * the top-left corner of the board at (offsetX, offsetY) on the screen.
+&nbsp;     *
+&nbsp;     * @param g the TextGraphics object used to draw on the screen
+&nbsp;     * @param board the game board containing the characters and colors to render
+&nbsp;     * @param offsetX the x-coordinate offset for rendering the board
+&nbsp;     * @param offsetY the y-coordinate offset for rendering the board
+&nbsp;     */
+&nbsp;    private void renderBoard(TextGraphics g, Board board, int offsetX, int offsetY) {
+<b class="fc">&nbsp;        char[][] gameBoard = board.getBoard();</b>
+<b class="fc">&nbsp;        TextColor[][] colors = board.getColors();</b>
+<b class="fc">&nbsp;        for (int row = 0; row &lt; gameBoard.length; row++) {</b>
+<b class="fc">&nbsp;            for (int col = 0; col &lt; gameBoard[row].length; col++) {</b>
+<b class="fc">&nbsp;                g.setBackgroundColor(colors[row][col]);</b>
+<b class="fc">&nbsp;                g.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="fc">&nbsp;                g.putString(offsetX + col, offsetY + row, String.valueOf(gameBoard[row][col]));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Renders the active piece at the specified offset coordinates.
+&nbsp;     *
+&nbsp;     * &lt;p&gt;This method renders the active piece at the specified offset coordinates
+&nbsp;     * by iterating over each cell of the piece&#39;s shape and rendering it on the
+&nbsp;     * screen using the provided TextGraphics object. The background color of each
+&nbsp;     * cell is set to the color of the piece, and the foreground color is set to
+&nbsp;     * white. The piece is rendered at the position (offsetX + x, offsetY + y) on
+&nbsp;     * the screen, where (x, y) is the position of the piece on the board.
+&nbsp;     *
+&nbsp;     * @param g the TextGraphics object used to draw on the screen
+&nbsp;     * @param currentPiece the active piece containing the shape and color to render
+&nbsp;     * @param offsetX the x-coordinate offset for rendering the piece
+&nbsp;     * @param offsetY the y-coordinate offset for rendering the piece
+&nbsp;     */
+&nbsp;    private void renderActivePiece(TextGraphics g, PositionedPiece currentPiece, int offsetX, int offsetY) {
+<b class="fc">&nbsp;        char[][] shape = currentPiece.getPiece().getShape();</b>
+<b class="fc">&nbsp;        int x = currentPiece.getX();</b>
+<b class="fc">&nbsp;        int y = currentPiece.getY();</b>
+<b class="fc">&nbsp;        TextColor color = currentPiece.getPiece().getColor();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int row = 0; row &lt; shape.length; row++) {</b>
+<b class="fc">&nbsp;            for (int col = 0; col &lt; shape[row].length; col++) {</b>
+<b class="fc">&nbsp;                if (shape[row][col] != &#39; &#39;) {</b>
+<b class="fc">&nbsp;                    g.setBackgroundColor(color);</b>
+<b class="fc">&nbsp;                    g.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="fc">&nbsp;                    g.putString(offsetX + x + col, offsetY + y + row, &quot;█&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void renderNextPiece(TextGraphics g, Piece nextPiece, int startX, int startY) {
+<b class="fc">&nbsp;        int boxWidth = 8;</b>
+<b class="fc">&nbsp;        int boxHeight = 6;</b>
+<b class="fc">&nbsp;        drawBox(g, startX, startY, boxWidth, boxHeight, TextColor.ANSI.WHITE);</b>
+&nbsp;
+<b class="fc">&nbsp;        char[][] shape = nextPiece.getShape();</b>
+<b class="fc">&nbsp;        TextColor color = nextPiece.getColor();</b>
+<b class="fc">&nbsp;        int shapeHeight = shape.length;</b>
+<b class="fc">&nbsp;        int shapeWidth = shape[0].length;</b>
+&nbsp;
+<b class="fc">&nbsp;        int offsetX = startX + (boxWidth - shapeWidth) / 2;</b>
+<b class="fc">&nbsp;        int offsetY = startY + (boxHeight - shapeHeight) / 2;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int r = 0; r &lt; shapeHeight; r++) {</b>
+<b class="fc">&nbsp;            for (int c = 0; c &lt; shape[r].length; c++) {</b>
+<b class="fc">&nbsp;                if (shape[r][c] != &#39; &#39;) {</b>
+<b class="fc">&nbsp;                    g.setBackgroundColor(color);</b>
+<b class="fc">&nbsp;                    g.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="fc">&nbsp;                    g.putString(offsetX + c, offsetY + r, &quot;█&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        g.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="fc">&nbsp;        g.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="fc">&nbsp;        g.putString(startX + 1, startY + boxHeight - 1, &quot;Next&quot;);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void refreshScreen() {
+&nbsp;        try {
+<b class="fc">&nbsp;            screen.refresh();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>

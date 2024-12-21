@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GUI</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">view</a>
+</div>
+
+<h1>Coverage Summary for Class: GUI (view)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">GUI$ACTION</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GUI$MockitoMock$1733445494</td>
+  </tr>
+  <tr>
+    <td class="name">GUI$MockitoMock$1733445494$auxiliary$99042HvT</td>
+  </tr>
+  <tr>
+    <td class="name">GUI$MockitoMock$1733445494$auxiliary$aXNbxtzb</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package view;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * The GUI interface defines the structure for graphical user interface
+&nbsp; * interactions in the game, including actions, screen management, and
+&nbsp; * resource cleanup.
+&nbsp; */
+&nbsp;public interface GUI {
+&nbsp;    /**
+&nbsp;     * Enum representing possible user actions captured by the GUI.
+&nbsp;     */
+<b class="fc">&nbsp;    enum ACTION {</b>
+<b class="fc">&nbsp;        ARROW_UP, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT,</b>
+<b class="fc">&nbsp;        SPACE, A, D, P, S_KEY, E_KEY, R_KEY, Q_KEY, B_KEY,</b>
+<b class="fc">&nbsp;        NONE, SELECT, ESCAPE</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Retrieves the next user action from the GUI input.
+&nbsp;     *
+&nbsp;     * @return the next ACTION captured by the GUI
+&nbsp;     * @throws IOException if an I/O error occurs during input retrieval
+&nbsp;     */
+&nbsp;    ACTION getNextAction() throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Clears the current display on the GUI.
+&nbsp;     */
+&nbsp;    void clear();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Refreshes the GUI display to reflect any changes.
+&nbsp;     *
+&nbsp;     * @throws IOException if an I/O error occurs during the refresh
+&nbsp;     */
+&nbsp;    void refresh() throws IOException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Closes the GUI and releases any resources associated with it.
+&nbsp;     *
+&nbsp;     * @throws IOException if an I/O error occurs during closing
+&nbsp;     */
+&nbsp;    void close() throws IOException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>

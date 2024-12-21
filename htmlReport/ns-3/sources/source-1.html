@@ -1,0 +1,304 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Main</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">main</a>
+</div>
+
+<h1>Coverage Summary for Class: Main (main)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Main</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (2/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30%
+  </span>
+  <span class="absValue">
+    (3/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    59%
+  </span>
+  <span class="absValue">
+    (23/39)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$DPcnbjzm</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$i5QIaQm5</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$ieLs6lDe</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$km63MitB</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$nr0cs2y4</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$TFb2ztq0</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$tV3x1vdi</td>
+  </tr>
+  <tr>
+    <td class="name">Main$MockitoMock$1122102718$auxiliary$yr0VKSFf</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (2/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30%
+  </span>
+  <span class="absValue">
+    (3/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    59%
+  </span>
+  <span class="absValue">
+    (23/39)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package main;
+&nbsp;
+&nbsp;import com.googlecode.lanterna.TerminalSize;
+&nbsp;import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+&nbsp;import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+&nbsp;import com.googlecode.lanterna.screen.Screen;
+&nbsp;import music.Music;
+&nbsp;import states.State;
+&nbsp;import states.StartMenuState;
+&nbsp;import view.GUI;
+&nbsp;import view.LanternaGUI;
+&nbsp;
+&nbsp;import java.awt.*;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.net.URL;
+&nbsp;/**
+&nbsp; * The main class of the program.
+&nbsp; * It is responsible for starting the game loop, setting up the GUI and loading the font.
+&nbsp; * It also creates the initial game state, which is the start menu state.
+&nbsp; *
+&nbsp; *
+&nbsp; *
+&nbsp; *
+&nbsp; */
+&nbsp;
+<b class="fc">&nbsp;public class Main {</b>
+&nbsp;    /**
+&nbsp;     * The main entry point of the program.
+&nbsp;     * Starts a new game loop.
+&nbsp;     *
+&nbsp;     * @param args the command line arguments
+&nbsp;     */
+&nbsp;    public static void main(String[] args) {
+&nbsp;        try {
+<b class="nc">&nbsp;            new Main().start(args);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Starts a new game loop.
+&nbsp;     * This method sets up the GUI, loads the font, creates the initial game state,
+&nbsp;     * which is the start menu state, and starts the game loop.
+&nbsp;     * It also starts the background music and sets up the screen.
+&nbsp;     *
+&nbsp;     * @param args the command line arguments
+&nbsp;     *
+&nbsp;     * @throws Exception if an error occurs while setting up the game loop
+&nbsp;     */
+&nbsp;    public void start(String[] args) throws Exception {
+&nbsp;        // Load custom font
+<b class="fc">&nbsp;        Font loadedFont = loadCustomFont(&quot;/fonts/crs.otf&quot;, 25f);</b>
+<b class="fc">&nbsp;        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);</b>
+&nbsp;
+<b class="fc">&nbsp;        TerminalSize initialSize = new TerminalSize(80, 24);</b>
+<b class="fc">&nbsp;        DefaultTerminalFactory terminalFactory = createTerminalFactory(loadedFont, initialSize)</b>
+<b class="fc">&nbsp;                .setInitialTerminalSize(initialSize)</b>
+<b class="fc">&nbsp;                .setForceAWTOverSwing(true)</b>
+<b class="fc">&nbsp;                .setTerminalEmulatorFontConfiguration(fontConfig);</b>
+&nbsp;
+<b class="fc">&nbsp;        Screen screen = terminalFactory.createScreen();</b>
+<b class="fc">&nbsp;        screen.startScreen();</b>
+&nbsp;
+<b class="fc">&nbsp;        GUI gui = createGUI(screen);</b>
+&nbsp;
+&nbsp;        // Start background music
+<b class="fc">&nbsp;        Music music = createMusic(&quot;/music/theme.wav&quot;);</b>
+<b class="fc">&nbsp;        music.runMusic();</b>
+&nbsp;
+<b class="fc">&nbsp;        State state = createStartMenuState(screen, music);</b>
+&nbsp;
+<b class="fc">&nbsp;        while (state != null) {</b>
+<b class="fc">&nbsp;            long startTime = System.currentTimeMillis();</b>
+<b class="fc">&nbsp;            state = state.step(gui, startTime);</b>
+<b class="fc">&nbsp;            long elapsed = System.currentTimeMillis() - startTime;</b>
+<b class="fc">&nbsp;            long sleep = 16 - elapsed;</b>
+<b class="pc">&nbsp;            if (sleep &gt; 0) Thread.sleep(sleep);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        screen.close();</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    // Protected methods to allow mocking in tests
+&nbsp;    /**
+&nbsp;     * Creates a terminal factory with the given font and initial size.
+&nbsp;     *
+&nbsp;     * @param loadedFont the font to use for the terminal
+&nbsp;     * @param initialSize the initial size of the terminal
+&nbsp;     * @return the created terminal factory
+&nbsp;     */
+&nbsp;    protected DefaultTerminalFactory createTerminalFactory(Font loadedFont, TerminalSize initialSize) {
+<b class="nc">&nbsp;        return new DefaultTerminalFactory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a GUI instance with the given screen.
+&nbsp;     *
+&nbsp;     * @param screen the screen to use for the GUI
+&nbsp;     * @return the created GUI instance
+&nbsp;     */
+&nbsp;    protected GUI createGUI(Screen screen) {
+<b class="nc">&nbsp;        return new LanternaGUI(screen);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a music instance with the given resource path.
+&nbsp;     *
+&nbsp;     * @param resourcePath the resource path of the music file
+&nbsp;     * @return the created music instance
+&nbsp;     */
+&nbsp;    protected Music createMusic(String resourcePath) throws Exception {
+<b class="nc">&nbsp;        return new Music(resourcePath);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a start menu state with the given screen and music.
+&nbsp;     *
+&nbsp;     * @param screen the screen to use for the start menu state
+&nbsp;     * @param music the music instance to use for the start menu state
+&nbsp;     * @return the created start menu state
+&nbsp;     */
+&nbsp;    protected State createStartMenuState(Screen screen, Music music) {
+<b class="nc">&nbsp;        return new StartMenuState(screen, music);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Loads a custom font from the given resource path with the given size.
+&nbsp;     *
+&nbsp;     * @param resourcePath the resource path of the font file
+&nbsp;     * @param size the size of the font
+&nbsp;     * @return the loaded font
+&nbsp;     */
+&nbsp;    protected Font loadCustomFont(String resourcePath, float size) throws IOException, FontFormatException {
+<b class="nc">&nbsp;        URL fontResource = Main.class.getResource(resourcePath);</b>
+<b class="nc">&nbsp;        if (fontResource == null) {</b>
+<b class="nc">&nbsp;            throw new IOException(&quot;Font resource not found: &quot; + resourcePath);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        try (InputStream fontStream = fontResource.openStream()) {</b>
+<b class="nc">&nbsp;            Font font = Font.createFont(Font.TRUETYPE_FONT, fontStream);</b>
+<b class="nc">&nbsp;            return font.deriveFont(Font.PLAIN, size);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RotateRightStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model</a>
+</div>
+
+<h1>Coverage Summary for Class: RotateRightStrategy (model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RotateRightStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package model;
+&nbsp;
+&nbsp;/**
+&nbsp; * A strategy for rotating a matrix to the right by 90 degrees.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * This class implements the {@link RotationStrategy} interface and provides
+&nbsp; * a concrete implementation of the {@link RotationStrategy#rotate(char[][])}
+&nbsp; * method. The method takes a matrix as an argument and returns a new matrix
+&nbsp; * with the same elements, but rotated 90 degrees to the right.
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * The rotation is performed in-place, meaning that the original matrix is not
+&nbsp; * modified. The returned matrix is a new instance, created by this class.
+&nbsp; *
+&nbsp; */
+<b class="fc">&nbsp;public class RotateRightStrategy implements RotationStrategy {</b>
+&nbsp;    @Override
+&nbsp;    public char[][] rotate(char[][] matrix) {
+<b class="pc">&nbsp;        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Matrix cannot be null or empty&quot;);</b>
+<b class="fc">&nbsp;        int rows = matrix.length;</b>
+<b class="fc">&nbsp;        int cols = matrix[0].length;</b>
+<b class="fc">&nbsp;        char[][] rotated = new char[cols][rows];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; rows; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; cols; j++) {</b>
+<b class="fc">&nbsp;                rotated[j][rows - 1 - i] = matrix[i][j];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return rotated;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 17:08</div>
+</div>
+</body>
+</html>
