@@ -93,4 +93,15 @@ public class StartMenuStateTest {
 
         assertSame(startMenuState, nextState, "State should remain StartMenuState for unrelated key presses");
     }
+    @Test
+    public void testInvalidKeyPress_RemainsInStartMenuState() throws IOException {
+        // Arrange
+        when(mockLanternaGui.getNextAction()).thenReturn(GUI.ACTION.A);
+
+        // Act
+        State nextState = startMenuState.step(mockLanternaGui, System.currentTimeMillis());
+
+        // Assert
+        assertSame(startMenuState, nextState, "State should remain StartMenuState for invalid key presses.");
+    }
 }

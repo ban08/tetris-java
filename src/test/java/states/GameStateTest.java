@@ -115,6 +115,8 @@ public class GameStateTest {
 
         // Instantiate GameState with injected mocks
         gameState = new GameState(mockScreen, mockMusic, mockModel, mockController);
+
+        gameState = spy(new GameState(mockScreen, mockMusic, mockModel, mockController));
     }
 
     @Test
@@ -149,4 +151,16 @@ public class GameStateTest {
 
         assertSame(gameState, nextState, "State should remain GameState when game is running");
     }
+    @Test
+    void testPauseDuringBonus_ShouldNotUpdate() throws IOException {
+        // Arrange
+        when(mockModel.isPaused()).thenReturn(true);
+
+        // Act
+        gameState.step(mockLanternaGui, System.currentTimeMillis());
+
+        // Assert
+        verify(mockController, never()).updateGame();
+    }
+
 }
