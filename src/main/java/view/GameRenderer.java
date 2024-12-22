@@ -190,6 +190,7 @@ public class GameRenderer {
      * @param offsetY the y-coordinate offset for rendering the piece
      */
     private void renderActivePiece(TextGraphics g, PositionedPiece currentPiece, int offsetX, int offsetY) {
+        if (currentPiece == null || currentPiece.getPiece() == null) return;
         char[][] shape = currentPiece.getPiece().getShape();
         int x = currentPiece.getX();
         int y = currentPiece.getY();
@@ -207,6 +208,7 @@ public class GameRenderer {
     }
 
     private void renderNextPiece(TextGraphics g, Piece nextPiece, int startX, int startY) {
+        if (nextPiece == null || nextPiece.getShape() == null) return;
         int boxWidth = 8;
         int boxHeight = 6;
         drawBox(g, startX, startY, boxWidth, boxHeight, TextColor.ANSI.WHITE);

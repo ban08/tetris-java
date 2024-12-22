@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'info.solidsoft.pitest' version '1.15.0'
+    id 'info.solidsoft.pitest' version '1.9.11'
     id 'jacoco'
 }
 
@@ -17,26 +17,35 @@ repositories {
 }
 
 dependencies {
+    // JUnit 5 dependencies
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.10.0'
+    testImplementation 'org.junit.platform:junit-platform-engine:1.10.0'
 
-    implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
+    // Lanterna dependency
+    implementation 'com.googlecode.lanterna:lanterna:3.1.1'
 
-    testImplementation 'org.mockito:mockito-core:3.7.7'
+    // Mockito for mocking
+    testImplementation 'org.mockito:mockito-core:5.0.0'
+
+    // Pitest JUnit 5 Plugin
+    testImplementation 'org.pitest:pitest-junit5-plugin:1.2.0'
 }
 
 pitest {
-    targetClasses = ['model.*', 'controller.*', 'states.*', 'view.*', 'main.*', 'music.*'] // Specify the packages to mutate
-    targetTests = ['*Test'] // Specify the test classes
+    targetClasses = ['model.*', 'controller.*', 'states.*', 'view.*', 'main.*', 'music.*']
+    targetTests = ['*Test'] // Ensure your test class names match this pattern
     threads = 4
-    outputFormats = ['HTML', 'XML'] // Formats for the report
-    mutators = ['ALL'] // Mutators to use; 'ALL' covers all mutation types
-    junit5PluginVersion = '0.14' // Ensure compatibility with JUnit 5
-    pitestVersion = '1.9.11' // Specify PITest version
-    timestampedReports = false // Generate reports in a consistent directory
+    outputFormats = ['HTML', 'XML']
+    pitestVersion = '1.14.4'
+    mutators = ['ALL']
+    junit5PluginVersion = '1.2.0'
+    timestampedReports = false
     verbose = true
-    jvmArgs = ['-Dfile.encoding=UTF-8'] // Force UTF-8 encoding
+    jvmArgs = ['-Dfile.encoding=UTF-8']
 }
+
 jacocoTestReport {
     reports {
         xml.required = true
@@ -45,14 +54,9 @@ jacocoTestReport {
 }
 
 tasks.withType(JavaCompile) {
-    compileJava {
-        options.encoding = "UTF-8"
-    }
-    compileTestJava {
-        options.encoding = "UTF-8"
-    }
+    options.encoding = 'UTF-8'
 }
 
-    test {
-        useJUnitPlatform()
-    }
+test {
+    useJUnitPlatform()
+}

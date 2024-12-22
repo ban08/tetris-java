@@ -93,4 +93,27 @@ public class GameOverStateTest {
 
         assertSame(gameOverState, nextState, "State should remain GameOverState for unrelated key presses");
     }
+    @Test
+    public void testInvalidKeyPress_RemainsInGameOverState() throws IOException {
+        // Arrange
+        when(mockLanternaGui.getNextAction()).thenReturn(GUI.ACTION.A);
+
+        // Act
+        State nextState = gameOverState.step(mockLanternaGui, System.currentTimeMillis());
+
+        // Assert
+        assertSame(gameOverState, nextState, "State should remain GameOverState for unrelated key presses.");
+    }
+    // inside GameOverStateTest
+    @Test
+    void testStep_EnsuresScreenIsClearedAndRefreshed() throws IOException {
+        when(mockLanternaGui.getNextAction()).thenReturn(GUI.ACTION.NONE);
+
+        State nextState = gameOverState.step(mockLanternaGui, System.currentTimeMillis());
+        assertSame(gameOverState, nextState);
+
+        verify(mockScreen).clear();
+        verify(mockScreen).refresh();
+    }
+
 }
