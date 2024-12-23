@@ -161,6 +161,70 @@ Cada uma dessas ações pode ser encapsulada em um objeto de comando, que é exe
 - Facilita a adição de novos tipos de comandos sem modificar o código do controlador.
 
 ## Know-code smells
+A usar Error Prone estes foram os resultados:
+- Task: Compile Java
+    - CatchAndPrintStackTrace
+        - Main.java:38: warning: [CatchAndPrintStackTrace] Logging or rethrowing exceptions should usually be preferred to catching and calling printStackTrace
+            e.printStackTrace();
+            ^
+        - Music.java:41: warning: [CatchAndPrintStackTrace] Logging or rethrowing exceptions should usually be preferred to catching and calling printStackTrace
+            e.printStackTrace();
+            ^
+        - GameRenderer.java:243: warning: [CatchAndPrintStackTrace] Logging or rethrowing exceptions should usually be preferred to catching and calling printStackTrace
+            e.printStackTrace();
+        - Não achámos necessário mudar de exception porque conseguimos perceber que não era completamente necessário adicionar um contexto aos erros.
+    - Unused Variable
+        - GameOverState.java:16: warning: [UnusedVariable] The field 'menu' is never read.
+        private final GameOverMenu menu;
+                                   ^
+          Did you mean to remove this line or to remove this line?
+        - StartMenuViewer.java:15: warning: [UnusedVariable] The field 'menu' is never read.
+            private final StartMenu menu;
+                            ^
+        - A variável menu em ambos os casos chega a ser usada. No primeiro menu é chamado para a criação de um GameOverMenu e no segundo é usada para o constructor StartMenuViewer.
+- Task: Compile Test Java
+    - MockNotUsedInProduction
+        - MainEdgeCasesTest.java:27: warning: [MockNotUsedInProduction] This mock is instantiated and configured, but is never passed to production code. It should be either removed or used.
+                mockScreen = mock(Screen.class);
+                           ^
+        - MainEdgeCasesTest.java:29: warning: [MockNotUsedInProduction] This mock is instantiated and configured, but is never passed to production code. It should be either removed or used.
+                mockMusic = mock(Music.class);
+                          ^
+        - MainEdgeCasesTest.java:30: warning: [MockNotUsedInProduction] This mock is instantiated and configured, but is never passed to production code. It should be either removed or used.
+                mockState = mock(State.class);
+                          ^
+        - MainEdgeCasesTest.java:28: warning: [MockNotUsedInProduction] This mock is instantiated and configured, but is never passed to production code. It should be either removed or used.
+                mockGui = mock(GUI.class);
+                         ^
+    - Unused Variable
+        - MainEdgeCasesTest.java:19: warning: [UnusedVariable] The field 'mockScreen' is never read.
+            private Screen mockScreen;
+                           ^
+        - MainEdgeCasesTest.java:21: warning: [UnusedVariable] The field 'mockMusic' is never read.
+            private Music mockMusic;
+                          ^
+        - MainEdgeCasesTest.java:22: warning: [UnusedVariable] The field 'mockState' is never read.
+            private State mockState;
+                          ^
+        - MainEdgeCasesTest.java:20: warning: [UnusedVariable] The field 'mockGui' is never read.
+            private GUI mockGui;
+                        ^
+        - MainTest.java:95: warning: [UnusedVariable] The local variable 'exception' is never read.
+                IOException exception = assertThrows(IOException.class, () -> main.start(new String[]{}));
+                            ^
+                    Did you mean to remove this line or 'assertThrows(IOException.class, () -> main.start(new String[]{}));'?
+    - DirectInvocationOnMock
+        - GameStateTest.java:87: warning: [DirectInvocationOnMock] Methods should not be directly invoked on the mock `mockModel`. Should this be part of a verify(..) call?
+                when(mockModel.getNextPiece().getPiece()).thenReturn(mockPiece);
+                                           ^
+        - GameStateTest.java:88: warning: [DirectInvocationOnMock] Methods should not be directly invoked on the mock `mockModel`. Should this be part of a verify(..) call?   
+                when(mockModel.getCurrentPiece().getPiece()).thenReturn(mockPiece);
+                                              ^
+        - GameViewTest.java:42: warning: [DirectInvocationOnMock] Methods should not be directly invoked on the mock `mockModel`. Should this be part of a verify(..) call?
+                var boardStub       = mockModel.getBoard();            // stubbed Board
+                                                        ^
+        - GameViewTest.java:43: warning: [DirectInvocationOnMock] Methods should not be directly invoked on the mock `mockModel`. Should this be part of a verify(..) call?      
+
 
 
 ## Testing 
