@@ -224,7 +224,7 @@ A usar Error Prone estes foram os resultados:
                 var boardStub       = mockModel.getBoard();            // stubbed Board
                                                         ^
         - GameViewTest.java:43: warning: [DirectInvocationOnMock] Methods should not be directly invoked on the mock `mockModel`. Should this be part of a verify(..) call?      
-
+- Em geral não achámos que os warnings dados interferiram de uma forma significativa para a mudança desse código.
 
 
 ## Testing 
