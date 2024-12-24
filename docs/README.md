@@ -21,13 +21,13 @@ Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Caroli
 - **Remoção de Linhas Completas** - Deteta e remove linha totalmente preenchidas e as linhas superiores deslocam-se para baixo e o jogador ganha pontos.O sistema notifica os observadores quando uma linha é limpa, para atualizar o placar do jogo, como a pontuação.
 - **Sistema de pontuação** - O jogo possui um sistema de pontuação(score), que será atualizado à medida que cada linha é removida.
 - **Sistema de Bônus** - Use pontos acumulados para desbloquear bônus que ajudam a limpar linhas ou áreas críticas.
-- - **Registro de Tempo**: O jogo mede quanto tempo o jogador sobrevive.
+- **Registo de Tempo**: O jogo mede quanto tempo o jogador sobrevive.
 - **Animações e efeitos** - Inclui animações de desaparecimento de linhas e efeitos de som para ações como a rotação e eliminação de linhas.
 - **Testes** - O códigos conta com vários testes automatizados que verificam desde a movimentação das peças até a remoção de linhas e cálculo da pontuação.
-- Música de fundo.
+- **Música de fundo.**
 
 
-## CONTROLES
+## CONTROLOS
 
 - **MOVIMENTAÇÃO**:
     - **Mover peça para a esquerda**: Seta Esquerda (←)
@@ -38,7 +38,7 @@ Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Caroli
     - **Mover peça para o fundo**: Tecla Espaço
 
 - **BÔNUS**:
-    - **Ativar bônus**: Tecla
+    - **Ativar bônus**: Tecla b
 
 - **OUTROS**:
     - **Pausar o jogo**: Tecla P

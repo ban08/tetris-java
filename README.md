@@ -1,26 +1,18 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/rUa5vdmg)
+LDTS Tetris - T12G01
+Descrição do Jogo
 
+O nosso Tetris é uma versão do clássico puzzle de blocos em queda. O objetivo é organizar os tetraminós que caem, de forma a completar linhas horizontais que são imediatamente removidas. Cada linha removida aumenta a pontuação e a dificuldade do jogo. Com um sistema de bónus dinâmico, selecção de linhas em modo especial e a possibilidade de pausar, esta versão de Tetris oferece um desafio rápido e divertido.
 
-# Tetris 
+Este projeto foi desenvolvido por Alan Turing (turing@edu.fe.up.pt), Ada Lovelace (ada@edu.fe.up.pt) e Grace Hopper (hopper@edu.fe.up.pt) no âmbito da unidade curricular LDTS 2024-25 na FEUP.
 
-O nosso jogo é uma recriação do clássico Tetris com algumas novidades estratégicas. O objetivo do jogador é posicionar peças de diferentes formas e cores em um tabuleiro de 10x20 para completar e eliminar linhas horizontais. Cada linha eliminada concede pontos, enquanto que erros tornam o jogo cada vez mais desafiador devido ao acumular de blocos.
+Para uma descrição mais detalhada da mecânica e design, consulte este documento.
+Capturas de Ecrã
 
-Os jogadores podem acumular pontos para desbloquear bônus que permitem eliminar linhas ou áreas específicas, prolongando o jogo e aumentando as possibilidades estratégicas.
+Apresentamos algumas imagens que ilustram as funcionalidades e diferentes ecrãs do Tetris.
 
-Este projeto foi desenvolvido por **[Filipe Camacho(up202208040@fe.up.pt),Carolina Roque(up202305062@fe.up.pt),Raul Oliveira(up202303446@fe.up.pt)]** para a unidade curricular LDTS 2024/2025 na FEUP.
-
----
-
-## DIAGRAMA UML
-
-![img.png](img.png)
-
-## MOCKUPS
-
-![TetrisMain](https://github.com/user-attachments/assets/f03f2534-f452-497d-b62b-96ed49e754d2)
-
-![TetrisMockup](https://github.com/user-attachments/assets/7b8f1ce1-1e0d-4085-80ca-73b879b3fc85)
-
-![TetrisGameOver](https://github.com/user-attachments/assets/26e3dae0-6c15-4c20-87a7-bbfcb739ce82)
-
-Para uma versão mais detalhada desta descrição, clique aqui [here](./docs/README.md).
+Jogo
+<p align="center" justify="center"> <img src="docs/gif/TetrisGameplay.gif" width="400"/> </p> <p align="center"> <b><i>Gif 1. Pequena demonstração da gameplay do Tetris</i></b> </p> <br />
+Menus
+<p align="center" justify="center"> <img src="docs/images/screenshots/TetrisMenuShot.png" width="400"/> </p> <p align="center"> <b><i>Fig. 1. Menu Inicial</i></b> </p> <br /> <p align="center" justify="center"> <img src="docs/images/screenshots/TetrisGameOver.png" width="400"/> </p> <p align="center"> <b><i>Fig. 2. Ecrã de Fim de Jogo</i></b> </p> <br />
+Jogabilidade
+ <p align="center" justify="center"> <img src="docs/gif/TetrisBonus.gif" width="400"/> </p> <p align="center"> <b><i>Gif 2. Modo de Bónus </i></b> </p> <br />
