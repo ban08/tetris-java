@@ -3,7 +3,7 @@ Descrição do Jogo
 
 O nosso Tetris é uma versão do clássico puzzle de blocos em queda. O objetivo é organizar os tetraminós que caem, de forma a completar linhas horizontais que são imediatamente removidas. Cada linha removida aumenta a pontuação e a dificuldade do jogo. Com um sistema de bónus dinâmico, selecção de linhas em modo especial e a possibilidade de pausar, esta versão de Tetris oferece um desafio rápido e divertido.
 
-Este projeto foi desenvolvido por Alan Turing (turing@edu.fe.up.pt), Ada Lovelace (ada@edu.fe.up.pt) e Grace Hopper (hopper@edu.fe.up.pt) no âmbito da unidade curricular LDTS 2024-25 na FEUP.
+Este projeto foi desenvolvido por [Filipe Camacho(up202208040@fe.up.pt),Carolina Roque(up202305062@fe.up.pt),Raul Oliveira(up202303446@fe.up.pt)]  no âmbito da unidade curricular LDTS 2024-25 na FEUP.
 
 Para uma descrição mais detalhada da mecânica e design, consulte este documento.
 Capturas de Ecrã
