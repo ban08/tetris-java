@@ -5,7 +5,7 @@ O nosso Tetris é uma versão do clássico puzzle de blocos em queda. O objetivo
 
 Este projeto foi desenvolvido por [Filipe Camacho(up202208040@fe.up.pt),Carolina Roque(up202305062@fe.up.pt),Raul Oliveira(up202303446@fe.up.pt)]  no âmbito da unidade curricular LDTS 2024-25 na FEUP.
 
-Para uma descrição mais detalhada: [Link to the secondary README](docs/README.md)
+Para uma descrição mais detalhada: (docs/README.md)
 
 
 Jogo
