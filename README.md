@@ -5,10 +5,8 @@ O nosso Tetris é uma versão do clássico puzzle de blocos em queda. O objetivo
 
 Este projeto foi desenvolvido por [Filipe Camacho(up202208040@fe.up.pt),Carolina Roque(up202305062@fe.up.pt),Raul Oliveira(up202303446@fe.up.pt)]  no âmbito da unidade curricular LDTS 2024-25 na FEUP.
 
-Para uma descrição mais detalhada da mecânica e design, consulte este documento.
-Capturas de Ecrã
+Para uma descrição mais detalhada: [Link to the secondary README](docs/README.md)
 
-Apresentamos algumas imagens que ilustram as funcionalidades e diferentes ecrãs do Tetris.
 
 Jogo
 <p align="center" justify="center"> <img src="docs/gif/TetrisGameplay.gif" width="400"/> </p> <p align="center"> <b><i>Gif 1. Pequena demonstração da gameplay do Tetris</i></b> </p> <br />
